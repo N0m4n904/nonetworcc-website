@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>NoNetworcc</title>
+    <title>Noah Anleitner</title>
     <link rel="icon" type="image/x-icon" href="src/images/NoNetworcc-Logo.png">
     <meta name="description" content="My profiles and projects" />
     <meta name="keywords" content="" />
@@ -79,6 +79,14 @@
         backdrop-filter: blur(40px);
         -webkit-backdrop-filter: blur(40px);
       }
+
+      .hover-bold {
+        transition: font-weight 0.2s ease;
+      }
+
+      .link-group:hover .hover-bold {
+        font-weight: bold;
+      }
     </style>
   </head>
   <body class="leading-normal tracking-normal text-white gradient">
@@ -88,7 +96,6 @@
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
           <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-            NoNetworcc
           </a>
         </div>
         <div
@@ -196,6 +203,31 @@
             </div>
           </div>
         </div>
+        <div class="flex flex-wrap">
+          <div class="w-5/6 sm:w-1/2 p-6 mt-6">
+            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
+              NixOS Configuration
+            </h3>
+            <p class="text-gray-600 mb-8">
+                My personal NixOS configuration, using:
+              <br />
+              - NixOS Stable
+              <br />
+              - foundrix
+              <br />
+              - Gnome
+              <br />
+              - COSMIC
+              <br />
+              <br />
+              Source:
+              <a class="text-pink-500 underline" href="https://gitlab.com/N0m4n904/nixos-desktop">nixos-desktop</a>
+            </p>
+          </div>
+          <div class="w-full sm:w-1/3 p-6">
+            <img src="src/images/NixOS.svg" alt="NixOS logo" />
+          </div>
+        </div>
       </div>
     </section>
     <section class="bg-white py-8">
@@ -216,12 +248,12 @@
                   1999-born human-being living in Germany.
                 </p>
               </a>
-              <a href="https://drw.de" target="_blank" class="flex flex-wrap no-underline hover:no-underline">
+             <a href="https://drw.de" target="_blank" class="link-group flex flex-wrap no-underline hover:no-underline">
                 <div class="w-full font-bold text-xl text-gray-800 px-6">
                   What I do
                 </div>
                 <p class="text-gray-800 text-base px-6 mb-5">
-                  Software Development at Dominikus-Ringeisen-Werk
+                  Software Development at <span class="hover-bold">Dominikus-Ringeisen-Werk</span>
                 </p>
               </a>
             </div>
@@ -236,7 +268,7 @@
                       <li>- Kotlin, Java</li>
                       <li>- Android, AOSP, Jetpack Compose</li>
                       <li>- .NET (Visual Basic, C#)</li>
-                      <li>- HTML, CSS, JavaScript</li>
+                      <li>- HTML, CSS, JavaScript, Typescript, Vue 3</li>
                       <li>- PHP</li>
                       <li>- Linux</li>
                       <li>- SQL (MySQL, SQLite, MSSQL)</li>
@@ -245,28 +277,9 @@
                       <li>- JobRouter</li>
                       <li>- Nextcloud</li>
                       <li>- Tailscale</li>
+                      <li>- Apache APISIX</li>
                     </ul>
                   </a>
-            </div>
-          </div>
-          <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink card">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
-                <a class="flex flex-wrap no-underline hover:no-underline">
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                        Special thanks
-                    </div>
-                    <ul class="text-gray-800 text-base px-6 mb-5">
-                        <li>
-                            <a class="flex flex-wrap no-underline hover:no-underline" target="_blank" href="https://superboring.dev">- Simao G. V. "Superboringdev/xdevs23" - one of my best friends</a>
-                        </li>
-                        <li>
-                            <a class="flex flex-wrap no-underline hover:no-underline" target="_blank" href="https://github.com/wedalb">- Heidi A. "wedalb" - one of my closest friends</a>
-                        </li>
-                        <li>
-                            <a class="flex flex-wrap no-underline hover:no-underline" target="_blank" href="https://halogenos.org/team.html">- The halogenOS team</a>
-                        </li>
-                    </ul>
-                </a>
             </div>
           </div>
         </div>
@@ -298,11 +311,6 @@
     <footer>
       <div class="container mx-auto px-8">
         <div class="w-full flex flex-col md:flex-row py-6">
-          <div class="flex-1 mb-6 text-black">
-            <a class="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-              NoNetworcc
-            </a>
-          </div>
           <div class="flex-1">
             <p class="uppercase text-gray-500 md:mb-6">Links</p>
             <ul class="list-reset mb-6">

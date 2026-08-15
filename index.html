@@ -87,6 +87,41 @@
       .link-group:hover .hover-bold {
         font-weight: bold;
       }
+
+      .badge-archived {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 9999px;
+        background-color: #f3f4f6;
+        color: #6b7280;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .archived-logo {
+        filter: grayscale(1);
+        opacity: 0.6;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+      }
+
+      .archived-logo:hover {
+        filter: grayscale(0);
+        opacity: 1;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .badge-archived {
+          border-color: #374151;
+          background-color: #1f2937;
+          color: #9ca3af;
+        }
+      }
     </style>
   </head>
   <body class="leading-normal tracking-normal text-white gradient">
@@ -183,15 +218,19 @@
         </div>
         <div class="flex flex-wrap flex-col-reverse sm:flex-row">
           <div class="w-full sm:w-1/3 p-6">
-            <img src="src/images/halogenos_discordbot.png" alt="halogenos discordbot logo" />
+            <img class="archived-logo" src="src/images/halogenos_discordbot.png" alt="halogenos discordbot logo" />
           </div>
           <div class="w-full sm:w-1/2 p-6 mt-6">
             <div class="align-middle">
               <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
                 halogenOS Discordbot
+                <span class="badge-archived">No longer maintained</span>
               </h3>
               <p class="text-gray-600 mb-8">
-                A Discord bot written in Kotlin that is used by halogenOS members
+                A Discord bot written in Kotlin that was used by halogenOS members
+                <br />
+                <br />
+                Discontinued in 2026 — the bot is no longer running. The sources stay online for reference.
                 <br />
                 <br />
                 Sources:

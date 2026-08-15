@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Smart Cursor">
+  <defs>
+    <linearGradient id="smartcursor-brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8c0be8" />
+      <stop offset="1" stop-color="#00C6FF" />
+    </linearGradient>
+    <filter id="smartcursor-glow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="7" result="blurred" />
+      <feMerge>
+        <feMergeNode in="blurred" />
+        <feMergeNode in="blurred" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- The ring eases toward the pointer, so it sits a little behind the dot
+       rather than centred on it — offset enough to read as lag, not as a
+       spinner, which is what the dot touching the stroke looked like. -->
+  <circle cx="118" cy="138" r="60" fill="none" stroke="url(#smartcursor-brand)" stroke-width="9" opacity="0.8" />
+  <circle cx="142" cy="114" r="12" fill="url(#smartcursor-brand)" filter="url(#smartcursor-glow)" />
+</svg>

@@ -612,6 +612,10 @@ video {
   z-index: 50;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
 .m-8 {
   margin: 2rem;
 }
@@ -662,6 +666,10 @@ video {
 
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .ml-auto {

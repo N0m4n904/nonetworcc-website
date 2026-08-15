@@ -33,4 +33,34 @@ Likewise, under Art. 21 GDPR, users and data subjects have the right to object t
 III. Information about the data processing
 Your data processed when using our website will be deleted or blocked as soon as the purpose for its storage ceases to apply, provided the deletion of the same is not in breach of any statutory storage obligations or unless otherwise stipulated below. This means that for the purpose of successfully completing a HTTP request, the IP address is necessary to send a response to your request and immediately deleted as soon as the connection used for the request is closed or lost.
 
+1. Instagram content
+
+This website shows selected posts from the Instagram account @b9_allroad_kru, operated by Meta Platforms Ireland Ltd.
+
+These posts are NOT loaded when you open the page. In their place you are shown a button. Only when you press one of these buttons is the post requested from instagram.com. Nothing is transmitted to Meta before that point.
+
+Once you press such a button, your browser connects to Meta's servers. Meta thereby receives your IP address, information about your browser and operating system, the address of the page you are on, and the time of the request, and may store and read cookies on your device. If you are logged in to Instagram at that moment, Meta can associate the visit with your account. This may involve the transfer of data to servers outside the European Union.
+
+The legal basis for this processing is your consent under Art. 6 Para. 1 lit. a) GDPR, which you give by pressing the button. You may withhold it simply by not pressing it, and no part of this website depends on doing so. Consent already given applies only to the current page view: reloading the page returns every post to its unloaded state. Cookies already set by Meta can be removed through your browser settings.
+
+We have no influence over the extent of the data collected by Meta, nor over how it is processed thereafter. For information on that, please refer to the privacy policy of Instagram at https://privacycenter.instagram.com/policy.
+
+2. Files loaded from third parties
+
+The following files are requested from external servers when a page of this website is opened. To deliver them, the operator of the respective server necessarily receives your IP address and technical information about your browser. No cookies are set by these files and they are not used to analyse your behaviour:
+
+- cdn.jsdelivr.net, for the script and stylesheet of the mouse pointer used on this site
+- brands.home-assistant.io, for the logo shown next to one of the listed projects
+- drw.de, for the emblem of Dominikus-Ringeisen-Werk shown in the work section
+
+The legal basis is our legitimate interest in delivering this website reliably, Art. 6 Para. 1 lit. f) GDPR.
+
+The typeface used on this website is delivered from our own server. No connection to Google Fonts or any comparable provider is established.
+
+3. Storage on your device
+
+This website stores a single entry named "smartCursorV2" in the local storage of your browser. It records nothing but whether the custom mouse pointer is switched on. It contains no personal data, is not transmitted anywhere, and is not used to recognise you. You can delete it at any time through your browser settings.
+
+Last updated: 15 August 2026
+
 Model Data Protection Statement for Anwaltskanzlei Weiß & Partner

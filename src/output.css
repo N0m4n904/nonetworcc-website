@@ -724,6 +724,10 @@ video {
   width: 100%;
 }
 
+.max-w-5xl {
+  max-width: 64rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -843,6 +847,11 @@ video {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .py-6 {

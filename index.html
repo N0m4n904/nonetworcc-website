@@ -97,14 +97,6 @@
         -webkit-backdrop-filter: blur(40px);
       }
 
-      .hover-bold {
-        transition: font-weight 0.2s ease;
-      }
-
-      .link-group:hover .hover-bold {
-        font-weight: bold;
-      }
-
       .badge-archived {
         display: inline-block;
         vertical-align: middle;
@@ -119,6 +111,18 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         white-space: nowrap;
+      }
+
+      /* The signet is dark red on opaque white, so it cannot simply sit on the
+         section: in dark mode that is a low-contrast mark on near-black. It
+         keeps the white it was drawn for, as a tile of its own. */
+      .logo-tile {
+        display: block;
+        width: 72%;
+        margin: 0 auto;
+        padding: 4%;
+        background-color: #ffffff;
+        border-radius: 14px;
       }
 
       .app-icon {
@@ -221,6 +225,20 @@
             </h2>
             <div class="w-full mb-4">
               <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+            <div class="flex flex-wrap items-center">
+              <div class="w-full sm:w-2/3 p-6 mt-6">
+                <p class="text-gray-600 mb-8">
+                  Built in my own time.
+                  <br />
+                  <br />
+                  GitHub:
+                  <a class="text-pink-500 underline" href="https://github.com/N0m4n904">N0m4n904</a>
+                  <br />
+                  GitLab:
+                  <a class="text-pink-500 underline" href="https://gitlab.com/N0m4n904">N0m4n904</a>
+                </p>
+              </div>
             </div>
             <div class="flex flex-wrap items-center">
               <div class="w-full sm:w-2/3 p-6 mt-6">
@@ -342,7 +360,12 @@
               </div>
             </div>
           </div>
-          <div class="w-full md:w-1/2 md:pl-10">
+          <!-- Work is the shorter list, so from the medium breakpoint up it is
+               pinned and rides along while the longer list scrolls past, rather
+               than leaving half the section empty. self-start keeps it from
+               stretching to the row height, which would leave it nothing to
+               travel through. Below that breakpoint the lists are stacked. -->
+          <div class="w-full md:w-1/2 md:pl-10 self-start md:sticky md:top-24">
             <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
               Work
             </h2>
@@ -350,10 +373,10 @@
               <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="flex flex-wrap items-center">
-              <div class="w-full p-6 mt-6">
+              <div class="w-full sm:w-2/3 p-6 mt-6">
                 <p class="text-gray-600 mb-8">
                   Software development at
-                  <a class="text-pink-500 underline" href="https://drw.de">Dominikus-Ringeisen-Werk</a>.
+                  <a class="text-pink-500 underline whitespace-nowrap" href="https://drw.de">Dominikus-Ringeisen-Werk</a>.
                   <br />
                   <br />
                   Organisation:
@@ -362,6 +385,9 @@
                   Work account:
                   <a class="text-pink-500 underline" href="https://github.com/DRW-NoahAnleitner">GitHub</a>
                 </p>
+              </div>
+              <div class="w-full sm:w-1/3 p-6">
+                <img class="logo-tile" src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
               </div>
             </div>
             <div class="flex flex-wrap items-center">
@@ -410,14 +436,15 @@
                   1999-born human-being living in Germany.
                 </p>
               </div>
-             <a href="https://drw.de" target="_blank" class="link-group flex flex-wrap no-underline hover:no-underline">
+              <div class="flex flex-wrap">
                 <div class="w-full font-bold text-xl text-gray-800 px-6">
                   What I do
                 </div>
                 <p class="text-gray-800 text-base px-6 mb-5">
-                  Software Development at <span class="hover-bold">Dominikus-Ringeisen-Werk</span>
+                  Software development, at work and after it. The two lists above say more about that
+                  than this card can.
                 </p>
-              </a>
+              </div>
             </div>
           </div>
           <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink card">

@@ -760,8 +760,16 @@ video {
   justify-content: space-between;
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-full {
@@ -1061,6 +1069,14 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:sticky {
+    position: sticky;
+  }
+
+  .md\:top-24 {
+    top: 6rem;
+  }
+
   .md\:mb-6 {
     margin-bottom: 1.5rem;
   }

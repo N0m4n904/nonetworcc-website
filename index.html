@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.0.0/smartcursor.css"
-          integrity="sha384-XkT9RbMo2pvoSW2NQGdt9AsGuyLSnV1lQRfDTKsGW3WyrsnXFlHFHY2vRMbUYZFe" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.0.0/smartcursor.js"
-            integrity="sha384-Ddw1pxQbG/N15ATkwgmta6aIutmgHhXHFqSjniEMmJHq6GtTLZHLJihDyJ2An1Gb" crossorigin="anonymous" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.0/smartcursor.css"
+          integrity="sha384-nYshBD+NGJjSHOzgrtbSmBvLGpII4N1wiIojTuzyHeJYepoS68ZWReJDfwavcNUa" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.0/smartcursor.js"
+            integrity="sha384-Bomif2oN01D2ZUasivYCt+INuzJO3bpM9W2Yj53BYggsSW9Z3Sfjrgq2ZVeUyg+7" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -16,6 +16,14 @@
     <link rel="stylesheet" href="src/output.css"/>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
     <style>
+      /* Smart cursor dot, in the two ends of the site gradient. Named for the
+         surface each is drawn on, so this holds for light and dark mode alike.
+         Declared after smartcursor.css, which is what lets it win. */
+      :root {
+        --brand: #8c0be8;
+        --brand-light: #00C6FF;
+      }
+
       body {
         font-family: 'Source Sans Pro', sans-serif;
       }

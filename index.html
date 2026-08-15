@@ -84,12 +84,32 @@
         backdrop-filter: blur(10px);
         border-radius: 20px;
         padding: 40px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .card:hover {
         transform: translateY(-10px);
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      /* A rule between the two lists: under the personal one while they are
+         stacked, down its right edge once they sit side by side. It belongs to
+         the personal list because that is the taller one — on the work list it
+         would ride along with the pinned column and stop short. */
+      .list-divider {
+        padding-bottom: 2.5rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      }
+
+      @media (min-width: 768px) {
+        .list-divider {
+          padding-bottom: 0;
+          margin-bottom: 0;
+          border-bottom: 0;
+          border-right: 1px solid rgba(0, 0, 0, 0.12);
+        }
       }
 
       .backdrop-blur {
@@ -143,11 +163,29 @@
         opacity: 1;
       }
 
+      /* Declared after the breakpoint block above so these win for both the
+         stacked and the side-by-side case. A black shadow barely registers on
+         a near-black section, so the cards get a deeper one plus a hairline to
+         hold their edge. */
       @media (prefers-color-scheme: dark) {
         .badge-archived {
           border-color: #374151;
           background-color: #1f2937;
           color: #9ca3af;
+        }
+
+        .card {
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06),
+                      0 2px 12px rgba(0, 0, 0, 0.55);
+        }
+
+        .card:hover {
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+                      0 20px 60px rgba(0, 0, 0, 0.75);
+        }
+
+        .list-divider {
+          border-color: rgba(255, 255, 255, 0.12);
         }
       }
     </style>
@@ -219,26 +257,24 @@
              they fall into one column in source order, so the personal work is
              what a phone reads first. -->
         <div class="flex flex-wrap">
-          <div class="w-full md:w-1/2 md:pr-10">
+          <div class="w-full md:w-1/2 md:pr-10 list-divider">
             <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
               Projects
             </h2>
             <div class="w-full mb-4">
               <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <p class="text-gray-600 mb-8">
-                  Built in my own time.
-                  <br />
-                  <br />
-                  GitHub:
-                  <a class="text-pink-500 underline" href="https://github.com/N0m4n904">N0m4n904</a>
-                  <br />
-                  GitLab:
-                  <a class="text-pink-500 underline" href="https://gitlab.com/N0m4n904">N0m4n904</a>
-                </p>
-              </div>
+            <div class="w-full mt-6 card">
+              <p class="text-gray-600">
+                Built in my own time.
+                <br />
+                <br />
+                GitHub:
+                <a class="text-pink-500 underline" href="https://github.com/N0m4n904">N0m4n904</a>
+                <br />
+                GitLab:
+                <a class="text-pink-500 underline" href="https://gitlab.com/N0m4n904">N0m4n904</a>
+              </p>
             </div>
             <div class="flex flex-wrap items-center">
               <div class="w-full sm:w-2/3 p-6 mt-6">
@@ -313,7 +349,7 @@
             </div>
             <div class="flex flex-wrap flex-col-reverse sm:flex-row items-center">
               <div class="w-full sm:w-1/3 p-6">
-                <img class="app-icon" src="src/images/maxstorage_ultimate.png" alt="Max.Storage Ultimate logo" />
+                <img class="app-icon" src="https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png" alt="Max.Storage Ultimate logo" />
               </div>
               <div class="w-full sm:w-2/3 p-6 mt-6">
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
@@ -372,9 +408,9 @@
             <div class="w-full mb-4">
               <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <p class="text-gray-600 mb-8">
+            <div class="w-full mt-6 card flex flex-wrap items-center">
+              <div class="w-full sm:w-2/3">
+                <p class="text-gray-600">
                   Software development at
                   <a class="text-pink-500 underline whitespace-nowrap" href="https://drw.de">Dominikus-Ringeisen-Werk</a>.
                   <br />
@@ -386,7 +422,7 @@
                   <a class="text-pink-500 underline" href="https://github.com/DRW-NoahAnleitner">GitHub</a>
                 </p>
               </div>
-              <div class="w-full sm:w-1/3 p-6">
+              <div class="w-full sm:w-1/3">
                 <img class="logo-tile" src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
               </div>
             </div>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.0/smartcursor.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.1/smartcursor.css"
           integrity="sha384-nYshBD+NGJjSHOzgrtbSmBvLGpII4N1wiIojTuzyHeJYepoS68ZWReJDfwavcNUa" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.0/smartcursor.js"
-            integrity="sha384-Bomif2oN01D2ZUasivYCt+INuzJO3bpM9W2Yj53BYggsSW9Z3Sfjrgq2ZVeUyg+7" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.1.1/smartcursor.js"
+            integrity="sha384-A5QxP7bYA14busOHKeezMiPQgbc2J0GnuSkubAxsJIATiNJmWgyOJB6mo65Bhj5Z" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -188,6 +188,9 @@
       .logo-tile {
         display: block;
         width: 72%;
+        /* Its column is a third of the card on a desktop but the whole width of
+           it on a phone, where 72% of that is far too large. */
+        max-width: 170px;
         margin: 0 auto;
         padding: 4%;
         background-color: #ffffff;
@@ -515,7 +518,7 @@
                   <a class="text-pink-500" href="https://github.com/DRW-NoahAnleitner" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
                 </p>
               </div>
-              <div class="w-full sm:w-1/3">
+              <div class="w-full sm:w-1/3 mt-6 sm:mt-0">
                 <img class="logo-tile" src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
               </div>
             </div>

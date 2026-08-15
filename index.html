@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="src/cursor/smartcursor.css">
-    <script src="src/cursor/smartcursor.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.0.0/smartcursor.css"
+          integrity="sha384-XkT9RbMo2pvoSW2NQGdt9AsGuyLSnV1lQRfDTKsGW3WyrsnXFlHFHY2vRMbUYZFe" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.0.0/smartcursor.js"
+            integrity="sha384-Ddw1pxQbG/N15ATkwgmta6aIutmgHhXHFqSjniEMmJHq6GtTLZHLJihDyJ2An1Gb" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -401,6 +403,12 @@
       </div>
     </footer>
     <script>
+      // smartcursor.js is deferred, so window.smartCursor only exists once
+      // parsing has finished. It ships off by default and is enabled here.
+      document.addEventListener("DOMContentLoaded", function () {
+        window.smartCursor.setEnabled(true);
+      });
+
       var scrollpos = window.scrollY;
       var header = document.getElementById("header");
       var navaction = document.getElementById("navAction");

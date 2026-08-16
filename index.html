@@ -512,7 +512,9 @@
         if (!button) return;
 
         button.addEventListener("click", function () {
-          document.querySelectorAll(".post-stub").forEach(function (stub) {
+          var frames = [];
+
+          document.querySelectorAll(".post-stub").forEach(function (stub, index) {
             var post = document.createElement("blockquote");
             post.className = "instagram-media";
             post.setAttribute("data-instgrm-permalink", stub.dataset.permalink);
@@ -521,8 +523,16 @@
 
             var frame = document.createElement("div");
             frame.className = "post-frame";
+            frame.style.setProperty("--i", index);
             frame.appendChild(post);
             stub.replaceWith(frame);
+            frames.push(frame);
+          });
+
+          // On the next frame, so the browser has a starting state to animate
+          // away from; they then arrive one after another.
+          requestAnimationFrame(function () {
+            frames.forEach(function (frame) { frame.classList.add("is-in"); });
           });
 
           document.getElementById("posts-action").remove();

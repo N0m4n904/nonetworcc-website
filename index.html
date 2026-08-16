@@ -85,6 +85,22 @@
             </div>
           </div>
           <figure class="hero__art" data-reveal style="--i:2">
+            <div class="rings" aria-hidden="true">
+              <svg viewBox="0 0 200 200">
+                <g class="rings__outer">
+                  <path class="a" d="M100 8C150 8 192 50 192 100C192 150 150 192 100 192C50 192 8 150 8 100C8 50 50 8 100 8" />
+                  <path class="b" d="M100 9C149 7 193 52 191 101C193 149 148 191 99 193C51 193 7 149 9 100C7 51 51 9 100 9" />
+                </g>
+                <g class="rings__middle">
+                  <path class="a" d="M100 30C139 30 170 61 170 100C170 139 139 170 100 170C61 170 30 139 30 100C30 61 61 30 100 30" />
+                  <path class="b" d="M100 31C138 29 171 62 169 101C171 138 138 171 99 169C62 171 29 138 31 100C29 62 62 31 100 31" />
+                </g>
+                <g class="rings__inner">
+                  <path class="a" d="M100 52C126 52 148 74 148 100C148 126 126 148 100 148C74 148 52 126 52 100C52 74 74 52 100 52" />
+                  <path class="b" d="M100 53C125 51 149 75 147 101C149 125 125 149 99 147C75 149 51 125 53 100C51 75 75 53 100 53" />
+                </g>
+              </svg>
+            </div>
             <img class="hero__logo" src="src/images/NoNetworcc-Logo.png" alt="" />
           </figure>
         </div>
@@ -141,6 +157,18 @@
       </section>
 
       <section class="section" id="projects">
+        <div class="field" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <path d="M0 40c60-8 120 6 180-2s140-10 220 4" />
+            <path d="M0 92c70 10 130-8 195 2s140 12 205-4" />
+            <path d="M0 148c55-12 118 8 178 0s150-12 222 6" />
+            <path d="M0 206c78 8 128-10 196 0s130 14 204-2" />
+            <path d="M0 258c62-10 126 8 186 2s136-12 214 4" />
+            <path d="M64 0c-8 70 8 130-2 190s6 80 2 110" />
+            <path d="M198 0c10 66-8 128 2 188s-6 82-2 112" />
+            <path d="M330 0c-6 74 10 126 0 186s8 84 2 114" />
+          </svg>
+        </div>
         <div class="shell">
           <div class="section__head" data-reveal>
             <p class="label">Built in my own time</p>
@@ -409,6 +437,44 @@
         window.addEventListener("scroll", mark, { passive: true });
       })();
 
+
+
+      // Sketched outlines. Two drawings per outline, swapped by the boil
+      // animation, injected here so the markup does not carry the same forty
+      // characters of path data on every card. Until this runs the elements
+      // keep the plain border they were given, so nothing looks unfinished if
+      // the script never arrives.
+      (function () {
+        var NS = "http://www.w3.org/2000/svg";
+        var DRAWINGS = [
+          "M4 8C4 5 6 3.6 10 4L90 4.4C95 4.4 96.3 6 96 9L95.6 91C95.6 95 94 96.4 90 96L9.5 95.6C5 95.6 3.8 94 4 91Z",
+          "M4.4 7C4.2 4.6 7 3.4 11 4.2L89 3.8C95.4 4.2 96.6 7 95.6 10L96 90C96.2 95.4 93 96.8 89.5 96L10 96.2C5.4 96 3.6 93.4 4.2 90.5Z"
+        ];
+
+        function outline() {
+          var svg = document.createElementNS(NS, "svg");
+          svg.setAttribute("class", "sketch");
+          svg.setAttribute("viewBox", "3.5 3.5 93 93");
+          svg.setAttribute("preserveAspectRatio", "none");
+          svg.setAttribute("aria-hidden", "true");
+          DRAWINGS.forEach(function (d) {
+            var path = document.createElementNS(NS, "path");
+            path.setAttribute("d", d);
+            svg.appendChild(path);
+          });
+          return svg;
+        }
+
+        document.querySelectorAll(".card").forEach(function (card) {
+          card.appendChild(outline());
+          card.classList.add("card--sketched");
+        });
+
+        document.querySelectorAll(".post-stub").forEach(function (stub) {
+          stub.appendChild(outline());
+          stub.classList.add("post-stub--sketched");
+        });
+      })();
 
       // Motion. One guard at the top: if the visitor asked for less, every
       // moving part below either never starts or is handed its finished state.

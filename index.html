@@ -7,754 +7,147 @@
             integrity="sha384-A5QxP7bYA14busOHKeezMiPQgbc2J0GnuSkubAxsJIATiNJmWgyOJB6mo65Bhj5Z" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Noah Anleitner</title>
     <link rel="icon" type="image/x-icon" href="src/images/NoNetworcc-Logo.png">
-    <meta name="description" content="My profiles and projects" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <link rel="stylesheet" href="src/output.css"/>
+    <meta name="description" content="Software developer. Projects, work and a car." />
+    <link rel="stylesheet" href="src/redesign.css" />
     <style>
-      /* Source Sans Pro, served from this site rather than fetched from
-         Google: the stylesheet link handed every visitor's address to a
-         third party before anything on the page had been agreed to. Latin
-         and latin-ext only, which is all this page sets. SIL OFL. */
-      @font-face {
-        font-display: swap;
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 400;
-        src: url(src/fonts/source-sans-pro-400-latin-ext.woff2) format('woff2');
-        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-      }
-
-      @font-face {
-        font-display: swap;
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 400;
-        src: url(src/fonts/source-sans-pro-400-latin.woff2) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-
-      @font-face {
-        font-display: swap;
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 700;
-        src: url(src/fonts/source-sans-pro-700-latin-ext.woff2) format('woff2');
-        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-      }
-
-      @font-face {
-        font-display: swap;
-        font-family: 'Source Sans Pro';
-        font-style: normal;
-        font-weight: 700;
-        src: url(src/fonts/source-sans-pro-700-latin.woff2) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-
       /* Smart cursor dot, in the two ends of the site gradient. Named for the
-         surface each is drawn on, so this holds for light and dark mode alike.
-         Declared after smartcursor.css, which is what lets it win. */
+         surface each is drawn on, so this holds for light and dark alike. */
       :root {
         --brand: #8c0be8;
-        --brand-light: #00C6FF;
+        --brand-light: #00c6ff;
       }
 
-      body {
-        font-family: 'Source Sans Pro', sans-serif;
-      }
-
-      /* Light mode gradient */
-      .gradient {
-        background: linear-gradient(90deg, #8c0be8 0%, #00C6FF 100%);
-      }
-
-      /* Dark mode gradient */
-      @media (prefers-color-scheme: dark) {
-        .gradient {
-          background: linear-gradient(90deg, #6a0bb0 0%, #0099cc 100%);
-        }
-
-        /* Dark mode für sections */
-        .bg-white:not(#header):not(#nav-content) {
-          background-color: #111827 !important;
-        }
-
-        .text-gray-800 {
-          color: #f3f4f6 !important;
-        }
-
-        .text-gray-600 {
-          color: #d1d5db !important;
-        }
-
-        .text-gray-500 {
-          color: #9ca3af !important;
-        }
-
-        .text-black {
-          color: #f3f4f6 !important;
-        }
-
-        /* SVG Fills für Dark Mode */
-        svg g[fill="#FFFFFF"],
-        svg path[fill="#FFFFFF"],
-        .wave {
-          fill: #111827 !important;
-        }
-
-        svg g[fill="#f8fafc"],
-        svg .wave[fill="#f8fafc"] {
-          fill: #111827 !important;
-        }
-      }
-
-      /* The nav sits at z-30 and page content scrolls beneath it, so the shape
-         that hugs that content belongs beneath it too — anything above 99998
-         would also cover the dot at 99999, which must still show over it. */
+      /* The ring hugs page content, so it belongs under the bar the way that
+         content does. Anything above 99998 would also cover the dot at 99999. */
       .smart-cursor-ring {
-        z-index: 29;
+        z-index: 39;
       }
 
-      .card {
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      }
-
-      /* A rule between the two lists: under the personal one while they are
-         stacked, down its right edge once they sit side by side. It belongs to
-         the personal list because that is the taller one — on the work list it
-         would ride along with the pinned column and stop short. */
-      .list-divider {
-        padding-bottom: 2.5rem;
-        margin-bottom: 2.5rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      @media (min-width: 768px) {
-        .list-divider {
-          padding-bottom: 0;
-          margin-bottom: 0;
-          border-bottom: 0;
-          border-right: 1px solid rgba(0, 0, 0, 0.12);
-        }
-      }
-
-      /* Sized in em so a mark matches the text it sits beside, and filled with
-         currentColor so it takes the link's own colour in either theme. */
-      .link-icon {
-        display: inline-block;
-        width: 1.15em;
-        height: 1.15em;
-        vertical-align: -0.2em;
-        fill: currentColor;
-      }
-
-      .backdrop-blur {
-        backdrop-filter: blur(40px);
-        -webkit-backdrop-filter: blur(40px);
-      }
-
-      .badge-archived {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 0.75rem;
-        padding: 0.25rem 0.75rem;
-        border: 1px solid #d1d5db;
-        border-radius: 9999px;
-        background-color: #f3f4f6;
-        color: #6b7280;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-
-      /* The signet is dark red on opaque white, so it cannot simply sit on the
-         section: in dark mode that is a low-contrast mark on near-black. It
-         keeps the white it was drawn for, as a tile of its own. */
-      .logo-tile {
-        display: block;
-        width: 72%;
-        /* Its column is a third of the card on a desktop but the whole width of
-           it on a phone, where 72% of that is far too large. */
-        max-width: 170px;
-        margin: 0 auto;
-        padding: 4%;
-        background-color: #ffffff;
-        border-radius: 14px;
-      }
-
-      .app-icon {
-        display: block;
-        width: 66%;
-        margin: 0 auto;
-        border-radius: 22%;
-      }
-
-      /* Stand-in for an Instagram post. Nothing is fetched from Meta until the
-         button below the grid is pressed, which is why the page needs no
-         consent banner: there is no third-party request to consent to until
-         the visitor asks for one. Sized to roughly the height of the embed it
-         is replaced by, so the page does not jump too far when they load. */
-      .ig-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        width: 100%;
-        min-height: 22rem;
-        padding: 2rem;
-        border: 1px dashed rgba(0, 0, 0, 0.25);
-        border-radius: 28px;
-        text-align: center;
-      }
-
-      /* A loaded post is Instagram's own document, always white whatever the
-         visitor's theme, and beyond the reach of anything declared here. It is
-         given a frame of the page's own so the white reads as a card that was
-         meant rather than a hole in the section. The iframe element itself does
-         belong to this page, so its corners and its own border can be restyled
-         — only its contents cannot. Instagram sets those inline, hence the
-         !important. */
-      .ig-frame {
-        max-width: 564px;
-        margin: 0 auto;
-        padding: 0.75rem;
-        border-radius: 28px;
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-
-      .instagram-media {
-        border: 0 !important;
-        border-radius: 20px !important;
-        box-shadow: none !important;
-      }
-
-      .ig-card-mark {
-        width: 2.5rem;
-        height: 2.5rem;
-        fill: #8c0be8;
-      }
-
-      .ig-card-title {
-        font-weight: 700;
-        font-size: 1.125rem;
-      }
-
-      .archived-logo {
-        filter: grayscale(1);
-        opacity: 0.6;
-        transition: filter 0.3s ease, opacity 0.3s ease;
-      }
-
-      .archived-logo:hover {
-        filter: grayscale(0);
-        opacity: 1;
-      }
-
-      /* Declared after the breakpoint block above so these win for both the
-         stacked and the side-by-side case. A black shadow barely registers on
-         a near-black section, so the cards get a deeper one plus a hairline to
-         hold their edge. */
-      @media (prefers-color-scheme: dark) {
-        .badge-archived {
-          border-color: #374151;
-          background-color: #1f2937;
-          color: #9ca3af;
-        }
-
-        .card {
-          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06),
-                      0 2px 12px rgba(0, 0, 0, 0.55);
-        }
-
-        .card:hover {
-          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
-                      0 20px 60px rgba(0, 0, 0, 0.75);
-        }
-
-        .list-divider {
-          border-color: rgba(255, 255, 255, 0.12);
-        }
-
-        .ig-card {
-          border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .ig-frame {
-          background-color: rgba(255, 255, 255, 0.07);
-        }
-
-        .ig-card-mark {
-          fill: #00C6FF;
+      /* The mark is white line art, which needs reversing on a light ground. */
+      @media (prefers-color-scheme: light) {
+        .hero__logo {
+          filter: invert(1);
         }
       }
     </style>
   </head>
-  <body class="leading-normal tracking-normal text-white gradient">
-    <!-- Marks for the service links, defined once and instanced with <use>.
-         They are inlined rather than fetched so they inherit the colour of the
-         link they sit in and need no network request. Paths: Simple Icons, CC0. -->
+  <body>
+    <div class="aura" aria-hidden="true"></div>
+
+    <!-- Marks and the one gradient the drawn rules stroke themselves with.
+         Inlined so they inherit colour and cost no request. Simple Icons, CC0. -->
     <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+      <defs>
+        <linearGradient id="rule-gradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#8c0be8" />
+          <stop offset="1" stop-color="#00c6ff" />
+        </linearGradient>
+      </defs>
       <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
-      <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
-      <symbol id="icon-gitlab" viewBox="0 0 24 24"><path d="m23.6004 9.5927-.0337-.0862L20.3.9814a.851.851 0 0 0-.3362-.405.8748.8748 0 0 0-.9997.0539.8748.8748 0 0 0-.29.4399l-2.2055 6.748H7.5375l-2.2057-6.748a.8573.8573 0 0 0-.29-.4412.8748.8748 0 0 0-.9997-.0537.8585.8585 0 0 0-.3362.4049L.4332 9.5015l-.0325.0862a6.0657 6.0657 0 0 0 2.0119 7.0105l.0113.0087.03.0213 4.976 3.7264 2.462 1.8633 1.4995 1.1321a1.0085 1.0085 0 0 0 1.2197 0l1.4995-1.1321 2.4619-1.8633 5.006-3.7489.0125-.01a6.0682 6.0682 0 0 0 2.0094-7.003z"/></symbol>
+      <symbol id="icon-gitlab" viewBox="0 0 24 24"><path d="m23.6004 9.5927-.0337-.0862L20.3.9814a.851.851 0 0 0-.3362-.405.8748.8748 0 0 0-.9997.0539.8748.8748 0 0 0-.29.4399l-2.2055 6.748H7.5375l-2.2057-6.748a.8573.8573 0 0 0-.29-.4412.8748.8748 0 0 0-.9997-.0537.8585.8585 0 0 0-.3362.4049L.4332 9.5015l-.0325.0862a6.0657 6.0657 0 0 0 2.0119 7.0105l.113.0087.0287.0199 4.976 3.7264 2.4620 1.8633 1.4995 1.1321a1.0085 1.0085 0 0 0 1.2197 0l1.4995-1.1321 2.4619-1.8633 5.0046-3.7488.0125-.0099a6.0682 6.0682 0 0 0 2.0086-7.0056z"/></symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.3877 2.1228.6677.6655 1.3363 1.0743 2.1287 1.3802.7632.2952 1.6361.4956 2.9134.552 1.2773.0564 1.6884.0689 4.9462.0626 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.388.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.0563-1.2809.0697-1.6898.0634-4.9487-.0063-3.2589-.0208-3.6668-.0812-4.9454-.0604-1.2786-.264-2.1482-.5635-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0044 11.977.0018 8.718.008 8.31.0223 7.0301.084m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.0723 4.848-.0794 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.0724-4.8493.0793-3.2045.007-3.5825-.006-4.8477-.0607M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.1568 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
     </svg>
-    <!--Nav-->
-    <nav id="header" class="fixed w-full z-30 top-0 text-white
-     backdrop-blur bg-black/20 transition-colors duration-300">
-      <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-        <div class="pl-4 flex items-center">
-          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-          </a>
-        </div>
-        <div
-          id="nav-content"
-          class="flex items-center ml-auto text-black p-4 lg:p-0 z-20">
-          <a href="mailto:contact@nonetwor.cc?subject=Contact">
-            <button
-              id="navAction"
-              class="ml-auto hover:underline bg-white text-gray-800 font-bold rounded-full py-2 px-6 lg:py-4 lg:px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-              Contact
-            </button>
-          </a>
-        </div>
-      </div>
-      <hr class="border-gray-100 opacity-25 my-0 py-0" />
-    </nav>
-    <!--Hero-->
-    <div class="pt-24">
-      <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <!--Left Col-->
-        <div class="flex flex-col w-full md:w-2/5 justify-center items-center text-center">
-          <p class="uppercase tracking-loose w-full">Software developer</p>
-          <h1 class="my-4 text-5xl font-bold leading-tight text-center">
-            Noah Anleitner
-          </h1>
-          <p class="leading-normal text-2xl mb-8">
-            Hobbyist and professional software development, and tuning my car when I am not coding
-          </p>
-        </div>
-        <!--Right Col-->
-        <div class="w-full md:w-3/5 py-6 text-center">
-          <img class="w-full md:w-4/5 z-50" src="src/images/NoNetworcc-Logo.png" />
-        </div>
-      </div>
-    </div>
-    <div class="relative -mt-12 lg:-mt-24">
-      <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
-            <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
-            <path
-              d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
-              opacity="0.100000001"
-            ></path>
-            <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" id="Path-4" opacity="0.200000003"></path>
-          </g>
-          <g transform="translate(-4.000000, 76.000000)" fill="#FFFFFF" fill-rule="nonzero">
-            <path
-              d="M0.457,34.035 C57.086,53.198 98.208,65.809 123.822,71.865 C181.454,85.495 234.295,90.29 272.033,93.459 C311.355,96.759 396.635,95.801 461.025,91.663 C486.76,90.01 518.727,86.372 556.926,80.752 C595.747,74.596 622.372,70.008 636.799,66.991 C663.913,61.324 712.501,49.503 727.605,46.128 C780.47,34.317 818.839,22.532 856.324,15.904 C922.689,4.169 955.676,2.522 1011.185,0.432 C1060.705,1.477 1097.39,3.129 1121.236,5.387 C1161.703,9.219 1208.621,17.821 1235.4,22.304 C1285.855,30.748 1354.351,47.432 1440.886,72.354 L1441.191,104.352 L1.121,104.031 L0.457,34.035 Z"
-            ></path>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <section class="bg-white py-8">
-      <div class="container max-w-7xl mx-auto m-8">
-        <!-- Two lists beside each other from the medium breakpoint up. Below it
-             they fall into one column in source order, so the personal work is
-             what a phone reads first. -->
-        <div class="flex flex-wrap">
-          <div class="w-full md:w-1/2 md:pr-10 list-divider">
-            <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
-              Projects
-            </h2>
-            <div class="w-full mb-4">
-              <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <div class="w-full mt-6 card">
-              <p class="text-gray-600">
-                Built in my own time.
-                <br />
-                <br />
-                <a class="text-pink-500" href="https://github.com/N0m4n904"><svg class="link-icon" aria-hidden="true"><use href="#icon-github"></use></svg><span class="underline ml-1">N0m4n904</span></a>
-                <br />
-                <a class="text-pink-500" href="https://gitlab.com/N0m4n904"><svg class="link-icon" aria-hidden="true"><use href="#icon-gitlab"></use></svg><span class="underline ml-1">N0m4n904</span></a>
-              </p>
-            </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  halogenOS
-                </h3>
-                <p class="text-gray-600 mb-8">
-                    A new generation cutting-edge Android ROM which is simple, smooth and sexy.
-                  <br />
-                  <br />
 
-                  Sources:
-                  <a class="text-pink-500 underline" href="https://git.halogenos.org/">git.halogenos.org</a>
-                  <br />
-
-                  Website:
-                  <a class="text-pink-500 underline" href="https://halogenos.org">halogenos.org</a>
-                  <br />
-                </p>
-              </div>
-              <div class="w-full sm:w-1/3 p-6">
-                <img src="src/images/halogenos_logo.png" alt="halogenOS Logo" />
-              </div>
-            </div>
-            <div class="flex flex-wrap flex-col-reverse sm:flex-row items-center">
-              <div class="w-full sm:w-1/3 p-6">
-                <img class="archived-logo" src="src/images/halogenos_discordbot.png" alt="halogenos discordbot logo" />
-              </div>
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <div class="align-middle">
-                  <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                    halogenOS Discordbot
-                    <span class="badge-archived">No longer maintained</span>
-                  </h3>
-                  <p class="text-gray-600 mb-8">
-                    A Discord bot written in Kotlin that was used by halogenOS members
-                    <br />
-                    <br />
-                    Discontinued in 2026 — the bot is no longer running. The sources stay online for reference.
-                    <br />
-                    <br />
-                    Sources:
-                    <a class="text-pink-500" href="https://github.com/halogenOS/halogenos.discordbot" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  NixOS Configuration
-                </h3>
-                <p class="text-gray-600 mb-8">
-                    My personal NixOS configuration, using:
-                  <br />
-                  - NixOS Stable
-                  <br />
-                  - foundrix
-                  <br />
-                  - Gnome
-                  <br />
-                  - COSMIC
-                  <br />
-                  <br />
-                  Sources:
-                  <a class="text-pink-500" href="https://gitlab.com/N0m4n904/nixos-config" aria-label="GitLab"><svg class="link-icon"><use href="#icon-gitlab"></use></svg></a>
-                </p>
-              </div>
-              <div class="w-full sm:w-1/3 p-6">
-                <img src="src/images/NixOS.svg" alt="NixOS logo" />
-              </div>
-            </div>
-            <div class="flex flex-wrap flex-col-reverse sm:flex-row items-center">
-              <div class="w-full sm:w-1/3 p-6">
-                <img class="app-icon" src="https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png" alt="Max.Storage Ultimate logo" />
-              </div>
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  Max.Storage Ultimate for Home Assistant
-                </h3>
-                <p class="text-gray-600 mb-8">
-                  A Home Assistant integration in Python for the MaxStorage Max.Storage Ultimate home battery.
-                  It exposes considerably more than the official Modbus interface: live photovoltaic, battery and grid
-                  readings, dynamically discovered MPPT strings, and relay states, which makes surplus energy usable
-                  in automations. Installable through HACS.
-                  <br />
-                  <br />
-                  A substantially extended fork of
-                  <a class="text-pink-500 underline" href="https://github.com/geeks-r-us/maxstorage_ultimate">geeks-r-us/maxstorage_ultimate</a>.
-                  <br />
-                  <br />
-                  Sources:
-                  <a class="text-pink-500" href="https://github.com/N0m4n904/maxstorage_ultimate" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3 p-6 mt-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  Smart Cursor
-                </h3>
-                <p class="text-gray-600 mb-8">
-                  A custom pointer for the web: a glowing dot and a ring that morphs onto whatever it hovers,
-                  matching that element's position, size and corner radius, and yielding to a caret over text.
-                  It reads the brightness of the surface underneath to stay legible on light and dark pages
-                  alike, and every dimension it draws is a CSS custom property. Two files, no build step,
-                  no dependencies.
-                  <br />
-                  <br />
-                  It is what is drawing your pointer on this page.
-                  <br />
-                  <br />
-                  Sources:
-                  <a class="text-pink-500" href="https://github.com/N0m4n904/smartcursor" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-                </p>
-              </div>
-              <div class="w-full sm:w-1/3 p-6">
-                <img src="src/images/smartcursor.svg" alt="Smart Cursor logo" />
-              </div>
-            </div>
-          </div>
-          <!-- Work is the shorter list, so from the medium breakpoint up it is
-               pinned and rides along while the longer list scrolls past, rather
-               than leaving half the section empty. self-start keeps it from
-               stretching to the row height, which would leave it nothing to
-               travel through. Below that breakpoint the lists are stacked. -->
-          <div class="w-full md:w-1/2 md:pl-10 self-start md:sticky md:top-24">
-            <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
-              Work
-            </h2>
-            <div class="w-full mb-4">
-              <div class="h-1 mx-auto gradient w-48 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-            <div class="w-full mt-6 card flex flex-wrap items-center">
-              <div class="w-full sm:w-2/3">
-                <p class="text-gray-600">
-                  Software development at
-                  <a class="text-pink-500 underline whitespace-nowrap" href="https://drw.de">Dominikus-Ringeisen-Werk</a>.
-                  <br />
-                  <br />
-                  Organisation:
-                  <a class="text-pink-500" href="https://github.com/Dominikus-Ringeisen-Werk" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-                  <br />
-                  Work account:
-                  <a class="text-pink-500" href="https://github.com/DRW-NoahAnleitner" aria-label="GitHub"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-                </p>
-              </div>
-              <div class="w-full sm:w-1/3 mt-6 sm:mt-0">
-                <img class="logo-tile" src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center">
-              <div class="w-full p-6 mt-6">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  DORINO
-                  <span class="badge-archived">Not public yet</span>
-                </h3>
-                <p class="text-gray-600 mb-8">
-                  A barrier-free information and communication system for social institutions: large touch
-                  areas on a tiled interface, read aloud on request, covering an intranet dashboard, news,
-                  weather and calendar, image and PDF viewing, maps, media playback and feedback.
-                  <br />
-                  <br />
-                  Homes for people with disabilities, senior homes, day-care centres and schools are the
-                  kind of place it is built for.
-                  <br />
-                  <br />
-                  I am one of its main developers at the DRW, which builds it together with SONNTAG IT
-                  Solutions, who sell it.
-                  <br />
-                  <br />
-                  The source is not public yet.
-                  <br />
-                  <br />
-                  Product site:
-                  <a class="text-pink-500 underline" href="https://www.sonntag-its.de/dorino/">sonntag-its.de</a>
-                </p>
-              </div>
-            </div>
-            </div>
-          </div>
+    <header class="bar" id="bar">
+      <div class="shell bar__inner">
+        <a class="bar__mark" href="#top">Noah&nbsp;Anleitner</a>
+        <nav class="bar__nav" aria-label="Sections">
+          <a class="bar__link" href="#work">Work</a>
+          <a class="bar__link" href="#projects">Projects</a>
+          <a class="bar__link" href="#garage">Garage</a>
+          <a class="bar__link" href="#about">About</a>
+        </nav>
+        <a class="button" href="mailto:contact@nonetwor.cc?subject=Contact">Get in touch</a>
       </div>
-    </section>
-    <section class="bg-white py-8">
-        <div class="container mx-auto flex flex-wrap pt-4 pb-12">
-          <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            About Me
-          </h2>
-          <div class="w-full mb-4">
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-          </div>
-          <div class="w-full md:w-1/3 m-4 flex flex-col flex-grow flex-shrink card">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
-              <div class="flex flex-wrap">
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                  Who I am
-                </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                  1999-born human-being living in Germany.
-                </p>
-              </div>
-              <div class="flex flex-wrap">
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                  What I do
-                </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                  Software development, at work and after it. The two lists above say more about that
-                  than this card can.
-                </p>
-              </div>
-              <div class="flex flex-wrap">
-                <div class="w-full font-bold text-xl text-gray-800 px-6">
-                  Away from the keyboard
-                </div>
-                <p class="text-gray-800 text-base px-6 mb-5">
-                  Tuning my car and photographing it. Those pictures are in the Garage below.
-                </p>
-              </div>
+    </header>
+
+    <main>
+      <section class="section section--tall" id="top">
+        <div class="shell hero">
+          <div>
+            <p class="label">Software developer</p>
+            <h1 class="display hero__title">
+              Noah <span class="accent">Anleitner</span>
+            </h1>
+            <p class="lede">
+              Software development for a living and for the fun of it, and tuning my car when I am
+              not coding.
+            </p>
+            <div class="hero__actions">
+              <a class="button" href="#work">See the work</a>
+              <a class="button button--quiet" href="#projects">Projects</a>
             </div>
           </div>
-          <div class="w-full md:w-1/3 m-4 flex flex-col flex-grow flex-shrink card">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden">
-                <div class="flex flex-wrap">
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">
-                      Technologies
-                    </div>
-                    <ul class="text-gray-800 text-base px-6 mb-5">
-                      <li>- Kotlin, Java</li>
-                      <li>- Android, AOSP, Jetpack Compose</li>
-                      <li>- .NET (Visual Basic, C#)</li>
-                      <li>- HTML, CSS, JavaScript, Typescript, Vue 3</li>
-                      <li>- PHP</li>
-                      <li>- Linux</li>
-                      <li>- SQL (MySQL, SQLite, MSSQL)</li>
-                      <li>- Jira, Confluence</li>
-                      <li>- Scriptrunner for Jira, Confluence</li>
-                      <li>- JobRouter</li>
-                      <li>- Nextcloud</li>
-                      <li>- Tailscale</li>
-                      <li>- Apache APISIX</li>
-                    </ul>
-                  </div>
-            </div>
-          </div>
+          <figure class="hero__art">
+            <img class="hero__logo" src="src/images/NoNetworcc-Logo.png" alt="" />
+          </figure>
         </div>
       </section>
-    <section class="bg-white py-8">
-      <div class="container max-w-5xl mx-auto m-8">
-        <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Garage
-        </h2>
-        <div class="w-full mb-4">
-          <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+
+      <section class="section" id="work">
+        <div class="shell">
+          <div class="section__head">
+            <p class="label">Day job</p>
+            <h2 class="title">Work</h2>
+            <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
+              <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />
+            </svg>
+          </div>
+          <p class="prose">DORINO and the Dominikus-Ringeisen-Werk go here.</p>
         </div>
-        <p class="text-gray-600 text-center mb-8 px-6">
-          My car and the work that goes into it. The pictures live on
-          <a class="text-pink-500" href="https://www.instagram.com/b9_allroad_kru/">
-            <svg class="link-icon" aria-hidden="true"><use href="#icon-instagram"></use></svg><span class="underline ml-1">@b9_allroad_kru</span></a>.
-          <br />
-          <br />
-          The posts below are not loaded until you ask for them. Pressing the button fetches them from
-          instagram.com, which means Meta receives your IP address and may set cookies on your device.
+      </section>
+
+      <section class="section" id="projects">
+        <div class="shell">
+          <div class="section__head">
+            <p class="label">Built in my own time</p>
+            <h2 class="title">Projects</h2>
+            <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
+              <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />
+            </svg>
+          </div>
+          <p class="prose">halogenOS, the Discordbot, NixOS, Max.Storage and Smart Cursor go here.</p>
+        </div>
+      </section>
+
+      <section class="section" id="garage">
+        <div class="shell">
+          <div class="section__head">
+            <p class="label">Away from the keyboard</p>
+            <h2 class="title">Garage</h2>
+            <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
+              <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />
+            </svg>
+          </div>
+          <p class="prose">The Instagram posts, still loaded only on request, go here.</p>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="shell">
+          <div class="section__head">
+            <p class="label">Who is typing</p>
+            <h2 class="title">About</h2>
+            <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
+              <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />
+            </svg>
+          </div>
+          <p class="prose">The short version of me, the tools I use, and how to get hold of me.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section">
+      <div class="shell">
+        <p class="label">Noah Anleitner</p>
+        <p class="prose">
+          <a href="src/privacy-policy.txt">Privacy</a>
         </p>
-        <div class="w-full text-center mb-4">
-          <button
-            type="button"
-            id="ig-load"
-            class="gradient text-white font-bold rounded-full py-3 px-8 shadow transform transition hover:scale-105 duration-300 ease-in-out">
-            Load the posts from Instagram
-          </button>
-        </div>
-        <div class="flex flex-wrap" id="ig-posts">
-          <div class="w-full md:w-1/2 p-4">
-            <div class="ig-card text-gray-600" data-permalink="https://www.instagram.com/p/DXkKC9CiPTl/">
-              <svg class="ig-card-mark" aria-hidden="true"><use href="#icon-instagram"></use></svg>
-              <span class="ig-card-title text-gray-800">Instagram post</span>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 p-4">
-            <div class="ig-card text-gray-600" data-permalink="https://www.instagram.com/p/DP9LiDeiEnN/">
-              <svg class="ig-card-mark" aria-hidden="true"><use href="#icon-instagram"></use></svg>
-              <span class="ig-card-title text-gray-800">Instagram post</span>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 p-4">
-            <div class="ig-card text-gray-600" data-permalink="https://www.instagram.com/p/DXkKKZLiHxB/">
-              <svg class="ig-card-mark" aria-hidden="true"><use href="#icon-instagram"></use></svg>
-              <span class="ig-card-title text-gray-800">Instagram post</span>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 p-4">
-            <div class="ig-card text-gray-600" data-permalink="https://www.instagram.com/p/DHdemuSoo_N/">
-              <svg class="ig-card-mark" aria-hidden="true"><use href="#icon-instagram"></use></svg>
-              <span class="ig-card-title text-gray-800">Instagram post</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
-          <g class="wave" fill="#f8fafc">
-            <path
-              d="M1440,84 C1383.555,64.3 1342.555,51.3 1317,45 C1259.5,30.824 1206.707,25.526 1169,22 C1129.711,18.326 1044.426,18.475 980,22 C954.25,23.409 922.25,26.742 884,32 C845.122,37.787 818.455,42.121 804,45 C776.833,50.41 728.136,61.77 713,65 C660.023,76.309 621.544,87.729 584,94 C517.525,105.104 484.525,106.438 429,108 C379.49,106.484 342.823,104.484 319,102 C278.571,97.783 231.737,88.736 205,84 C154.629,75.076 86.296,57.743 0,32 L0,0 L1440,0 L1440,84 Z"
-            ></path>
-          </g>
-          <g transform="translate(1.000000, 15.000000)" fill="#FFFFFF">
-            <g transform="translate(719.500000, 68.500000) rotate(-180.000000) translate(-719.500000, -68.500000) ">
-              <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
-              <path
-                d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
-                opacity="0.100000001"
-              ></path>
-              <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" opacity="0.200000003"></path>
-            </g>
-          </g>
-        </g>
-      </g>
-    </svg>
-    <section class="container mx-auto text-center py-6 mb-12">
-    </section>
-    <!--Footer-->
-    <footer>
-      <div class="container mx-auto px-8">
-        <div class="w-full flex flex-col md:flex-row py-6">
-          <div class="flex-1">
-            <p class="uppercase text-gray-500 md:mb-6">Links</p>
-            <ul class="list-reset mb-6">
-              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                <a href="https://github.com/N0m4n904" target="_blank" aria-label="GitHub" class="no-underline text-gray-800 hover:text-pink-500"><svg class="link-icon"><use href="#icon-github"></use></svg></a>
-              </li>
-              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                <a href="https://gitlab.com/N0m4n904" target="_blank" aria-label="GitLab" class="no-underline text-gray-800 hover:text-pink-500"><svg class="link-icon"><use href="#icon-gitlab"></use></svg></a>
-              </li>
-            </ul>
-          </div>
-          <div class="flex-1">
-            <p class="uppercase text-gray-500 md:mb-6">Work</p>
-            <ul class="list-reset mb-6">
-              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                <a href="https://github.com/Dominikus-Ringeisen-Werk" target="_blank" class="no-underline text-gray-800 hover:text-pink-500"><svg class="link-icon" aria-hidden="true"><use href="#icon-github"></use></svg><span class="ml-1 hover:underline">Organisation</span></a>
-              </li>
-              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                <a href="https://github.com/DRW-NoahAnleitner" target="_blank" class="no-underline text-gray-800 hover:text-pink-500"><svg class="link-icon" aria-hidden="true"><use href="#icon-github"></use></svg><span class="ml-1 hover:underline">Work account</span></a>
-              </li>
-            </ul>
-          </div>
-          <div class="flex-1">
-            <p class="uppercase text-gray-500 md:mb-6">Legal</p>
-            <ul class="list-reset mb-6">
-              <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                <a href="src/privacy-policy.txt" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Privacy</a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
     </footer>
+
     <script>
       // smartcursor.js is deferred, so window.smartCursor only exists once
       // parsing has finished. It ships off by default and is enabled here.
@@ -762,69 +155,15 @@
         window.smartCursor.setEnabled(true);
       });
 
-      // Instagram posts are fetched only once the visitor asks for them, so
-      // that opening the page contacts Meta not at all. Every frame is turned
-      // into the blockquote embed.js expects, then the script is requested
-      // once and converts all of them into iframes in one pass.
+      // The bar earns its edge only once the page has moved beneath it.
       (function () {
-        var button = document.getElementById("ig-load");
-        if (!button) return;
-
-        button.addEventListener("click", function () {
-          document.querySelectorAll(".ig-card").forEach(function (frame) {
-            var post = document.createElement("blockquote");
-            post.className = "instagram-media";
-            post.setAttribute("data-instgrm-permalink", frame.dataset.permalink);
-            post.setAttribute("data-instgrm-version", "14");
-            post.style.cssText = "max-width:540px;min-width:250px;width:100%;margin:0 auto";
-
-            var surround = document.createElement("div");
-            surround.className = "ig-frame";
-            surround.appendChild(post);
-            frame.replaceWith(surround);
-          });
-
-          // Nothing left to ask for; the button has done its one job.
-          button.parentElement.remove();
-
-          if (window.instgrm) {
-            window.instgrm.Embeds.process();
-          } else {
-            var script = document.createElement("script");
-            script.async = true;
-            script.src = "https://www.instagram.com/embed.js";
-            document.body.appendChild(script);
-          }
-        });
+        var bar = document.getElementById("bar");
+        var mark = function () {
+          bar.dataset.scrolled = window.scrollY > 8 ? "true" : "false";
+        };
+        mark();
+        window.addEventListener("scroll", mark, { passive: true });
       })();
-
-      var scrollpos = window.scrollY;
-      var header = document.getElementById("header");
-      var navaction = document.getElementById("navAction");
-
-      document.addEventListener("scroll", function () {
-        scrollpos = window.scrollY;
-
-        if (scrollpos > 10) {
-          header.classList.add("shadow");
-
-          if (window.innerWidth >= 1024) {
-            navaction.classList.remove("bg-white");
-            navaction.classList.add("gradient");
-            navaction.classList.remove("text-gray-800");
-            navaction.classList.add("text-white");
-          }
-        } else {
-          header.classList.remove("shadow");
-
-          if (window.innerWidth >= 1024) {
-            navaction.classList.remove("gradient");
-            navaction.classList.add("bg-white");
-            navaction.classList.remove("text-white");
-            navaction.classList.add("text-gray-800");
-          }
-        }
-      });
     </script>
   </body>
 </html>

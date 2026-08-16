@@ -1,0 +1,465 @@
+/* ---------------------------------------------------------------------------
+   Noah Anleitner — design system
+
+   One handwritten family throughout, on a ground that carries depth rather
+   than a flat fill. Everything below is driven by the tokens in this first
+   block: both themes are the same design with different values, so nothing
+   downstream ever asks which theme is active.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* Ground and surfaces. The ground is never a flat colour on screen — the
+     glows in .aura sit on top of it — so it stays deliberately plain here. */
+  --ground: #f7f6fb;
+  --ground-deep: #eceaf5;
+  --surface: rgba(20, 18, 28, 0.04);
+  --surface-strong: rgba(20, 18, 28, 0.07);
+  --edge: rgba(20, 18, 28, 0.12);
+
+  --ink: #14121c;
+  --ink-soft: #4b4661;
+  --ink-faint: #6f6987;
+
+  /* The brand pair. -ink variants are the same hues pulled dark enough to
+     read as text on a light ground, where the plain cyan cannot. */
+  --violet: #8c0be8;
+  --cyan: #00c6ff;
+  --violet-ink: #7209c0;
+  --cyan-ink: #0479a3;
+
+  --glow-violet: rgba(140, 11, 232, 0.18);
+  --glow-cyan: rgba(0, 198, 255, 0.16);
+
+  --shadow-low: 0 2px 10px rgba(20, 18, 28, 0.08);
+  --shadow-high: 0 24px 60px rgba(20, 18, 28, 0.16);
+
+  /* Fluid type. Each step interpolates between a phone and a wide desktop, so
+     there are no breakpoint jumps in the headings. */
+  --step-display: clamp(3rem, 1.2rem + 7.5vw, 8rem);
+  --step-title: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem);
+  --step-heading: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  --step-lead: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --step-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-small: 0.875rem;
+
+  --measure: 34rem;
+  --shell: 78rem;
+  --gutter: clamp(1.25rem, 0.6rem + 3vw, 4rem);
+  --rhythm: clamp(4rem, 2rem + 8vw, 9rem);
+
+  --radius: 22px;
+  --radius-lg: 32px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0b0a12;
+    --ground-deep: #07060d;
+    --surface: rgba(255, 255, 255, 0.045);
+    --surface-strong: rgba(255, 255, 255, 0.08);
+    --edge: rgba(255, 255, 255, 0.12);
+
+    --ink: #f4f2fb;
+    --ink-soft: #b6b1c9;
+    --ink-faint: #8b85a3;
+
+    /* On a dark ground the pure hues are the readable ones. */
+    --violet-ink: #b06bff;
+    --cyan-ink: #4bd8ff;
+
+    --glow-violet: rgba(140, 11, 232, 0.3);
+    --glow-cyan: rgba(0, 198, 255, 0.22);
+
+    --shadow-low: 0 2px 12px rgba(0, 0, 0, 0.5);
+    --shadow-high: 0 24px 70px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The face. One variable file carries 300–800, so weight is a free axis and
+   headings need no second family.
+   --------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Shantell Sans';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(fonts/shantell-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Shantell Sans';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(fonts/shantell-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchored sections stop below the bar rather than under it. */
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ground);
+  color: var(--ink);
+  font-family: 'Shantell Sans', 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: var(--step-body);
+  font-weight: 400;
+  /* Handwriting needs more air between lines than a neutral sans to stay
+     readable at paragraph length. */
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, p, ul, figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Layout
+   --------------------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--rhythm);
+}
+
+.section--tall {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: var(--step-lead);
+}
+
+.prose {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------------------
+   Type
+   --------------------------------------------------------------------------- */
+
+.display {
+  font-size: var(--step-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: var(--step-title);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.heading {
+  font-size: var(--step-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Small caps-ish label. Handwriting has no small-caps, so the effect comes
+   from size, weight and tracking instead. */
+.label {
+  font-size: var(--step-small);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.accent {
+  background-image: linear-gradient(100deg, var(--violet-ink), var(--cyan-ink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Aura — the ground's depth. Two soft radial fields, deliberately larger than
+   the viewport so their edges never show, sitting behind everything.
+   --------------------------------------------------------------------------- */
+
+.aura {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 0%, var(--ground-deep), var(--ground) 60%);
+}
+
+.aura::before,
+.aura::after {
+  content: '';
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.aura::before {
+  top: -30vmax;
+  left: -20vmax;
+  background: radial-gradient(circle, var(--glow-violet), transparent 65%);
+}
+
+.aura::after {
+  top: 30vmax;
+  right: -30vmax;
+  background: radial-gradient(circle, var(--glow-cyan), transparent 65%);
+}
+
+/* ---------------------------------------------------------------------------
+   Bar
+   --------------------------------------------------------------------------- */
+
+.bar {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 40;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background-color: color-mix(in srgb, var(--ground) 72%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+
+.bar[data-scrolled='true'] {
+  border-bottom-color: var(--edge);
+}
+
+.bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 4.5rem;
+}
+
+.bar__mark {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.bar__nav {
+  display: none;
+  gap: 1.75rem;
+}
+
+@media (min-width: 56rem) {
+  .bar__nav {
+    display: flex;
+  }
+}
+
+.bar__link {
+  position: relative;
+  font-size: var(--step-small);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-block: 0.35rem;
+  transition: color 0.3s var(--ease);
+}
+
+.bar__link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-image: linear-gradient(90deg, var(--violet-ink), var(--cyan-ink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.bar__link:hover,
+.bar__link[aria-current='true'] {
+  color: var(--ink);
+}
+
+.bar__link:hover::after,
+.bar__link[aria-current='true']::after {
+  transform: scaleX(1);
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+   --------------------------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 600;
+  background-image: linear-gradient(100deg, var(--violet), var(--cyan));
+  color: #fff;
+  box-shadow: var(--shadow-low);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-high);
+}
+
+.button--quiet {
+  background-image: none;
+  background-color: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--edge);
+  box-shadow: none;
+}
+
+.button--quiet:hover {
+  background-color: var(--surface-strong);
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding-block-start: 6rem;
+}
+
+@media (min-width: 62rem) {
+  .hero {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.hero__title {
+  margin-block: 0.5rem 1.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-block-start: 2.25rem;
+}
+
+.hero__art {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 26rem);
+}
+
+.hero__art img {
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+   Section headings, with a drawn rule beneath. The stroke is an SVG path so it
+   can be animated later; here it simply sits under the words.
+   --------------------------------------------------------------------------- */
+
+.section__head {
+  margin-block-end: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section__rule {
+  width: clamp(8rem, 18vw, 14rem);
+  height: 14px;
+  margin-block-start: 0.75rem;
+  overflow: visible;
+}
+
+.section__rule path {
+  fill: none;
+  stroke: url(#rule-gradient);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion is opt-out at the root: anything that moves is written so that this
+   single block can switch it off.
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

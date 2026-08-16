@@ -473,23 +473,21 @@ main > .section {
    column beside the words on a wide screen and above them on a narrow one.
    --------------------------------------------------------------------------- */
 
+/* The drawn outline is the tile. It used to sit inside a translucent panel
+   with a radius of its own, and the two edges read as a double border — the
+   panel is gone, so there is one line around a tile and it is a drawn one.
+   The border below is only what shows before the outline is injected. */
 .tile {
   display: grid;
   gap: clamp(1.25rem, 3vw, 2.5rem);
   padding: clamp(1.5rem, 3vw, 2.75rem);
   border: 1px solid var(--edge);
   border-radius: var(--radius-lg);
-  background-color: var(--surface);
-  box-shadow: var(--shadow-low);
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
-              border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
 .tile:hover {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--violet-ink) 40%, var(--edge));
-  background-color: var(--surface-strong);
-  box-shadow: var(--shadow-high);
 }
 
 @media (min-width: 48rem) {
@@ -896,8 +894,8 @@ main > .section {
 
 .sketch path {
   fill: none;
-  stroke: var(--edge);
-  stroke-width: 1.6;
+  stroke: color-mix(in srgb, var(--ink) 22%, transparent);
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;

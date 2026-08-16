@@ -688,7 +688,7 @@ main > .section {
   color: var(--ink-faint);
 }
 
-.post-stub svg:not(.sketch) {
+.post-stub svg:not(.drawn) {
   width: 2.5rem;
   height: 2.5rem;
   fill: var(--violet-ink);
@@ -882,7 +882,7 @@ main > .section {
    non-scaling-stroke keeps the line an even weight while it does.
    --------------------------------------------------------------------------- */
 
-.sketch {
+.drawn {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -894,7 +894,7 @@ main > .section {
 /* The fill rides on the drawn path rather than on the element, so the surface
    and the line around it are one shape and cannot disagree — the same wobble
    bounds both, and there is no CSS radius for the stroke to miss. */
-.sketch path {
+.drawn path {
   fill: var(--surface);
   stroke: color-mix(in srgb, var(--ink) 22%, transparent);
   stroke-width: 2.6;
@@ -906,7 +906,7 @@ main > .section {
 
 /* Behind the words, but only within its own tile: the stacking context is what
    keeps a negative index from falling through to the section. */
-.sketch {
+.drawn {
   z-index: -1;
 }
 
@@ -915,19 +915,19 @@ main > .section {
   isolation: isolate;
 }
 
-.tile--sketched:hover .sketch path,
-.post-stub--sketched:hover .sketch path {
+.tile--sketched:hover .drawn path,
+.post-stub--sketched:hover .drawn path {
   fill: var(--surface-strong);
 }
 
 /* Each outline is drawn at its own pace and out of step with its neighbours;
    the values come from the script, which knows each tile's position. */
-.sketch path:first-child {
+.drawn path:first-child {
   animation: boil-a var(--boil, 0.3s) steps(1, end) infinite;
   animation-delay: var(--boil-shift, 0s);
 }
 
-.sketch path:last-child {
+.drawn path:last-child {
   animation: boil-b var(--boil, 0.3s) steps(1, end) infinite;
   animation-delay: var(--boil-shift, 0s);
 }
@@ -957,8 +957,8 @@ main > .section {
   border-color: transparent;
 }
 
-.tile--sketched:hover .sketch path,
-.post-stub--sketched:hover .sketch path {
+.tile--sketched:hover .drawn path,
+.post-stub--sketched:hover .drawn path {
   stroke: var(--violet-ink);
 }
 
@@ -1061,7 +1061,7 @@ main > .section {
 
 @media (prefers-reduced-motion: reduce) {
   /* One drawing rather than two, and nothing turning or drifting. */
-  .sketch path:last-child {
+  .drawn path:last-child {
     opacity: 0;
   }
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.3.1/smartcursor.css"
-          integrity="sha384-OwwjEJFwWLrXt9//nYBT8BqJ55+wlqI/dGYNz3P5nYBDywb97z3WQXjL547ssBYm" crossorigin="anonymous">
+          integrity="sha384-DJ28qhylHcyHeG8xQ+6dpdA7kmM/WA6RYJDSMoATHaPbTUWBbFuR2m8NJsrh+GiL" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.3.1/smartcursor.js"
             integrity="sha384-a7j13yCrNsnHh02eefp0sp+2VzRxVJndwHtZniqRxPVlU8PRCnYVYpwESHgcOh5u" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
@@ -517,10 +517,10 @@
           var h = host.offsetHeight;
           if (!w || !h) return;
 
-          var svg = host.querySelector(":scope > .sketch");
+          var svg = host.querySelector(":scope > .drawn");
           if (!svg) {
             svg = document.createElementNS(NS, "svg");
-            svg.setAttribute("class", "sketch");
+            svg.setAttribute("class", "drawn");
             svg.setAttribute("preserveAspectRatio", "none");
             svg.setAttribute("aria-hidden", "true");
             svg.appendChild(document.createElementNS(NS, "path"));

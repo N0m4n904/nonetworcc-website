@@ -127,7 +127,11 @@ body {
   /* Handwriting needs more air between lines than a neutral sans to stay
      readable at paragraph length. */
   line-height: 1.75;
-  overflow-x: hidden;
+  /* clip rather than hidden: hidden leaves the page scrollable sideways by
+     however far the rings reach past the edge, and a page that can be dragged
+     27px to the right is how a fixed bar ends up looking cut off. clip crops
+     them without making anything scrollable. */
+  overflow-x: clip;
 }
 
 h1, h2, h3, p, ul, figure {
@@ -185,6 +189,12 @@ main > .section {
   min-height: 100svh;
   display: flex;
   align-items: center;
+  /* Cropped here rather than left to the page: the rings reach past the side
+     on a narrow screen, which is the look, but anything hanging off the body
+     leaves the page draggable sideways by that much. clip, not hidden, so it
+     crops without becoming a scroll container — sticky and the aura behind it
+     carry on as before. */
+  overflow-x: clip;
 }
 
 .lede {

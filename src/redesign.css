@@ -179,7 +179,7 @@ button {
 
 /* Every section of the page proper stands as its own panel: at least a screen
    tall with its content centred. Sections carrying more than a screen — the
-   five project cards, the four posts — simply grow past it. svh rather than vh
+   five project tiles, the four posts — simply grow past it. svh rather than vh
    so a phone's collapsing address bar does not change the height mid-scroll. */
 main > .section {
   min-height: 100svh;
@@ -473,7 +473,7 @@ main > .section {
    column beside the words on a wide screen and above them on a narrow one.
    --------------------------------------------------------------------------- */
 
-.card {
+.tile {
   display: grid;
   gap: clamp(1.25rem, 3vw, 2.5rem);
   padding: clamp(1.5rem, 3vw, 2.75rem);
@@ -485,7 +485,7 @@ main > .section {
               border-color 0.4s var(--ease), background-color 0.4s var(--ease);
 }
 
-.card:hover {
+.tile:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--violet-ink) 40%, var(--edge));
   background-color: var(--surface-strong);
@@ -493,65 +493,65 @@ main > .section {
 }
 
 @media (min-width: 48rem) {
-  .card {
+  .tile {
     grid-template-columns: 10rem 1fr;
     align-items: center;
   }
 }
 
-.card + .card {
+.tile + .tile {
   margin-block-start: clamp(1rem, 2.5vw, 2rem);
 }
 
-.card__media {
+.tile__media {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card__media img {
+.tile__media img {
   width: min(100%, 8.5rem);
 }
 
 /* A tile for marks that carry their own opaque background and would otherwise
    sit as a hard rectangle on the surface. */
-.card__media--tile img {
+.tile__media--plate img {
   padding: 0.75rem;
   border-radius: 18px;
   background-color: #fff;
 }
 
-.card__media--rounded img {
+.tile__media--rounded img {
   border-radius: 22%;
 }
 
 /* Retired work reads as retired: colour drains out and returns on hover. */
-.card__media--past img {
+.tile__media--past img {
   filter: grayscale(1);
   opacity: 0.55;
   transition: filter 0.4s var(--ease), opacity 0.4s var(--ease);
 }
 
-.card:hover .card__media--past img {
+.tile:hover .tile__media--past img {
   filter: grayscale(0);
   opacity: 1;
 }
 
-.card__title {
+.tile__title {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
 }
 
-.card__body {
-  /* A card is wider than a comfortable line, so the words stop before it does. */
+.tile__body {
+  /* A tile is wider than a comfortable line, so the words stop before it does. */
   max-width: 62ch;
   margin-block: 0.75rem 0;
   color: var(--ink-soft);
 }
 
-.card__note {
+.tile__note {
   max-width: 62ch;
   margin-block-start: 0.5rem;
   color: var(--ink-faint);
@@ -787,9 +787,9 @@ main > .section {
   color: var(--ink);
 }
 
-/* A card with no mark of its own drops the media column entirely. */
+/* A tile with no mark of its own drops the media column entirely. */
 @media (min-width: 48rem) {
-  .card--plain {
+  .tile--plain {
     grid-template-columns: 1fr;
   }
 }
@@ -924,19 +924,19 @@ main > .section {
 
 /* Cards and stubs wear the outline instead of a border once the script has
    drawn one; the border stays as the fallback until then. */
-.card,
+.tile,
 .post-stub {
   position: relative;
 }
 
-.card--sketched,
-.card--sketched:hover,
+.tile--sketched,
+.tile--sketched:hover,
 .post-stub--sketched,
 .post-stub--sketched:hover {
   border-color: transparent;
 }
 
-.card--sketched:hover .sketch path,
+.tile--sketched:hover .sketch path,
 .post-stub--sketched:hover .sketch path {
   stroke: var(--violet-ink);
 }

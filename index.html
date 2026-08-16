@@ -50,6 +50,10 @@
       <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.3877 2.1228.6677.6655 1.3363 1.0743 2.1287 1.3802.7632.2952 1.6361.4956 2.9134.552 1.2773.0564 1.6884.0689 4.9462.0626 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.388.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.0563-1.2809.0697-1.6898.0634-4.9487-.0063-3.2589-.0208-3.6668-.0812-4.9454-.0604-1.2786-.264-2.1482-.5635-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0044 11.977.0018 8.718.008 8.31.0223 7.0301.084m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.0723 4.848-.0794 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.0724-4.8493.0793-3.2045.007-3.5825-.006-4.8477-.0607M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.1568 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
     </svg>
 
+    <svg class="thread" id="thread" viewBox="0 0 42 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M21 0c-14 120 14 190 0 300s-16 190 0 300 12 220 0 400" />
+    </svg>
+
     <header class="bar" id="bar">
       <div class="shell bar__inner">
         <a class="bar__mark" href="#top">Noah&nbsp;Anleitner</a>
@@ -64,23 +68,23 @@
     </header>
 
     <main>
-      <section class="section section--tall" id="top">
+      <section class="section" id="top">
         <div class="shell hero">
           <div>
-            <p class="label">Software developer</p>
-            <h1 class="display hero__title">
+            <p class="label" data-reveal>Software developer</p>
+            <h1 class="display hero__title" data-reveal style="--i:1">
               Noah <span class="accent">Anleitner</span>
             </h1>
-            <p class="lede">
+            <p class="lede" data-reveal style="--i:2">
               Software development for a living and for the fun of it, and tuning my car when I am
               not coding.
             </p>
-            <div class="hero__actions">
+            <div class="hero__actions" data-reveal style="--i:3">
               <a class="button" href="#work">See the work</a>
               <a class="button button--quiet" href="#projects">Projects</a>
             </div>
           </div>
-          <figure class="hero__art">
+          <figure class="hero__art" data-reveal style="--i:2">
             <img class="hero__logo" src="src/images/NoNetworcc-Logo.png" alt="" />
           </figure>
         </div>
@@ -88,7 +92,7 @@
 
       <section class="section" id="work">
         <div class="shell">
-          <div class="section__head">
+          <div class="section__head" data-reveal>
             <p class="label">Day job</p>
             <h2 class="title">Work</h2>
             <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
@@ -96,7 +100,7 @@
             </svg>
           </div>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media card__media--tile">
               <img src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
             </div>
@@ -115,7 +119,7 @@
             </div>
           </article>
 
-          <article class="card card--plain">
+          <article class="card card--plain" data-reveal>
             <div>
               <h3 class="heading card__title">DORINO <span class="badge">Not public yet</span></h3>
               <p class="card__body">
@@ -138,7 +142,7 @@
 
       <section class="section" id="projects">
         <div class="shell">
-          <div class="section__head">
+          <div class="section__head" data-reveal>
             <p class="label">Built in my own time</p>
             <h2 class="title">Projects</h2>
             <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
@@ -146,7 +150,7 @@
             </svg>
           </div>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media">
               <img src="src/images/halogenos_logo.png" alt="halogenOS" />
             </div>
@@ -160,7 +164,7 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media card__media--past">
               <img src="src/images/halogenos_discordbot.png" alt="halogenOS Discordbot" />
             </div>
@@ -178,7 +182,7 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media">
               <img src="src/images/NixOS.svg" alt="NixOS" />
             </div>
@@ -195,7 +199,7 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media card__media--rounded">
               <img src="https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png" alt="Max.Storage Ultimate" />
             </div>
@@ -218,7 +222,7 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-reveal>
             <div class="card__media">
               <img src="src/images/smartcursor.svg" alt="Smart Cursor" />
             </div>
@@ -241,7 +245,7 @@
 
       <section class="section" id="garage">
         <div class="shell">
-          <div class="section__head">
+          <div class="section__head" data-reveal>
             <p class="label">Away from the keyboard</p>
             <h2 class="title">Garage</h2>
             <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
@@ -262,19 +266,19 @@
           </div>
 
           <div class="posts" id="posts">
-            <div class="post-stub" data-permalink="https://www.instagram.com/p/DXkKC9CiPTl/">
+            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DXkKC9CiPTl/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-permalink="https://www.instagram.com/p/DP9LiDeiEnN/">
+            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DP9LiDeiEnN/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-permalink="https://www.instagram.com/p/DXkKKZLiHxB/">
+            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DXkKKZLiHxB/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-permalink="https://www.instagram.com/p/DHdemuSoo_N/">
+            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DHdemuSoo_N/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
@@ -284,7 +288,7 @@
 
       <section class="section" id="about">
         <div class="shell">
-          <div class="section__head">
+          <div class="section__head" data-reveal>
             <p class="label">Who is typing</p>
             <h2 class="title">About</h2>
             <svg class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
@@ -294,15 +298,15 @@
 
           <div class="about">
             <div>
-              <div class="about__block">
+              <div class="about__block" data-reveal>
                 <h3>Who I am</h3>
                 <p>Born 1999, living in Germany.</p>
               </div>
-              <div class="about__block">
+              <div class="about__block" data-reveal>
                 <h3>What I do</h3>
                 <p>Software development, at work and after it.</p>
               </div>
-              <div class="about__block">
+              <div class="about__block" data-reveal>
                 <h3>Away from the keyboard</h3>
                 <p>Tuning my car and photographing it.</p>
               </div>
@@ -403,6 +407,100 @@
         };
         mark();
         window.addEventListener("scroll", mark, { passive: true });
+      })();
+
+
+      // Motion. One guard at the top: if the visitor asked for less, every
+      // moving part below either never starts or is handed its finished state.
+      (function () {
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var targets = document.querySelectorAll("[data-reveal]");
+
+        if (reduced || !("IntersectionObserver" in window)) {
+          targets.forEach(function (el) { el.classList.add("is-in"); });
+        } else {
+          // Siblings within a section step in one after another. The index is
+          // set here rather than in the markup so the order survives edits.
+          document.querySelectorAll("main > section").forEach(function (section) {
+            var group = section.querySelectorAll(
+              ".card[data-reveal], .post-stub[data-reveal], .about__block[data-reveal]"
+            );
+            group.forEach(function (el, i) { el.style.setProperty("--i", i); });
+          });
+
+          // A drawn line needs its own length: a guessed dash either clips the
+          // stroke or leaves a gap at the end.
+          document.querySelectorAll(".section__rule path").forEach(function (path) {
+            var len = path.getTotalLength();
+            path.style.strokeDasharray = len;
+            path.style.strokeDashoffset = len;
+          });
+
+          var reveal = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-in");
+              reveal.unobserve(entry.target); // it only has to arrive once
+            });
+          }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+          targets.forEach(function (el) { reveal.observe(el); });
+        }
+
+        // Which section is being read. Not motion, so it runs either way.
+        var links = {};
+        document.querySelectorAll(".bar__link").forEach(function (link) {
+          links[link.getAttribute("href").slice(1)] = link;
+        });
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var link = links[entry.target.id];
+            if (!link || !entry.isIntersecting) return;
+            Object.keys(links).forEach(function (key) {
+              links[key].removeAttribute("aria-current");
+            });
+            link.setAttribute("aria-current", "true");
+          });
+        }, { rootMargin: "-45% 0px -45% 0px" });
+        document.querySelectorAll("main > section[id]").forEach(function (section) {
+          spy.observe(section);
+        });
+
+        if (reduced) return;
+
+        // The thread is drawn in proportion to how much of the page has gone
+        // by, and the glows drift against it. Both are written inside a frame
+        // callback so a fast scroll cannot queue up more work than it can do.
+        var path = document.querySelector("#thread path");
+        var aura = document.querySelector(".aura");
+        var length = path ? path.getTotalLength() : 0;
+        var queued = false;
+
+        if (path) {
+          path.style.strokeDasharray = length;
+          path.style.strokeDashoffset = length;
+        }
+
+        function paint() {
+          queued = false;
+          var travel = document.documentElement.scrollHeight - window.innerHeight;
+          var progress = travel > 0 ? Math.min(1, window.scrollY / travel) : 0;
+          if (path) path.style.strokeDashoffset = length * (1 - progress);
+          if (aura) {
+            aura.style.setProperty("--drift-a", window.scrollY * -0.05 + "px");
+            aura.style.setProperty("--drift-b", window.scrollY * 0.04 + "px");
+          }
+        }
+
+        function schedule() {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(paint);
+        }
+
+        paint();
+        window.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", schedule, { passive: true });
       })();
 
       // Instagram posts are fetched only once the visitor asks for them, so

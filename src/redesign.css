@@ -177,7 +177,11 @@ button {
   padding-block: var(--rhythm);
 }
 
-.section--tall {
+/* Every section of the page proper stands as its own panel: at least a screen
+   tall with its content centred. Sections carrying more than a screen — the
+   five project cards, the four posts — simply grow past it. svh rather than vh
+   so a phone's collapsing address bar does not change the height mid-scroll. */
+main > .section {
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -749,5 +753,84 @@ button {
 @media (min-width: 48rem) {
   .card--plain {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+
+   Everything that moves is declared here and switched on by a class the
+   observer adds, so the reduced-motion block at the end of this file — and the
+   matching guard in the script — can silence the lot without hunting.
+   --------------------------------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  /* Children of one group step in one after another rather than together. */
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* The rule under a heading draws itself. Its dash length is measured from the
+   path in the script, since a guessed one either clips or leaves a gap. */
+.section__rule path {
+  transition: stroke-dashoffset 1.2s var(--ease) 0.2s;
+}
+
+[data-reveal].is-in .section__rule path {
+  stroke-dashoffset: 0 !important;
+}
+
+/* The thread down the side, drawn in proportion to how far the page has been
+   read. It is decoration, so it goes when the screen is too narrow to spare
+   the room and when motion is unwelcome. */
+.thread {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: clamp(0.75rem, 2.2vw, 2.5rem);
+  width: 42px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.thread path {
+  fill: none;
+  stroke: url(#rule-gradient);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+@media (max-width: 64rem) {
+  .thread {
+    display: none;
+  }
+}
+
+/* The glows drift against the scroll. Pseudo-elements cannot be reached from
+   the script, so it writes these two properties on the parent instead. */
+.aura::before {
+  transform: translate3d(0, var(--drift-a, 0), 0);
+}
+
+.aura::after {
+  transform: translate3d(0, var(--drift-b, 0), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .thread {
+    display: none;
   }
 }

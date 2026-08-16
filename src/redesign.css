@@ -898,7 +898,7 @@ main > .section {
 .sketch path {
   fill: var(--surface);
   stroke: color-mix(in srgb, var(--ink) 22%, transparent);
-  stroke-width: 1.8;
+  stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;

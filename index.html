@@ -439,50 +439,118 @@
 
 
 
-      // Sketched outlines. Two drawings per outline, swapped by the boil
-      // animation, injected here so the markup does not carry the same forty
-      // characters of path data on every tile. Until this runs the elements
-      // keep the plain border they were given, so nothing looks unfinished if
-      // the script never arrives.
+      // Sketched outlines.
+      //
+      // Drawn at the element's own size rather than stretched to it. A single
+      // shape squashed to fit means the wobble is tiny on a tall box and wild
+      // on a wide one, and the corners smear; generating in pixels keeps the
+      // hand even everywhere and the corners round. Two drawings per outline,
+      // swapped by the boil, and both redrawn if the box changes size.
       (function () {
         var NS = "http://www.w3.org/2000/svg";
-        var DRAWINGS = [
-          "M4 8C4 5 6 3.6 10 4L90 4.4C95 4.4 96.3 6 96 9L95.6 91C95.6 95 94 96.4 90 96L9.5 95.6C5 95.6 3.8 94 4 91Z",
-          "M4.4 7C4.2 4.6 7 3.4 11 4.2L89 3.8C95.4 4.2 96.6 7 95.6 10L96 90C96.2 95.4 93 96.8 89.5 96L10 96.2C5.4 96 3.6 93.4 4.2 90.5Z"
-        ];
+        var WIGGLE = 3.2;   // how far the line strays, in pixels
+        var STEP = 46;      // how often it strays: one deviation per this much edge
+        var RADIUS = 26;
+
+        // Seeded so a reload draws what the last one drew.
+        function hand(seed) {
+          var state = seed * 9301 + 49297;
+          return function () {
+            state = (state * 9301 + 49297) % 233280;
+            return state / 233280 - 0.5;
+          };
+        }
+
+        // One edge, wandering between its two ends.
+        function edge(from, to, along, across, rng, out) {
+          var span = to - from;
+          var steps = Math.max(2, Math.round(Math.abs(span) / STEP));
+          for (var i = 1; i <= steps; i++) {
+            var at = from + (span * i) / steps;
+            var stray = rng() * WIGGLE * 2;
+            var drift = rng() * WIGGLE;
+            out.push(along === "x"
+              ? "L" + (at + drift).toFixed(1) + " " + (across + stray).toFixed(1)
+              : "L" + (across + stray).toFixed(1) + " " + (at + drift).toFixed(1));
+          }
+        }
+
+        function box(w, h, seed) {
+          var rng = hand(seed);
+          var r = Math.min(RADIUS, w / 2 - 2, h / 2 - 2);
+          var pad = 2;
+          var x0 = pad, y0 = pad, x1 = w - pad, y1 = h - pad;
+          var d = ["M" + (x0 + r).toFixed(1) + " " + (y0 + rng() * WIGGLE).toFixed(1)];
+
+          edge(x0 + r, x1 - r, "x", y0, rng, d);
+          d.push("Q" + x1 + " " + y0 + " " + (x1 + rng() * WIGGLE).toFixed(1) + " " + (y0 + r).toFixed(1));
+          edge(y0 + r, y1 - r, "y", x1, rng, d);
+          d.push("Q" + x1 + " " + y1 + " " + (x1 - r).toFixed(1) + " " + (y1 + rng() * WIGGLE).toFixed(1));
+          edge(x1 - r, x0 + r, "x", y1, rng, d);
+          d.push("Q" + x0 + " " + y1 + " " + (x0 + rng() * WIGGLE).toFixed(1) + " " + (y1 - r).toFixed(1));
+          edge(y1 - r, y0 + r, "y", x0, rng, d);
+          d.push("Q" + x0 + " " + y0 + " " + (x0 + r).toFixed(1) + " " + (y0 + rng() * WIGGLE).toFixed(1));
+          d.push("Z");
+          return d.join("");
+        }
 
         // A hand redrawing a line does not keep time, and neither should the
-        // page: every outline gets its own pace and its own starting point, so
-        // a column of them never flickers in unison. Derived from position
-        // rather than drawn at random, so a reload looks the same as before.
+        // page: every outline gets its own pace and starting point, taken from
+        // where it sits rather than drawn at random.
         var PACES = [0.26, 0.34, 0.3, 0.42, 0.38];
         var SHIFTS = [0, -0.11, -0.05, -0.17, -0.08, -0.14];
 
-        function outline(index) {
-          var svg = document.createElementNS(NS, "svg");
-          svg.setAttribute("class", "sketch");
-          svg.setAttribute("viewBox", "3.5 3.5 93 93");
-          svg.setAttribute("preserveAspectRatio", "none");
-          svg.setAttribute("aria-hidden", "true");
-          svg.style.setProperty("--boil", PACES[index % PACES.length] + "s");
-          svg.style.setProperty("--boil-shift", SHIFTS[index % SHIFTS.length] + "s");
-          DRAWINGS.forEach(function (d) {
-            var path = document.createElementNS(NS, "path");
-            path.setAttribute("d", d);
-            svg.appendChild(path);
-          });
-          return svg;
+        function draw(host, index) {
+          var w = host.offsetWidth;
+          var h = host.offsetHeight;
+          if (!w || !h) return;
+
+          var svg = host.querySelector(":scope > .sketch");
+          if (!svg) {
+            svg = document.createElementNS(NS, "svg");
+            svg.setAttribute("class", "sketch");
+            svg.setAttribute("preserveAspectRatio", "none");
+            svg.setAttribute("aria-hidden", "true");
+            svg.appendChild(document.createElementNS(NS, "path"));
+            svg.appendChild(document.createElementNS(NS, "path"));
+            svg.style.setProperty("--boil", PACES[index % PACES.length] + "s");
+            svg.style.setProperty("--boil-shift", SHIFTS[index % SHIFTS.length] + "s");
+            host.appendChild(svg);
+          }
+
+          svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+          var paths = svg.querySelectorAll("path");
+          paths[0].setAttribute("d", box(w, h, index + 1));
+          paths[1].setAttribute("d", box(w, h, index + 101));
         }
 
-        document.querySelectorAll(".tile").forEach(function (tile, index) {
-          tile.appendChild(outline(index));
+        var hosts = [];
+        document.querySelectorAll(".tile").forEach(function (tile) {
           tile.classList.add("tile--sketched");
+          hosts.push(tile);
+        });
+        document.querySelectorAll(".post-stub").forEach(function (stub) {
+          stub.classList.add("post-stub--sketched");
+          hosts.push(stub);
         });
 
-        document.querySelectorAll(".post-stub").forEach(function (stub, index) {
-          stub.appendChild(outline(index + 2));
-          stub.classList.add("post-stub--sketched");
-        });
+        function drawAll() {
+          hosts.forEach(function (host, index) { draw(host, index); });
+        }
+
+        drawAll();
+
+        // A tile changes height when the window narrows and its text rewraps,
+        // and the line has to be redrawn for the box it now is.
+        if ("ResizeObserver" in window) {
+          var queued = false;
+          var watch = new ResizeObserver(function () {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(function () { queued = false; drawAll(); });
+          });
+          hosts.forEach(function (host) { watch.observe(host); });
+        }
       })();
 
       // Motion. One guard at the top: if the visitor asked for less, every

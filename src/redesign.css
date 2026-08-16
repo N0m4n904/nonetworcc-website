@@ -298,14 +298,29 @@ main > .section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  min-height: 4.5rem;
+  gap: clamp(0.75rem, 0.4rem + 1.2vw, 1.5rem);
+  min-height: clamp(3.75rem, 3rem + 2vw, 4.5rem);
+}
+
+/* Whatever else gives, the way to reach you does not. */
+.bar .button {
+  flex: none;
 }
 
 .bar__mark {
   font-weight: 700;
-  font-size: 1.25rem;
+  /* Fluid rather than stepped at a breakpoint, so there is no width at which
+     it is still large while the room has already gone. */
+  font-size: clamp(1rem, 0.85rem + 0.6vw, 1.25rem);
   letter-spacing: -0.01em;
+  /* A flex item will not shrink below its own content unless told it may. The
+     name gives way before the button does, and truncates rather than pushing
+     it off the edge — which is what happens while the handwriting is still
+     loading and the fallback face runs wider than it will. */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bar__nav {
@@ -363,7 +378,8 @@ main > .section {
   gap: 0.6rem;
   /* Two words on two lines make a bar twice as tall on a phone. */
   white-space: nowrap;
-  padding: 0.7rem 1.5rem;
+  padding: clamp(0.5rem, 0.4rem + 0.4vw, 0.7rem) clamp(1rem, 0.6rem + 1.4vw, 1.5rem);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
   border: 0;
   border-radius: 999px;
   font-weight: 600;
@@ -1122,22 +1138,7 @@ main > .section {
    --------------------------------------------------------------------------- */
 
 @media (max-width: 30rem) {
-  .bar__inner {
-    min-height: 3.75rem;
-    gap: 0.75rem;
-  }
-
-  .bar__mark {
-    font-size: 1rem;
-  }
-
-  .button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9375rem;
-  }
-
   .hero {
     padding-block-start: 4.5rem;
   }
-
 }

@@ -892,23 +892,47 @@ main > .section {
   overflow: visible;
 }
 
+/* The fill rides on the drawn path rather than on the element, so the surface
+   and the line around it are one shape and cannot disagree — the same wobble
+   bounds both, and there is no CSS radius for the stroke to miss. */
 .sketch path {
-  fill: none;
+  fill: var(--surface);
   stroke: color-mix(in srgb, var(--ink) 22%, transparent);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  transition: stroke 0.4s var(--ease);
+  transition: stroke 0.4s var(--ease), fill 0.4s var(--ease);
 }
 
+/* Behind the words, but only within its own tile: the stacking context is what
+   keeps a negative index from falling through to the section. */
+.sketch {
+  z-index: -1;
+}
+
+.tile,
+.post-stub {
+  isolation: isolate;
+}
+
+.tile--sketched:hover .sketch path,
+.post-stub--sketched:hover .sketch path {
+  fill: var(--surface-strong);
+}
+
+/* Each outline is drawn at its own pace and out of step with its neighbours;
+   the values come from the script, which knows each tile's position. */
 .sketch path:first-child {
-  animation: boil-a 0.3s steps(1, end) infinite;
+  animation: boil-a var(--boil, 0.3s) steps(1, end) infinite;
+  animation-delay: var(--boil-shift, 0s);
 }
 
 .sketch path:last-child {
-  animation: boil-b 0.3s steps(1, end) infinite;
+  animation: boil-b var(--boil, 0.3s) steps(1, end) infinite;
+  animation-delay: var(--boil-shift, 0s);
 }
+
 
 @keyframes boil-a {
   0%, 49.9% { opacity: 1; }

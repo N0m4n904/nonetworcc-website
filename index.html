@@ -451,12 +451,21 @@
           "M4.4 7C4.2 4.6 7 3.4 11 4.2L89 3.8C95.4 4.2 96.6 7 95.6 10L96 90C96.2 95.4 93 96.8 89.5 96L10 96.2C5.4 96 3.6 93.4 4.2 90.5Z"
         ];
 
-        function outline() {
+        // A hand redrawing a line does not keep time, and neither should the
+        // page: every outline gets its own pace and its own starting point, so
+        // a column of them never flickers in unison. Derived from position
+        // rather than drawn at random, so a reload looks the same as before.
+        var PACES = [0.26, 0.34, 0.3, 0.42, 0.38];
+        var SHIFTS = [0, -0.11, -0.05, -0.17, -0.08, -0.14];
+
+        function outline(index) {
           var svg = document.createElementNS(NS, "svg");
           svg.setAttribute("class", "sketch");
           svg.setAttribute("viewBox", "3.5 3.5 93 93");
           svg.setAttribute("preserveAspectRatio", "none");
           svg.setAttribute("aria-hidden", "true");
+          svg.style.setProperty("--boil", PACES[index % PACES.length] + "s");
+          svg.style.setProperty("--boil-shift", SHIFTS[index % SHIFTS.length] + "s");
           DRAWINGS.forEach(function (d) {
             var path = document.createElementNS(NS, "path");
             path.setAttribute("d", d);
@@ -465,13 +474,13 @@
           return svg;
         }
 
-        document.querySelectorAll(".tile").forEach(function (tile) {
-          tile.appendChild(outline());
+        document.querySelectorAll(".tile").forEach(function (tile, index) {
+          tile.appendChild(outline(index));
           tile.classList.add("tile--sketched");
         });
 
-        document.querySelectorAll(".post-stub").forEach(function (stub) {
-          stub.appendChild(outline());
+        document.querySelectorAll(".post-stub").forEach(function (stub, index) {
+          stub.appendChild(outline(index + 2));
           stub.classList.add("post-stub--sketched");
         });
       })();

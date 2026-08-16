@@ -463,3 +463,291 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Cards — one per project, running down the page. The mark sits in its own
+   column beside the words on a wide screen and above them on a narrow one.
+   --------------------------------------------------------------------------- */
+
+.card {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-low);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+              border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--violet-ink) 40%, var(--edge));
+  background-color: var(--surface-strong);
+  box-shadow: var(--shadow-high);
+}
+
+@media (min-width: 48rem) {
+  .card {
+    grid-template-columns: 10rem 1fr;
+    align-items: center;
+  }
+}
+
+.card + .card {
+  margin-block-start: clamp(1rem, 2.5vw, 2rem);
+}
+
+.card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__media img {
+  width: min(100%, 8.5rem);
+}
+
+/* A tile for marks that carry their own opaque background and would otherwise
+   sit as a hard rectangle on the surface. */
+.card__media--tile img {
+  padding: 0.75rem;
+  border-radius: 18px;
+  background-color: #fff;
+}
+
+.card__media--rounded img {
+  border-radius: 22%;
+}
+
+/* Retired work reads as retired: colour drains out and returns on hover. */
+.card__media--past img {
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+
+.card:hover .card__media--past img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.card__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.card__body {
+  /* A card is wider than a comfortable line, so the words stop before it does. */
+  max-width: 62ch;
+  margin-block: 0.75rem 0;
+  color: var(--ink-soft);
+}
+
+.card__note {
+  max-width: 62ch;
+  margin-block-start: 0.5rem;
+  color: var(--ink-faint);
+  font-size: var(--step-small);
+}
+
+/* ---------------------------------------------------------------------------
+   Badges, links and tags
+   --------------------------------------------------------------------------- */
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background-color: var(--surface-strong);
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-block-start: 1.25rem;
+}
+
+.meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.meta a:hover {
+  color: var(--violet-ink);
+  border-bottom-color: var(--violet-ink);
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  fill: currentColor;
+  flex: none;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block-start: 1.25rem;
+}
+
+.tags li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  font-size: var(--step-small);
+  color: var(--ink-soft);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.tags li:hover {
+  border-color: var(--cyan-ink);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------------
+   About — short blocks beside the tag list
+   --------------------------------------------------------------------------- */
+
+.about {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+@media (min-width: 52rem) {
+  .about {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.about__block + .about__block {
+  margin-block-start: 1.75rem;
+}
+
+.about__block h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.about__block p {
+  margin-block-start: 0.35rem;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------------------
+   Garage — stand-ins until a visitor asks for the posts, then the frames the
+   embeds are set into. Instagram's document is always white and beyond reach
+   from here, so it is framed rather than fought.
+   --------------------------------------------------------------------------- */
+
+.posts {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+@media (min-width: 48rem) {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.post-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 22rem;
+  padding: 2rem;
+  border: 1px dashed var(--edge);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--ink-faint);
+}
+
+.post-stub svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: var(--violet-ink);
+}
+
+.post-stub strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.post-frame {
+  max-width: 564px;
+  margin-inline: auto;
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-strong);
+}
+
+.instagram-media {
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--edge);
+  margin-block-start: var(--rhythm);
+}
+
+.footer__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 40rem) {
+  .footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer__grid ul {
+  display: grid;
+  gap: 0.6rem;
+  margin-block-start: 0.9rem;
+}
+
+.footer__grid a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-soft);
+  transition: color 0.3s var(--ease);
+}
+
+.footer__grid a:hover {
+  color: var(--ink);
+}
+
+/* A card with no mark of its own drops the media column entirely. */
+@media (min-width: 48rem) {
+  .card--plain {
+    grid-template-columns: 1fr;
+  }
+}

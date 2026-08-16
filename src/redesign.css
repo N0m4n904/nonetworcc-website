@@ -386,7 +386,11 @@ main > .section {
 
 .button--quiet {
   background-image: none;
-  background-color: var(--surface);
+  /* Frosted rather than merely tinted: the ring behind the hero read straight
+     through a surface this faint, so what passes behind is diffused instead. */
+  background-color: color-mix(in srgb, var(--ground) 60%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: var(--ink);
   border: 1px solid var(--edge);
   box-shadow: none;
@@ -427,10 +431,9 @@ main > .section {
 .hero__art {
   position: relative;
   justify-self: center;
-  /* The rings sit 18% outside this box, so the box has to leave room for them
-     inside the gutter — otherwise they run off the side of a phone and are cut
-     off by the page's own overflow rule. */
-  width: min(72%, 26rem);
+  /* The rings sit 18% outside this box and are meant to run past the edge of a
+     narrow screen; the page's overflow rule crops them, which is the look. */
+  width: min(100%, 26rem);
 }
 
 .hero__art img {
@@ -1137,7 +1140,4 @@ main > .section {
     padding-block-start: 4.5rem;
   }
 
-  .hero__art {
-    width: min(78%, 15rem);
-  }
 }

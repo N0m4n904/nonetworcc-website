@@ -690,7 +690,7 @@ main > .section {
   color: var(--ink-faint);
 }
 
-.post-stub svg {
+.post-stub svg:not(.sketch) {
   width: 2.5rem;
   height: 2.5rem;
   fill: var(--violet-ink);
@@ -930,7 +930,9 @@ main > .section {
 }
 
 .card--sketched,
-.post-stub--sketched {
+.card--sketched:hover,
+.post-stub--sketched,
+.post-stub--sketched:hover {
   border-color: transparent;
 }
 
@@ -1055,11 +1057,11 @@ main > .section {
 }
 
 .rings .a {
-  animation: boil-a 0.3s steps(1, end) infinite;
+  animation: boil-a 0.52s steps(1, end) infinite;
 }
 
 .rings .b {
-  animation: boil-b 0.3s steps(1, end) infinite;
+  animation: boil-b 0.52s steps(1, end) infinite;
 }
 
 .rings__outer path {

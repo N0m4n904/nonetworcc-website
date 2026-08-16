@@ -365,6 +365,12 @@ main > .section {
   border: 0;
   border-radius: 999px;
   font-weight: 600;
+  /* A real <button> carries the browser's own opaque buttonface underneath.
+     The gradient hides it, but anything reading the background colour still
+     finds it — the cursor's luminance probe read this button as a light
+     surface and drew itself dark on a dark page. Stating the colour the
+     gradient starts from replaces it with the truth. */
+  background-color: var(--violet);
   background-image: linear-gradient(100deg, var(--violet), var(--cyan));
   color: #fff;
   box-shadow: var(--shadow-low);

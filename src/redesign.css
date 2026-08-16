@@ -752,7 +752,6 @@ main > .section {
    --------------------------------------------------------------------------- */
 
 .footer {
-  border-top: 1px solid var(--edge);
   margin-block-start: var(--rhythm);
 }
 

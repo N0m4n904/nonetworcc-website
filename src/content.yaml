@@ -64,7 +64,7 @@ projects:
     body: "A cutting-edge Android ROM: simple, smooth and fast."
     note: "Maintainer of Nothing Phone (2) and OnePlus 7 Pro"
     media:
-      src: /images/halogenos_logo.png
+      src: /images/halogenos_logo.webp
       alt: halogenOS
     links:
       - text: git.halogenos.org
@@ -77,7 +77,7 @@ projects:
     body: A Discord bot in Kotlin for the halogenOS team.
     note: Discontinued in 2026. The sources stay online for reference.
     media:
-      src: /images/halogenos_discordbot.png
+      src: /images/halogenos_discordbot.webp
       alt: halogenOS Discordbot
       treatment: past
     links:

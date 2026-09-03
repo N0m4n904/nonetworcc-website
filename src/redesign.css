@@ -1116,15 +1116,25 @@ main > .section {
   to { transform: translate3d(1.5%, 1%, 0) rotate(0.6deg); }
 }
 
-/* The name's gradient never quite settles. */
+/* The name's colour never quite settles.
+
+   This used to slide the gradient under the letters, which meant repainting
+   the largest words on the page every frame — three quarters of all the paint
+   this page did, and it did it whether or not the hero was on screen. No CSS
+   property moves a gradient inside text without repainting it, so the
+   restlessness comes from the hue drifting instead: filter is one of the few
+   things the compositor can animate on its own, so the words are drawn once
+   and tinted per frame rather than drawn again.
+
+   The swing is deliberately small. Taken further, violet and cyan both leave
+   for green on the way round; this stays inside the pair. */
 .accent {
-  background-size: 220% 100%;
-  animation: wander 14s ease-in-out infinite alternate;
+  animation: unsettle 14s ease-in-out infinite alternate;
 }
 
-@keyframes wander {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
+@keyframes unsettle {
+  from { filter: hue-rotate(-14deg); }
+  to { filter: hue-rotate(14deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

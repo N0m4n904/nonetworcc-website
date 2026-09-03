@@ -6,7 +6,7 @@ const TOOLS = [
   "Kotlin", "Java", "Android", "AOSP", "Jetpack Compose", "C#", "Visual Basic",
   "TypeScript", "Vue 3", "PHP", "Linux", "NixOS", "MySQL", "SQLite", "MSSQL",
   "Jira", "Confluence", "Scriptrunner", "JobRouter", "Nextcloud", "Tailscale",
-  "Apache APISIX",
+  "Apache APISIX", "Claude Code", "Kord"
 ];
 </script>
 

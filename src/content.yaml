@@ -19,6 +19,7 @@
 #   body       required. The sentence or two under the title.
 #   note       optional. The quieter line under the body, for provenance and
 #              caveats rather than description.
+#   date       optional. The date since when I work on that project
 #   media      optional. Leave it out and the tile drops the mark column and
 #              runs full width, which is what tile--plain used to say.
 #     src        path or URL of the mark.
@@ -43,6 +44,7 @@ work:
     body:
       en: "Where I work: software development for a social care provider."
       de: "Wo ich arbeite: Softwareentwicklung für einen Träger der Sozialwirtschaft."
+    date: "2022 -"
     media:
       src: https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg
       alt: Dominikus-Ringeisen-Werk signet
@@ -88,6 +90,7 @@ projects:
     body:
       en: "A cutting-edge Android ROM: simple, smooth and fast."
       de: "Ein topaktuelles Android-ROM: schlicht, flüssig und schnell."
+    date: "2021 -"
     note:
       en: "Maintainer of Nothing Phone (2) and OnePlus 7 Pro"
       de: "Maintainer für Nothing Phone (2) und OnePlus 7 Pro"
@@ -104,12 +107,13 @@ projects:
     badge:
       en: No longer maintained
       de: Wird nicht mehr gepflegt
+    date: "2022 - 2026"
     body:
       en: A Discord bot in Kotlin for the halogenOS team.
       de: Ein Discord-Bot in Kotlin für das halogenOS-Team.
     note:
-      en: Discontinued in 2026. The sources stay online for reference.
-      de: 2026 eingestellt. Der Quellcode bleibt zum Nachschlagen online.
+      en: Discontinued. The sources stay online for reference.
+      de: Eingestellt. Der Quellcode bleibt zum Nachschlagen online.
     media:
       src: /images/halogenos_discordbot.webp
       alt: halogenOS Discordbot
@@ -127,6 +131,7 @@ projects:
       de: >-
         Meine eigenen Rechner, deklariert: Stable-Channel, foundrix, Gnome, COSMIC und
         Hyprland.
+    date: "2025 -"
     media:
       src: /images/NixOS.svg
       alt: NixOS
@@ -145,6 +150,7 @@ projects:
         Eine Home-Assistant-Integration für den MaxStorage-Hausspeicher. Live-Werte von
         Photovoltaik, Batterie und Netz, MPPT-Strings werden erkannt, sobald sie auftauchen,
         dazu Relaiszustände – damit überschüssiger Strom Automationen auslösen kann.
+    date: "2024 -"
     note:
       en: Python, installable through HACS. A heavily extended fork of geeks-r-us.
       de: Python, über HACS installierbar. Ein stark erweiterter Fork von geeks-r-us.
@@ -168,6 +174,7 @@ projects:
         Ein Mauszeiger fürs Web: ein leuchtender Punkt und ein Ring, der sich auf alles legt,
         worüber er fährt, und über Text zum Cursor wird. Zwei Dateien, kein Build-Schritt,
         keine Abhängigkeiten.
+    date: "2026 -"
     note:
       en: It is what is drawing your pointer on this page.
       de: Er zeichnet gerade deinen Mauszeiger auf dieser Seite.
@@ -189,6 +196,7 @@ projects:
         Diese Website ist selbst eines meiner Projekte. Sie ist ein persönliches
         Portfolio, in dem ich meine Projekte, Experimente und Ideen auf eine
         interaktive und minimalistische Art präsentiere.
+    date: "2019 -"
     note:
       en: You are looking at the project right now.
       de: Du siehst das Projekt gerade vor dir.

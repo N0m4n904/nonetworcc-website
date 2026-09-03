@@ -36,6 +36,12 @@ defineProps({
         }}<span v-if="entry.badge" class="badge">{{ say(entry.badge) }}</span></h3>
       <p class="tile__body">{{ say(entry.body) }}</p>
       <p v-if="entry.note" class="tile__note">{{ say(entry.note) }}</p>
+
+      <!-- Perfekt eingereihtes Datum (oberhalb der Links) -->
+      <div v-if="entry.date" class="tile__date-container">
+        <span class="badge badge--date">{{ say(entry.date) }}</span>
+      </div>
+
       <div v-if="entry.links?.length" class="meta">
         <a v-for="link in entry.links" :key="link.href" :href="link.href">
           <svg v-if="link.icon" class="icon" aria-hidden="true">

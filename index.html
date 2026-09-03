@@ -450,18 +450,6 @@
         );
       });
 
-      // The bar earns its edge only once the page has moved beneath it.
-      (function () {
-        var bar = document.getElementById("bar");
-        var mark = function () {
-          bar.dataset.scrolled = window.scrollY > 8 ? "true" : "false";
-        };
-        mark();
-        window.addEventListener("scroll", mark, { passive: true });
-      })();
-
-
-
       // Sketched outlines.
       //
       // Drawn at the element's own size rather than stretched to it. A single
@@ -656,15 +644,20 @@
           spy.observe(section);
         });
 
-        if (reduced) return;
-
-        // The thread is drawn in proportion to how much of the page has gone
-        // by, and the glows drift against it. Both are written inside a frame
-        // callback so a fast scroll cannot queue up more work than it can do.
-        var path = document.querySelector("#thread path");
-        var aura = document.querySelector(".aura");
+        // Everything the page does about a scroll, it does here, in one frame
+        // callback. Two listeners each scheduling their own frame is two style
+        // recalculations where one will do — and the bar was not scheduling at
+        // all, but writing on every scroll event the browser could deliver.
+        //
+        // The bar earns its edge once the page has moved beneath it, which is
+        // not motion and so happens either way; the thread and the glows are,
+        // and are left null when the visitor asked for less.
+        var bar = document.getElementById("bar");
+        var path = reduced ? null : document.querySelector("#thread path");
+        var aura = reduced ? null : document.querySelector(".aura");
         var length = path ? path.getTotalLength() : 0;
         var queued = false;
+        var edged = null;
 
         if (path) {
           path.style.strokeDasharray = length;
@@ -673,12 +666,25 @@
 
         function paint() {
           queued = false;
+          var y = window.scrollY;
+
+          // Only when it changes. Setting an attribute to the value it already
+          // holds still invalidates that element's style, and the bar is the
+          // one thing on the page sitting behind a backdrop filter — the most
+          // expensive element to have an opinion about, sixty times a second.
+          var edge = y > 8 ? "true" : "false";
+          if (edge !== edged) {
+            bar.dataset.scrolled = edge;
+            edged = edge;
+          }
+
+          if (!path && !aura) return;
           var travel = document.documentElement.scrollHeight - window.innerHeight;
-          var progress = travel > 0 ? Math.min(1, window.scrollY / travel) : 0;
+          var progress = travel > 0 ? Math.min(1, y / travel) : 0;
           if (path) path.style.strokeDashoffset = length * (1 - progress);
           if (aura) {
-            aura.style.setProperty("--drift-a", window.scrollY * -0.05 + "px");
-            aura.style.setProperty("--drift-b", window.scrollY * 0.04 + "px");
+            aura.style.setProperty("--drift-a", y * -0.05 + "px");
+            aura.style.setProperty("--drift-b", y * 0.04 + "px");
           }
         }
 

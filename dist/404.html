@@ -6,11 +6,30 @@
     <title>Nothing here — Noah Anleitner</title>
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <!-- The same pointer the site draws, from the same URL and the same
+         version, so anyone arriving here from the site has it cached already
+         and this costs them nothing. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.css"
+          integrity="sha384-DJ28qhylHcyHeG8xQ+6dpdA7kmM/WA6RYJDSMoATHaPbTUWBbFuR2m8NJsrh+GiL" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.js"
+            integrity="sha384-10cf4kvCVDBb2inFJcb2OHHVqejWTZZLCXDeeA9pgIwYD6Pglz/Cn31yUu0BRdOP" crossorigin="anonymous" defer></script>
     <style>
       /* Its own page rather than the app: a 404 that boots a whole framework to
          say four words is a poor trade, and this one has to work when the thing
          being asked for does not exist. The colours are the site's, copied
          deliberately — it is thirty lines, not a design system. */
+
+      /* The pointer's own tokens, as the site sets them: the dot in the two
+         ends of the gradient, and a ring drawn rather than bordered. */
+      :root {
+        --brand: #8c0be8;
+        --brand-light: #00c6ff;
+        --sc-sketch: 1;
+        --sc-sketch-wiggle: 2.4px;
+        --sc-ring-width: 2.6px;
+        --sc-ease: 0.45;
+      }
 
       :root {
         --ground: #f7f6fb;
@@ -110,6 +129,14 @@
     <a class="home" href="/" data-de="Zurück zum Anfang">Back to the start</a>
 
     <script>
+      // smartcursor is deferred, so it has run by the time this fires. It
+      // ships off by default and refuses to start where there is no pointer,
+      // so there is nothing to check beyond its being there at all. The one
+      // link on the page is already in its built-in list of things to hug.
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.smartCursor) window.smartCursor.setEnabled(true);
+      });
+
       // The same rule as the site: German for a browser asking for German,
       // English for every other. The first entry of the list decides, so
       // somebody who merely has German further down it does not get German.

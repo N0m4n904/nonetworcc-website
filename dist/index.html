@@ -32,11 +32,11 @@
         --sc-ease: 0.45;
       }
 
-      /* The ring hugs page content, so it belongs under the bar the way that
-         content does. Anything above 99998 would also cover the dot at 99999. */
-      .smart-cursor-ring {
-        z-index: 39;
-      }
+      /* The ring is left at the height smartcursor gives it, above everything
+         including the bar. It was pushed under the bar once, on the reasoning
+         that it hugs page content and so belongs where that content does — but
+         it also hugs the links in the bar, and there it was hidden behind the
+         very thing it was drawing around. */
 
       /* The mark is white line art, which needs reversing on a light ground. */
       @media (prefers-color-scheme: light) {

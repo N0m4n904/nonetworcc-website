@@ -4,6 +4,8 @@
 // number of them will look. Cheap to leave for them: a few strings, printed
 // once, and nothing running afterwards.
 
+import { hasFinePointer } from "./pointer.js";
+
 const BRAND = "#8c0be8";
 const CYAN = "#00c6ff";
 
@@ -24,11 +26,18 @@ export function greet() {
     "%cEverything drawn on this page is drawn by hand — the outlines, the rings,\n" +
       "the pointer. Two files and no dependencies, if you want to look.\n\n" +
       "%cSource      %chttps://github.com/N0m4n904\n" +
-      "%cThe pointer %chttps://github.com/N0m4n904/smartcursor\n\n" +
-      "%cPress %cP%c to pick up a pencil and draw on the page.",
+      "%cThe pointer %chttps://github.com/N0m4n904/smartcursor",
     quiet,
     quiet, key,
-    quiet, key,
-    quiet, key, quiet
+    quiet, key
   );
+
+  // The only way in, so it is the only place it is written down. Not mentioned
+  // where there is no keyboard to press it on.
+  if (hasFinePointer) {
+    console.log(
+      "%cPress %cP%c to pick up a pencil and draw on the page. Escape puts it down.",
+      quiet, key, quiet
+    );
+  }
 }

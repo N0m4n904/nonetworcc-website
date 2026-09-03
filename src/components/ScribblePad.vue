@@ -3,7 +3,7 @@ import { useScribble } from "../composables/useScribble.js";
 
 const {
   drawing, strokes, live, height, empty,
-  toggle, undo, clear, down, move, up,
+  put, undo, clear, down, move, up,
 } = useScribble();
 </script>
 
@@ -25,28 +25,13 @@ const {
     <path v-if="live" :d="live" />
   </svg>
 
-  <div class="scribble-controls">
-    <button
-      type="button"
-      class="scribble-pencil"
-      :aria-pressed="drawing"
-      :title="drawing ? 'Put the pencil down (P)' : 'Draw on the page (P)'"
-      @click="toggle"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 21l3.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L3 21z" />
-        <path d="M14.5 5.5l4 4" />
-      </svg>
-      <span class="scribble-label">{{ drawing ? "Drawing" : "Draw" }}</span>
-    </button>
-
-    <template v-if="drawing">
-      <button type="button" class="scribble-minor" :disabled="empty" @click="undo">
-        Undo
-      </button>
-      <button type="button" class="scribble-minor" :disabled="empty" @click="clear">
-        Clear
-      </button>
-    </template>
+  <!-- Nothing at all until the pencil is in hand: the way in is the P key,
+       and the console says so. Once someone has found it they need a way to
+       take a stroke back and a way out, and guessing at more keys is not it. -->
+  <div v-if="drawing" class="scribble-controls" role="group" aria-label="Drawing">
+    <span class="scribble-mode">Drawing</span>
+    <button type="button" class="scribble-key" :disabled="empty" @click="undo">Undo</button>
+    <button type="button" class="scribble-key" :disabled="empty" @click="clear">Clear</button>
+    <button type="button" class="scribble-key" @click="put(false)">Done</button>
   </div>
 </template>

@@ -11,6 +11,7 @@ import GarageSection from "./components/GarageSection.vue";
 import AboutSection from "./components/AboutSection.vue";
 import SiteFooter from "./components/SiteFooter.vue";
 import ScribblePad from "./components/ScribblePad.vue";
+import { hasFinePointer } from "./lib/pointer.js";
 
 import { useScrollFrame } from "./composables/useScrollFrame.js";
 import { useSmartCursor } from "./composables/useSmartCursor.js";
@@ -93,6 +94,8 @@ useSmartCursor();
 
   <SiteFooter :profile="content.garage.profile" />
 
-  <!-- Last, so it lies over everything it might be drawn on. -->
-  <ScribblePad />
+  <!-- Last, so it lies over everything it might be drawn on. Left out
+       entirely without a pointer and a keyboard to reach it with, rather
+       than built and hidden. -->
+  <ScribblePad v-if="hasFinePointer" />
 </template>

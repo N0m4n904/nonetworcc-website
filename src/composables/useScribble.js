@@ -118,19 +118,27 @@ export function useScribble() {
     save();
   }
 
-  function toggle() {
-    drawing.value = !drawing.value;
+  // Pick the pencil up, put it down, or swap.
+  function put(on = !drawing.value) {
+    drawing.value = on;
   }
 
-  // The pencil is worth having a key for; the console says so too.
+  // The key is the only way in — there is no button to find, and the console
+  // note is what tells anyone it exists. Escape is the way back out, because
+  // it is the way out of everything else.
   function onKey(event) {
-    if (event.key !== "p" && event.key !== "P") return;
     if (event.metaKey || event.ctrlKey || event.altKey) return;
     // Not while someone is typing into something.
     const el = document.activeElement;
     if (el && (el.isContentEditable || /^(input|textarea|select)$/i.test(el.tagName))) return;
-    event.preventDefault();
-    toggle();
+
+    if (event.key === "p" || event.key === "P") {
+      event.preventDefault();
+      put();
+    } else if (event.key === "Escape" && drawing.value) {
+      event.preventDefault();
+      put(false);
+    }
   }
 
   onMounted(() => {
@@ -159,5 +167,5 @@ export function useScribble() {
     }
   });
 
-  return { drawing, strokes, live, height, empty, toggle, undo, clear, down, move, up };
+  return { drawing, strokes, live, height, empty, put, undo, clear, down, move, up };
 }

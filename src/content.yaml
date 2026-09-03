@@ -131,9 +131,9 @@ projects:
       src: /images/NixOS.svg
       alt: NixOS
     links:
-      - text: GitLab
-        href: https://gitlab.com/N0m4n904/nixos-config
-        icon: gitlab
+      - text: GitHub
+        href: https://github.com/N0m4n904/nixos-config
+        icon: github
 
   - title: Max.Storage Ultimate
     body:

@@ -894,6 +894,35 @@ main > .section {
    Only the cards. The headings and the short blocks in About are text, they
    cost nothing to move, and without them the page would arrive dead. */
 @media (hover: none) {
+  /* Nothing is frosted on a phone.
+
+     A backdrop filter is the most expensive thing on this page, and the bar is
+     the worst place to put one: it spans the full width, it is fixed, and it
+     has to re-sample and re-blur everything beneath it every time any of that
+     moves — which here is constantly, since the outlines boil and the rings
+     turn under it. Reported from a Nothing Phone (1) as the last thing still
+     stuttering after the cards stopped flying in.
+
+     The bar keeps its job by going opaque instead. Opaque rather than nearly
+     so: without a blur to diffuse it, a few percent of transparency does not
+     read as frosted, it reads as the words underneath showing through — which
+     looks like a fault rather than a finish. What it gives up is watching the
+     page slide under it, which is a small thing on a screen this size beside a
+     scroll that keeps up. */
+  .bar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: var(--ground);
+  }
+
+  /* The same for the one button that sits over the rings, and for the same
+     reason it was frosted to begin with: the rings read straight through it. */
+  .button--quiet {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: var(--ground);
+  }
+
   .tile[data-reveal],
   .post-stub[data-reveal] {
     opacity: 1;

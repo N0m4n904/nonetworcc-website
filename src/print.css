@@ -110,7 +110,11 @@
 
   .label {
     font-size: 8pt;
-    letter-spacing: 0.14em;
+    /* Tracked out on screen for the small-caps effect. On paper it makes the
+       words come apart when the text is extracted — "SOFTWA RE DEVELOPER" —
+       and a job title is exactly the phrase an employer's software searches
+       for. */
+    letter-spacing: 0.04em;
     color: #555;
   }
 
@@ -185,6 +189,9 @@
   }
 
   @page {
+    /* Stated, or the browser prints whatever its locale defaults to — which
+       is Letter in a US-configured Chrome, and this is a German CV. */
+    size: A4;
     margin: 14mm;
   }
 }

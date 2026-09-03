@@ -17,6 +17,7 @@ en:
     garage: Garage
     about: About
   contact: Get in touch
+  skip: Skip to content
 
   hero:
     label: Software developer
@@ -55,6 +56,8 @@ en:
         text: Tuning my car and photographing it.
     tools: Tools of the trade
     card: Save my card
+    cv: Download CV
+    cvFile: /noah-anleitner-cv.pdf
 
   footer:
     me: Me
@@ -74,6 +77,7 @@ de:
     garage: Garage
     about: Über mich
   contact: Kontakt
+  skip: Zum Inhalt springen
 
   hero:
     label: Softwareentwickler
@@ -112,6 +116,8 @@ de:
         text: An meinem Auto schrauben und es fotografieren.
     tools: Womit ich arbeite
     card: Kontakt speichern
+    cv: Lebenslauf laden
+    cvFile: /noah-anleitner-lebenslauf.pdf
 
   footer:
     me: Ich

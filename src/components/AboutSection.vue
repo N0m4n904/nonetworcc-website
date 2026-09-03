@@ -32,6 +32,8 @@ const TOOLS = [
             <!-- Carries only what this page already says out loud: a name, a
                  title, an address and two profiles. No number, no street. -->
             <a href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a>
+            <!-- The same page, printed. Whichever language is being read. -->
+            <a :href="t.about.cvFile" download>{{ t.about.cv }}</a>
           </div>
         </div>
         <div>

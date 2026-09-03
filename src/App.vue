@@ -25,6 +25,9 @@ useSmartCursor();
 </script>
 
 <template>
+  <!-- First in the document, so it is the first thing a Tab reaches. -->
+  <a class="skip" href="#top">{{ t.skip }}</a>
+
   <!-- The ground's depth: two soft radial fields, larger than the viewport so
        their edges never show, drifting against the scroll. -->
   <div class="aura" ref="aura" aria-hidden="true" v-live></div>

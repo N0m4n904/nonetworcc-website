@@ -923,6 +923,22 @@ main > .section {
     background-color: var(--ground);
   }
 
+  /* The field holds still.
+
+     It is the largest surface on the page by a long way: stretched over the
+     whole Projects section, which is five tiles tall, it measures 454 by 4056
+     and would be some 47MB of texture at a phone's pixel density. Drifting, it
+     is promoted to a layer of its own and that masked surface is composited
+     again every frame; standing still, it is painted once with everything else
+     and simply scrolls.
+
+     This is why a tester found the page stuttering in the same place every
+     time. The field is the one thing the Projects section has and the others
+     do not — Garage carries more boiling outlines and was fine. */
+  .field svg {
+    animation: none;
+  }
+
   .tile[data-reveal],
   .post-stub[data-reveal] {
     opacity: 1;

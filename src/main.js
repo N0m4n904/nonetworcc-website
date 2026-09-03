@@ -5,7 +5,10 @@ import reveal from "./directives/reveal.js";
 import live from "./directives/live.js";
 import outline from "./directives/outline.js";
 
+import { greet } from "./lib/greeting.js";
+
 import "./redesign.css";
+import "./print.css";
 
 // The three directives are the page's own machinery, registered globally
 // because they belong to any element that wants them rather than to a
@@ -16,3 +19,5 @@ createApp(App)
   .directive("live", live)
   .directive("outline", outline)
   .mount("#app");
+
+greet();

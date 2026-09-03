@@ -986,6 +986,66 @@ main > .section {
   stroke: url(#rule-gradient);
   stroke-width: 3;
   stroke-linecap: round;
+  /* Declared one unit long by pathLength, so the dash is a fraction and needs
+     no measuring. Undrawn until something says otherwise. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Hung on the scroll itself.
+
+   Where the browser can drive an animation from a scroll position, the thread
+   and the glows are declared against it and run off the main thread entirely —
+   no listener, no frame callback, no styles written from script. Where it
+   cannot, the script does exactly what it did before and the page is the same.
+   Neither branch is the special case; they are two ways of saying one thing.
+
+   Chromium has this. Firefox has it behind
+   layout.css.scroll-driven-animations.enabled in about:config.
+   --------------------------------------------------------------------------- */
+
+@supports (animation-timeline: scroll()) {
+  .thread path {
+    animation: thread-draw linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  @keyframes thread-draw {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* The distance comes from the script, once, because only it knows how tall
+     the document turned out to be. */
+  .aura::before {
+    animation: drift-glow-a linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  .aura::after {
+    animation: drift-glow-b linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  @keyframes drift-glow-a {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, var(--drift-span-a, 0px), 0); }
+  }
+
+  @keyframes drift-glow-b {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, var(--drift-span-b, 0px), 0); }
+  }
+
+  /* Asked for less motion: the thread is already hidden, and the glows hold
+     still rather than riding the scroll. */
+  @media (prefers-reduced-motion: reduce) {
+    .aura::before,
+    .aura::after {
+      animation: none;
+    }
+  }
 }
 
 @media (max-width: 64rem) {
@@ -1274,5 +1334,106 @@ main > .section {
 @media (max-width: 30rem) {
   .hero {
     padding-block-start: 4.5rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The pencil
+
+   The page is pretending to be drawn by hand; a visitor may as well be able to
+   join in. The sheet lies over the whole document and is inert until the
+   pencil is picked up, so it costs a visitor who never notices it nothing at
+   all — no listeners, no hit testing, no paint.
+   --------------------------------------------------------------------------- */
+
+.scribble {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  width: 100%;
+  z-index: 30;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.scribble--live {
+  pointer-events: auto;
+  /* Drawing and scrolling are one gesture on a touch screen. While the pencil
+     is out, a drag draws. */
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.scribble path {
+  fill: none;
+  stroke: var(--violet-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The page holds still while the pencil is out, so a drag cannot both draw a
+   line and carry the paper away under it. */
+.is-drawing,
+.is-drawing body {
+  overflow: hidden;
+}
+
+.scribble-controls {
+  position: fixed;
+  inset-block-end: clamp(0.75rem, 2vw, 1.5rem);
+  inset-inline-end: clamp(0.75rem, 2vw, 1.5rem);
+  z-index: 41;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scribble-pencil,
+.scribble-minor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background-color: var(--ground);
+  color: var(--ink-soft);
+  font-size: var(--step-small);
+  font-weight: 600;
+  box-shadow: var(--shadow-low);
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.scribble-pencil svg {
+  width: 1.05em;
+  height: 1.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scribble-pencil:hover,
+.scribble-minor:hover {
+  color: var(--ink);
+  border-color: var(--violet-ink);
+}
+
+.scribble-pencil[aria-pressed='true'] {
+  color: var(--ink);
+  border-color: var(--violet-ink);
+}
+
+.scribble-minor[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* On a phone the word is the first thing to go; the pencil says enough. */
+@media (max-width: 30rem) {
+  .scribble-label {
+    display: none;
   }
 }

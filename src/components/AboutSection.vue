@@ -34,6 +34,9 @@ const TOOLS = [
           </div>
           <div class="meta">
             <a href="mailto:contact@nonetwor.cc?subject=Contact">contact@nonetwor.cc</a>
+            <!-- Carries only what this page already says out loud: a name, a
+                 title, an address and two profiles. No number, no street. -->
+            <a href="/contact.vcf" download="noah-anleitner.vcf">Save my card</a>
           </div>
         </div>
         <div>

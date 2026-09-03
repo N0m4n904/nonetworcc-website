@@ -10,6 +10,7 @@ import ProjectTile from "./components/ProjectTile.vue";
 import GarageSection from "./components/GarageSection.vue";
 import AboutSection from "./components/AboutSection.vue";
 import SiteFooter from "./components/SiteFooter.vue";
+import ScribblePad from "./components/ScribblePad.vue";
 
 import { useScrollFrame } from "./composables/useScrollFrame.js";
 import { useSmartCursor } from "./composables/useSmartCursor.js";
@@ -28,7 +29,11 @@ useSmartCursor();
 
   <IconSprite />
 
-  <!-- Drawn in proportion to how much of the page has gone by. -->
+  <!-- Drawn in proportion to how much of the page has gone by.
+
+       pathLength="1" declares the line to be one unit long whatever its real
+       geometry, so the dash can be written as a fraction and nobody — neither
+       the script nor the stylesheet — has to measure it first. -->
   <svg
     class="thread"
     ref="thread"
@@ -36,7 +41,7 @@ useSmartCursor();
     preserveAspectRatio="none"
     aria-hidden="true"
   >
-    <path d="M21 0c-14 120 14 190 0 300s-16 190 0 300 12 220 0 400" />
+    <path pathLength="1" d="M21 0c-14 120 14 190 0 300s-16 190 0 300 12 220 0 400" />
   </svg>
 
   <SiteBar :scrolled="scrolled" />
@@ -87,4 +92,7 @@ useSmartCursor();
   </main>
 
   <SiteFooter :profile="content.garage.profile" />
+
+  <!-- Last, so it lies over everything it might be drawn on. -->
+  <ScribblePad />
 </template>

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Anleitner;Noah;;;
+FN:Noah Anleitner
+TITLE:Software developer
+EMAIL;TYPE=INTERNET,PREF:contact@nonetwor.cc
+URL:https://nonetwor.cc
+X-SOCIALPROFILE;TYPE=github:https://github.com/N0m4n904
+X-SOCIALPROFILE;TYPE=gitlab:https://gitlab.com/N0m4n904
+NOTE:Software development for a living and for the fun of it.
+END:VCARD

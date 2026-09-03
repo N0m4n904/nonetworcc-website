@@ -1,0 +1,190 @@
+/* ---------------------------------------------------------------------------
+   On paper.
+
+   Everything this page is made of — the drawn outlines, the boil, the rings,
+   the thread, the glows — exists to be looked at on a screen that can move.
+   None of it survives a printer, and most of it wastes ink trying. What is
+   left is what the page is actually about: who this is, what they have built,
+   and how to reach them.
+
+   Treated as a one-page CV rather than a screenshot of a website.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  /* Decoration, all of it. */
+  .aura,
+  .thread,
+  .rings,
+  .field,
+  .drawn,
+  .bar,
+  .hero__art,
+  .section__rule,
+  .posts,
+  .post-stub,
+  .post-frame,
+  .smart-cursor,
+  .smart-cursor-ring,
+  .scribble,
+  .scribble-controls {
+    display: none !important;
+  }
+
+  /* Buttons are for pressing. On paper they are a shape with a word in it. */
+  .button,
+  .hero__actions {
+    display: none !important;
+  }
+
+  :root {
+    --ink: #000;
+    --ink-soft: #222;
+    --ink-faint: #555;
+    --edge: #bbb;
+    --surface: transparent;
+    --surface-strong: transparent;
+  }
+
+  html {
+    /* An anchor offset for a bar that is no longer there. */
+    scroll-padding-top: 0;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* A screen's worth of height per section turns four sections into eight
+     pages of white. */
+  main > .section,
+  .section,
+  .footer {
+    min-height: 0 !important;
+    display: block !important;
+    padding-block: 0 0 !important;
+    margin-block-end: 10mm;
+  }
+
+  .shell {
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  /* Nothing arrives on paper; it is simply there. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Gradient text is painted into transparent letters, which prints as an
+     empty space where the name should be. */
+  .accent,
+  .accent__face {
+    background: none !important;
+    -webkit-text-fill-color: #000;
+    color: #000 !important;
+    display: inline !important;
+  }
+
+  .accent__face--alt {
+    display: none !important;
+  }
+
+  .display {
+    font-size: 24pt;
+    line-height: 1.1;
+  }
+
+  .title {
+    font-size: 15pt;
+    margin-block-start: 6mm;
+  }
+
+  .heading,
+  .tile__title {
+    font-size: 12pt;
+  }
+
+  .label {
+    font-size: 8pt;
+    letter-spacing: 0.14em;
+    color: #555;
+  }
+
+  .lede {
+    font-size: 11pt;
+    max-width: none;
+  }
+
+  /* A card should not be split across a page break if it can be helped. */
+  .tile {
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+    padding: 4mm;
+    margin-block-start: 4mm !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    display: block !important;
+  }
+
+  .tile__media {
+    display: none !important;
+  }
+
+  .badge {
+    border: 1px solid #999;
+    color: #333;
+    font-size: 7.5pt;
+  }
+
+  /* A link on paper is only useful if it says where it goes. Internal anchors
+     and mail links are left alone: one is meaningless off-screen and the other
+     already reads as an address. */
+  .meta a[href^="http"]::after,
+  .footer__grid a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  .meta a,
+  .footer__grid a {
+    border: 0 !important;
+    color: #000 !important;
+  }
+
+  .icon {
+    display: none !important;
+  }
+
+  .tags {
+    gap: 2mm;
+  }
+
+  .tags li {
+    border: 1px solid #ccc;
+    color: #222;
+    padding: 0.5mm 2mm;
+    font-size: 9pt;
+  }
+
+  .about {
+    display: block !important;
+  }
+
+  .footer__grid {
+    display: block !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}

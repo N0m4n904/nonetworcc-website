@@ -1,0 +1,139 @@
+# Everything the page lists, in the order it lists it. Adding an entry here is
+# meant to be the whole job — the page builds each section by walking these.
+#
+# A tile (work and projects both use the same shape):
+#
+#   title      required.
+#   badge      optional. The pill beside the title, for things not public or
+#              no longer maintained.
+#   body       required. The sentence or two under the title.
+#   note       optional. The quieter line under the body, for provenance and
+#              caveats rather than description.
+#   media      optional. Leave it out and the tile drops the mark column and
+#              runs full width, which is what tile--plain used to say.
+#     src        path or URL of the mark.
+#     alt        empty string for a mark that repeats the title; the title is
+#                right there, and a screen reader does not need it twice.
+#     treatment  one of: plate, past, rounded. Omit for a plain mark.
+#                  plate    — white plate behind marks carrying their own
+#                             opaque background, which would otherwise sit as
+#                             a hard rectangle on the page.
+#                  past     — colour drained, returning on hover. For work
+#                             that is over.
+#                  rounded  — squircle corners, for app icons already drawn
+#                             to be masked.
+#   links      optional. The row beneath.
+#     text       what the link says.
+#     href       where it goes.
+#     icon       one of: github, gitlab, instagram. Omit for a bare link.
+#                Must match a symbol id in index.html, minus the "icon-".
+
+work:
+  - title: Dominikus-Ringeisen-Werk
+    body: "Where I work: software development for a social care provider."
+    media:
+      src: https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg
+      alt: Dominikus-Ringeisen-Werk signet
+      treatment: plate
+    links:
+      - text: drw.de
+        href: https://drw.de
+      - text: Organisation
+        href: https://github.com/Dominikus-Ringeisen-Werk
+        icon: github
+      - text: Work account
+        href: https://github.com/DRW-NoahAnleitner
+        icon: github
+
+  - title: DORINO
+    badge: Not public yet
+    body: >-
+      A barrier-free information system for social institutions: a tiled touch interface,
+      read aloud on request, carrying dashboard, news, weather, calendar, documents, maps
+      and media. Built for homes for people with disabilities, senior homes, day-care
+      centres and schools.
+    note: >-
+      One of its main developers at the DRW, which builds it together with SONNTAG IT
+      Solutions, who sell it.
+    links:
+      - text: sonntag-its.de
+        href: https://www.sonntag-its.de/dorino/
+
+projects:
+  - title: halogenOS
+    body: "A cutting-edge Android ROM: simple, smooth and fast."
+    media:
+      src: src/images/halogenos_logo.png
+      alt: halogenOS
+    links:
+      - text: git.halogenos.org
+        href: https://git.halogenos.org/
+      - text: halogenos.org
+        href: https://halogenos.org
+
+  - title: halogenOS Discordbot
+    badge: No longer maintained
+    body: A Discord bot in Kotlin for the halogenOS team.
+    note: Discontinued in 2026. The sources stay online for reference.
+    media:
+      src: src/images/halogenos_discordbot.png
+      alt: halogenOS Discordbot
+      treatment: past
+    links:
+      - text: GitHub
+        href: https://github.com/halogenOS/halogenos.discordbot
+        icon: github
+
+  - title: NixOS Configuration
+    body: >-
+      My own machines, declared: the stable channel, foundrix, Gnome, COSMIC and
+      Hyprland.
+    media:
+      src: src/images/NixOS.svg
+      alt: NixOS
+    links:
+      - text: GitLab
+        href: https://gitlab.com/N0m4n904/nixos-config
+        icon: gitlab
+
+  - title: Max.Storage Ultimate
+    body: >-
+      A Home Assistant integration for the MaxStorage home battery. Live photovoltaic,
+      battery and grid readings, MPPT strings discovered as it finds them, and relay
+      states, so surplus energy can drive automations.
+    note: Python, installable through HACS. A heavily extended fork of geeks-r-us.
+    media:
+      src: https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png
+      alt: Max.Storage Ultimate
+      treatment: rounded
+    links:
+      - text: GitHub
+        href: https://github.com/N0m4n904/maxstorage_ultimate
+        icon: github
+      - text: Upstream
+        href: https://github.com/geeks-r-us/maxstorage_ultimate
+
+  - title: Smart Cursor
+    body: >-
+      A pointer for the web: a glowing dot and a ring that morphs onto whatever it hovers,
+      yielding to a caret over text. Two files, no build step, no dependencies.
+    note: It is what is drawing your pointer on this page.
+    media:
+      src: src/images/smartcursor.svg
+      alt: Smart Cursor
+    links:
+      - text: GitHub
+        href: https://github.com/N0m4n904/smartcursor
+        icon: github
+
+# The garage lists posts rather than tiles. Nothing is fetched from Meta until
+# a visitor presses the button; these are only the permalinks each stub stands
+# in for until they do.
+garage:
+  handle: b9_allroad_kru
+  profile: https://www.instagram.com/b9_allroad_kru/
+  posts:
+    - https://www.instagram.com/p/DXkKC9CiPTl/
+    - https://www.instagram.com/p/DP9LiDeiEnN/
+    - https://www.instagram.com/p/DXkKKZLiHxB/
+    - https://www.instagram.com/p/DHdemuSoo_N/

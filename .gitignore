@@ -1,0 +1,11 @@
+# Installed, not authored. It was tracked because the server takes the site by
+# `git pull`, but nothing served ever referenced it — the page loads only
+# index.html, src/ and the CDN — so it was 20MB of noise in every clone, and a
+# Vue toolchain would have made it far more.
+node_modules/
+
+# Editor and OS leavings
+.DS_Store
+*.swp
+.vscode/
+.idea/

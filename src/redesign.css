@@ -839,6 +839,27 @@ main > .section {
    matching guard in the script — can silence the lot without hunting.
    --------------------------------------------------------------------------- */
 
+/* Off screen, nothing moves. Hosts carrying a continuous animation are marked
+   data-live in the markup, the script writes which of them can be seen, and
+   this is the only rule that acts on the answer — for descendants too, since
+   what actually animates is usually a path inside the host rather than the
+   host itself.
+
+   Paused rather than cancelled: an outline comes back on the drawing it
+   stopped on and a ring at the angle it stopped at, so returning to a section
+   never looks like a restart. The attribute ships empty and only the script
+   writes "false", which means a visitor without it keeps the page as it was.
+
+   !important for the same reason the reduced-motion guard below needs it:
+   every animation on this page is declared with the `animation` shorthand,
+   which writes `running` into animation-play-state whether or not it says so.
+   A guard that has to out-specify each of them one at a time is a guard that
+   will be forgotten the next time one is added. */
+[data-live='false'],
+[data-live='false'] * {
+  animation-play-state: paused !important;
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(28px);

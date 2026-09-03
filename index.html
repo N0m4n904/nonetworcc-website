@@ -80,7 +80,7 @@
           <div>
             <p class="label" data-reveal>Software developer</p>
             <h1 class="display hero__title" data-reveal style="--i:1">
-              Noah <span class="accent">Anleitner</span>
+              Noah <span class="accent" data-live>Anleitner</span>
             </h1>
             <p class="lede" data-reveal style="--i:2">
               Software development for a living and for the fun of it, and tuning my car when I am
@@ -123,7 +123,7 @@
             </svg>
           </div>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media tile__media--plate">
               <img src="https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg" alt="Dominikus-Ringeisen-Werk signet" />
             </div>
@@ -142,7 +142,7 @@
             </div>
           </article>
 
-          <article class="tile tile--plain" data-reveal>
+          <article class="tile tile--plain" data-reveal data-live>
             <div>
               <h3 class="heading tile__title">DORINO <span class="badge">Not public yet</span></h3>
               <p class="tile__body">
@@ -164,7 +164,7 @@
       </section>
 
       <section class="section" id="projects">
-        <div class="field" aria-hidden="true">
+        <div class="field" data-live aria-hidden="true">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
             <path d="M0 40c60-8 120 6 180-2s140-10 220 4" />
             <path d="M0 92c70 10 130-8 195 2s140 12 205-4" />
@@ -185,7 +185,7 @@
             </svg>
           </div>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media">
               <img src="src/images/halogenos_logo.png" alt="halogenOS" />
             </div>
@@ -199,7 +199,7 @@
             </div>
           </article>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media tile__media--past">
               <img src="src/images/halogenos_discordbot.png" alt="halogenOS Discordbot" />
             </div>
@@ -217,7 +217,7 @@
             </div>
           </article>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media">
               <img src="src/images/NixOS.svg" alt="NixOS" />
             </div>
@@ -235,7 +235,7 @@
             </div>
           </article>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media tile__media--rounded">
               <img src="https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png" alt="Max.Storage Ultimate" />
             </div>
@@ -258,7 +258,7 @@
             </div>
           </article>
 
-          <article class="tile" data-reveal>
+          <article class="tile" data-reveal data-live>
             <div class="tile__media">
               <img src="src/images/smartcursor.svg" alt="Smart Cursor" />
             </div>
@@ -291,7 +291,7 @@
 
           <p class="lede">
             My car, and the work that goes into it, on
-            <a class="accent" href="https://www.instagram.com/b9_allroad_kru/">@b9_allroad_kru</a>.
+            <a class="accent" data-live href="https://www.instagram.com/b9_allroad_kru/">@b9_allroad_kru</a>.
           </p>
           <p class="prose tile__note">
             The posts are not loaded until you ask for them. Pressing the button fetches them from
@@ -302,19 +302,19 @@
           </div>
 
           <div class="posts" id="posts">
-            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DXkKC9CiPTl/">
+            <div class="post-stub" data-reveal data-live data-permalink="https://www.instagram.com/p/DXkKC9CiPTl/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DP9LiDeiEnN/">
+            <div class="post-stub" data-reveal data-live data-permalink="https://www.instagram.com/p/DP9LiDeiEnN/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DXkKKZLiHxB/">
+            <div class="post-stub" data-reveal data-live data-permalink="https://www.instagram.com/p/DXkKKZLiHxB/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
-            <div class="post-stub" data-reveal data-permalink="https://www.instagram.com/p/DHdemuSoo_N/">
+            <div class="post-stub" data-reveal data-live data-permalink="https://www.instagram.com/p/DHdemuSoo_N/">
               <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
               <strong>Instagram post</strong>
             </div>
@@ -564,6 +564,30 @@
           });
           hosts.forEach(function (host) { watch.observe(host); });
         }
+      })();
+
+      // What cannot be seen holds still.
+      //
+      // Everything decorative on this page moves continuously, and a browser
+      // will keep painting all of it while it sits three screens away — which
+      // on a modest phone is most of it, most of the time. Each host that
+      // carries a running animation says so with data-live; this decides which
+      // of them are in view, and the stylesheet does the pausing.
+      (function () {
+        var hosts = document.querySelectorAll("[data-live]");
+        if (!hosts.length || !("IntersectionObserver" in window)) return;
+
+        var watch = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            entry.target.dataset.live = entry.isIntersecting ? "true" : "false";
+          });
+          // A little before the edge rather than at it. Resuming needs no
+          // run-up — a paused animation carries on from the angle it stopped
+          // at — but the callback is asynchronous, and this is the margin that
+          // keeps a ring from being seen frozen for the frame it takes.
+        }, { rootMargin: "20% 0px" });
+
+        hosts.forEach(function (host) { watch.observe(host); });
       })();
 
       // Motion. One guard at the top: if the visitor asked for less, every

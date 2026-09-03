@@ -63,7 +63,7 @@ projects:
   - title: halogenOS
     body: "A cutting-edge Android ROM: simple, smooth and fast."
     media:
-      src: src/images/halogenos_logo.png
+      src: /images/halogenos_logo.png
       alt: halogenOS
     links:
       - text: git.halogenos.org
@@ -76,7 +76,7 @@ projects:
     body: A Discord bot in Kotlin for the halogenOS team.
     note: Discontinued in 2026. The sources stay online for reference.
     media:
-      src: src/images/halogenos_discordbot.png
+      src: /images/halogenos_discordbot.png
       alt: halogenOS Discordbot
       treatment: past
     links:
@@ -89,7 +89,7 @@ projects:
       My own machines, declared: the stable channel, foundrix, Gnome, COSMIC and
       Hyprland.
     media:
-      src: src/images/NixOS.svg
+      src: /images/NixOS.svg
       alt: NixOS
     links:
       - text: GitLab
@@ -119,7 +119,7 @@ projects:
       yielding to a caret over text. Two files, no build step, no dependencies.
     note: It is what is drawing your pointer on this page.
     media:
-      src: src/images/smartcursor.svg
+      src: /images/smartcursor.svg
       alt: Smart Cursor
     links:
       - text: GitHub

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.css"
+          integrity="sha384-DJ28qhylHcyHeG8xQ+6dpdA7kmM/WA6RYJDSMoATHaPbTUWBbFuR2m8NJsrh+GiL" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.js"
+            integrity="sha384-10cf4kvCVDBb2inFJcb2OHHVqejWTZZLCXDeeA9pgIwYD6Pglz/Cn31yUu0BRdOP" crossorigin="anonymous" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noah Anleitner</title>
+    <link rel="icon" type="image/x-icon" href="/images/NoNetworcc-Logo.png">
+    <meta name="description" content="Software developer. Projects, work and a car." />
+    <style>
+      /* Kept here rather than in the stylesheet because it configures the two
+         tags above it: these are the cursor's own tokens, not the page's. */
+
+      /* Smart cursor dot, in the two ends of the site gradient. Named for the
+         surface each is drawn on, so this holds for light and dark alike. */
+      :root {
+        --brand: #8c0be8;
+        --brand-light: #00c6ff;
+        /* The pointer is drawn by the same hand as the outlines on the page. */
+        --sc-sketch: 1;
+        --sc-sketch-wiggle: 2.4px;
+        --sc-ring-width: 2.6px;
+        /* Closes on its target faster than the default, so the outline arrives
+           with the pointer rather than catching up to it. */
+        --sc-ease: 0.45;
+      }
+
+      /* The ring hugs page content, so it belongs under the bar the way that
+         content does. Anything above 99998 would also cover the dot at 99999. */
+      .smart-cursor-ring {
+        z-index: 39;
+      }
+
+      /* The mark is white line art, which needs reversing on a light ground. */
+      @media (prefers-color-scheme: light) {
+        .hero__logo {
+          filter: invert(1);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BAojjp-w.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dp9UxJVx.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

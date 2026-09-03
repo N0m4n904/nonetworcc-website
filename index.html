@@ -80,7 +80,14 @@
           <div>
             <p class="label" data-reveal>Software developer</p>
             <h1 class="display hero__title" data-reveal style="--i:1">
-              Noah <span class="accent" data-live>Anleitner</span>
+              Noah
+              <!-- The same word twice, stacked in one grid cell and taking
+                   turns. The second face is the animation and nothing else,
+                   so it is kept away from anything reading the page aloud. -->
+              <span class="accent" data-live>
+                <span class="accent__face">Anleitner</span>
+                <span class="accent__face accent__face--alt" aria-hidden="true">Anleitner</span>
+              </span>
             </h1>
             <p class="lede" data-reveal style="--i:2">
               Software development for a living and for the fun of it, and tuning my car when I am
@@ -301,7 +308,10 @@
 
           <p class="lede">
             My car, and the work that goes into it, on
-            <a class="accent" data-live href="https://www.instagram.com/b9_allroad_kru/">@b9_allroad_kru</a>.
+            <a class="accent" data-live href="https://www.instagram.com/b9_allroad_kru/"
+              ><span class="accent__face">@b9_allroad_kru</span
+              ><span class="accent__face accent__face--alt" aria-hidden="true">@b9_allroad_kru</span
+            ></a>.
           </p>
           <p class="prose tile__note">
             The posts are not loaded until you ask for them. Pressing the button fetches them from

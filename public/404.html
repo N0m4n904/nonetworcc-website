@@ -3,19 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Not here — Noah Anleitner</title>
+    <title>Nothing here — Noah Anleitner</title>
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <style>
       /* Its own page rather than the app: a 404 that boots a whole framework to
          say four words is a poor trade, and this one has to work when the thing
-         being asked for does not exist. The colours and the face are the
-         page's, copied deliberately — it is twenty lines, not a design system. */
-
-      /* No @font-face here on purpose. The site's handwriting is bundled under
-         a hashed name that changes with every build, and copying an 80kB file
-         into public/ for a page nobody should reach is a poor trade. The
-         fallback stack the site already names is handwriting anyway. */
+         being asked for does not exist. The colours are the site's, copied
+         deliberately — it is thirty lines, not a design system. */
 
       :root {
         --ground: #f7f6fb;
@@ -47,15 +42,13 @@
         padding: clamp(1.5rem, 6vw, 5rem);
         background: var(--ground);
         color: var(--ink);
-        /* The site's handwriting is not loaded here (see above). On the site
-           proper the fallbacks are a stopgap seen for a moment; here there is
-           nothing to fall back from, so whatever is named first is simply the
-           typeface. That rules out both "cursive", which resolves to a serif
-           where Comic Sans is absent, and Comic Sans itself. The page carries
-           the site in its colours, its gradient and its drawn rule; the letters
-           can be plain. Carlito follows Calibri because it is metric-compatible
-           and is the one Linux machines are likely to have; the system sans
-           catches everything after that. */
+        /* The site's handwriting is not loaded here: it is bundled under a
+           hashed name that changes with every build, and copying an 80kB file
+           for a page nobody should reach is a poor trade. On the site proper
+           the fallbacks are a stopgap seen for a moment while it arrives; here
+           there is nothing to fall back from, so whatever is named first is
+           simply the typeface. Carlito follows Calibri because it is
+           metric-compatible and is the one a Linux machine is likely to have. */
         font-family: Calibri, Carlito, system-ui, -apple-system, "Segoe UI", sans-serif;
         line-height: 1.7;
       }
@@ -63,7 +56,11 @@
       h1 {
         font-size: clamp(3rem, 1rem + 9vw, 7rem);
         font-weight: 700;
-        line-height: 0.95;
+        /* Room for the tail of the g. The gradient is clipped to the text box,
+           and a line-height below one leaves a descender outside it — where it
+           is simply not painted. */
+        line-height: 1.15;
+        padding-block-end: 0.08em;
         letter-spacing: -0.02em;
         background-image: linear-gradient(100deg, var(--violet), var(--cyan));
         -webkit-background-clip: text;
@@ -71,7 +68,11 @@
         color: transparent;
       }
 
-      p { color: var(--ink-soft); max-width: 34rem; font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem); }
+      p {
+        color: var(--ink-soft);
+        max-width: 34rem;
+        font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      }
 
       a.home {
         display: inline-flex;
@@ -83,7 +84,6 @@
         text-decoration: none;
       }
 
-      /* The page's own line, drawn once and not moving. */
       svg { width: clamp(8rem, 18vw, 14rem); height: 14px; overflow: visible; }
       svg path { fill: none; stroke: url(#g); stroke-width: 4; stroke-linecap: round; }
     </style>
@@ -99,11 +99,29 @@
       <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />
     </svg>
 
-    <h1>Nothing here</h1>
-    <p>
+    <!-- English is what the page is written in, so a visitor without
+         JavaScript reads something sensible rather than nothing. The German is
+         carried alongside and swapped in below, by the rule the site uses. -->
+    <h1 data-de="Nichts gefunden">Nothing here</h1>
+    <p data-de="Diese Adresse führt hier nirgendwohin – vielleicht ein Tippfehler, vielleicht hat es sie nie gegeben.">
       That address does not lead anywhere on this site — it may have been mistyped,
-      or it may never have existed. Nichts gefunden: diese Adresse führt hier nirgendwohin.
+      or it may never have existed.
     </p>
-    <a class="home" href="/">Back to the start</a>
+    <a class="home" href="/" data-de="Zurück zum Anfang">Back to the start</a>
+
+    <script>
+      // The same rule as the site: German for a browser asking for German,
+      // English for every other. The first entry of the list decides, so
+      // somebody who merely has German further down it does not get German.
+      (function () {
+        var first = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+        if (!/^de\b/i.test(first)) return;
+        document.documentElement.lang = "de";
+        document.title = "Nichts gefunden — Noah Anleitner";
+        document.querySelectorAll("[data-de]").forEach(function (el) {
+          el.textContent = el.getAttribute("data-de");
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -56,8 +56,8 @@ en:
         text: Tuning my car and photographing it.
     tools: Tools of the trade
     card: Save my card
-    cv: Download CV
-    cvFile: /noah-anleitner-cv.pdf
+    pdf: Download as PDF
+    pdfFile: /noah-anleitner-en.pdf
 
   footer:
     me: Me
@@ -116,8 +116,8 @@ de:
         text: An meinem Auto schrauben und es fotografieren.
     tools: Womit ich arbeite
     card: Kontakt speichern
-    cv: Lebenslauf laden
-    cvFile: /noah-anleitner-lebenslauf.pdf
+    pdf: Als PDF speichern
+    pdfFile: /noah-anleitner-de.pdf
 
   footer:
     me: Ich

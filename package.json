@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "og": "node tools/make-og.mjs",
-    "cv": "vite build && node tools/make-cv.mjs && vite build"
+    "pdf": "vite build && node tools/make-pdf.mjs && vite build"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",

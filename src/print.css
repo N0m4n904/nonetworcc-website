@@ -7,7 +7,8 @@
    left is what the page is actually about: who this is, what they have built,
    and how to reach them.
 
-   Treated as a one-page CV rather than a screenshot of a website.
+   Treated as a document rather than a screenshot of a website. Not a CV —
+   there is no history or education here, only what the page itself says.
    --------------------------------------------------------------------------- */
 
 @media print {
@@ -190,7 +191,7 @@
 
   @page {
     /* Stated, or the browser prints whatever its locale defaults to — which
-       is Letter in a US-configured Chrome, and this is a German CV. */
+       is Letter in a US-configured Chrome, and this is read in Germany. */
     size: A4;
     margin: 14mm;
   }

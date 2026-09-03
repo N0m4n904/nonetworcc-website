@@ -33,7 +33,7 @@ const TOOLS = [
                  title, an address and two profiles. No number, no street. -->
             <a href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a>
             <!-- The same page, printed. Whichever language is being read. -->
-            <a :href="t.about.cvFile" download>{{ t.about.cv }}</a>
+            <a :href="t.about.pdfFile" download>{{ t.about.pdf }}</a>
           </div>
         </div>
         <div>

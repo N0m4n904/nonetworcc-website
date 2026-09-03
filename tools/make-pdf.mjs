@@ -1,14 +1,17 @@
 // Renders the site's print view to a PDF, in both languages.
 //
-// The print stylesheet already turns the page into a one-page CV; this saves
-// the result to a file so it can be handed to someone rather than only
-// existing if they think to press Ctrl-P. Nothing here designs anything — the
-// layout is src/print.css and the words are the page's, so the CV cannot drift
-// away from the site.
+// This is the page on paper and nothing more. It is deliberately not called a
+// CV: there is no employment history in it, no education, no dates — a file
+// named for one would promise something it does not contain. It saves the
+// print view so it can be handed to somebody rather than existing only if they
+// think to press Ctrl-P.
 //
-// Run `npm run cv`. It builds first, because it renders the built site, and
-// builds again afterwards so the PDFs it just wrote into public/ are copied
-// into dist.
+// Nothing here designs anything — the layout is src/print.css and the words
+// are the page's, so the two cannot drift apart.
+//
+// Run `npm run pdf`. It builds first, because it renders the built site, and
+// builds again afterwards so the files it wrote into public/ are copied into
+// dist.
 
 import { spawn, execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -23,8 +26,8 @@ const DIST = path.join(ROOT, "dist");
 const PORT = 8198;
 
 const EDITIONS = [
-  { file: "noah-anleitner-cv.pdf", accept: "en-GB,en" },
-  { file: "noah-anleitner-lebenslauf.pdf", accept: "de-DE,de" },
+  { file: "noah-anleitner-en.pdf", accept: "en-GB,en" },
+  { file: "noah-anleitner-de.pdf", accept: "de-DE,de" },
 ];
 
 const TYPES = {
@@ -77,8 +80,8 @@ function connect(wsUrl) {
 
 // Chromium embeds a variable font as Type 3 glyphs, which triples the size of
 // a document that is only words. Ghostscript rewrites it to a third of that
-// and the text stays extractable, which matters — a CV gets read by software
-// before it is read by a person. Skipped without complaint where gs is absent;
+// and the text stays extractable, which is worth keeping — a document of words
+// should be searchable. Skipped without complaint where gs is absent;
 // the PDF is correct either way, only larger.
 function shrink(file) {
   const original = fs.statSync(file).size;
@@ -101,7 +104,7 @@ function shrink(file) {
 }
 
 const server = await serve();
-const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cv-"));
+const profile = fs.mkdtempSync(path.join(os.tmpdir(), "pdf-"));
 const chrome = spawn("chromium", ["--headless=new", "--remote-debugging-port=9601",
   `--user-data-dir=${profile}`, "--no-first-run"], { stdio: "ignore" });
 
@@ -120,7 +123,7 @@ for (const { file, accept } of EDITIONS) {
   await call("Emulation.setUserAgentOverride", { userAgent: "", acceptLanguage: accept });
   await call("Page.navigate", { url: `http://localhost:${PORT}/` });
   await wait(2500);
-  // The handwriting has to have arrived, or the CV is set in the fallback face.
+  // The handwriting has to have arrived, or it is set in the fallback face.
   await call("Runtime.evaluate", { expression: "document.fonts.ready", awaitPromise: true });
   await wait(400);
 

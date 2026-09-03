@@ -264,6 +264,18 @@ main > .section {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Room for a descender.
+
+     The gradient is painted into this element's box and only then clipped to
+     the shapes of the letters, so a tail hanging below the box has no gradient
+     to show and is not drawn at all. .display sets a line-height below one,
+     which makes the box shorter than the letters in it — "Noah Anleitner" has
+     no descenders and hides the fault, but a g or a y would be cut off.
+
+     The padding gives the background somewhere to be; the negative margin
+     hands the space straight back, so nothing on the page moves. */
+  padding-block-end: 0.2em;
+  margin-block-end: -0.2em;
 }
 
 /* ---------------------------------------------------------------------------

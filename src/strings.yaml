@@ -1,0 +1,122 @@
+# Everything the page says that is not an entry in content.yaml.
+#
+# Two languages, chosen from the browser's own setting: German for a browser
+# asking for German, English for every other. See src/lib/language.js.
+#
+# The German is a translation rather than a second original, and it should be
+# read by someone who writes German before it is trusted — it speaks for a
+# person, not for a product.
+
+en:
+  documentTitle: Noah Anleitner
+  description: Software developer. Projects, work and a car.
+
+  nav:
+    work: Work
+    projects: Projects
+    garage: Garage
+    about: About
+  contact: Get in touch
+
+  hero:
+    label: Software developer
+    lede: >-
+      Software development for a living and for the fun of it, and tuning my car when I am
+      not coding.
+    seeWork: See the work
+    seeProjects: Projects
+
+  work:
+    label: Day job
+    title: Work
+  projects:
+    label: Built in my own time
+    title: Projects
+
+  garage:
+    label: Away from the keyboard
+    title: Garage
+    ledeBefore: My car, and the work that goes into it, on
+    consent: >-
+      The posts are not loaded until you ask for them. Pressing the button fetches them from
+      instagram.com, which means Meta receives your IP address and may set cookies.
+    load: Load the posts from Instagram
+    post: Instagram post
+
+  about:
+    label: Who is typing
+    title: About
+    blocks:
+      - heading: Who I am
+        text: Born 1999, living in Germany.
+      - heading: What I do
+        text: Software development, at work and after it.
+      - heading: Away from the keyboard
+        text: Tuning my car and photographing it.
+    tools: Tools of the trade
+    card: Save my card
+
+  footer:
+    me: Me
+    work: Work
+    legal: Legal
+    privacy: Privacy
+    organisation: Organisation
+    workAccount: Work account
+
+de:
+  documentTitle: Noah Anleitner
+  description: Softwareentwickler. Projekte, Arbeit und ein Auto.
+
+  nav:
+    work: Arbeit
+    projects: Projekte
+    garage: Garage
+    about: Über mich
+  contact: Kontakt
+
+  hero:
+    label: Softwareentwickler
+    lede: >-
+      Softwareentwicklung als Beruf und aus Spaß an der Sache – und wenn ich nicht
+      programmiere, schraube ich an meinem Auto.
+    seeWork: Meine Arbeit
+    seeProjects: Projekte
+
+  work:
+    label: Hauptberuflich
+    title: Arbeit
+  projects:
+    label: In meiner Freizeit entstanden
+    title: Projekte
+
+  garage:
+    label: Abseits der Tastatur
+    title: Garage
+    ledeBefore: Mein Auto und die Arbeit, die darin steckt, auf
+    consent: >-
+      Die Beiträge werden erst geladen, wenn du es möchtest. Mit einem Klick werden sie von
+      instagram.com abgerufen – dabei erhält Meta deine IP-Adresse und kann Cookies setzen.
+    load: Beiträge von Instagram laden
+    post: Instagram-Beitrag
+
+  about:
+    label: Wer hier tippt
+    title: Über mich
+    blocks:
+      - heading: Wer ich bin
+        text: Jahrgang 1999, wohnhaft in Deutschland.
+      - heading: Was ich mache
+        text: Softwareentwicklung, im Beruf und danach.
+      - heading: Abseits der Tastatur
+        text: An meinem Auto schrauben und es fotografieren.
+    tools: Womit ich arbeite
+    card: Kontakt speichern
+
+  footer:
+    me: Ich
+    work: Arbeit
+    legal: Rechtliches
+    privacy: Datenschutz
+    organisation: Organisation
+    workAccount: Arbeitsaccount

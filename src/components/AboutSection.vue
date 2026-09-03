@@ -1,11 +1,6 @@
 <script setup>
 import SectionHead from "./SectionHead.vue";
-
-const BLOCKS = [
-  { heading: "Who I am", text: "Born 1999, living in Germany." },
-  { heading: "What I do", text: "Software development, at work and after it." },
-  { heading: "Away from the keyboard", text: "Tuning my car and photographing it." },
-];
+import { t } from "../lib/language.js";
 
 const TOOLS = [
   "Kotlin", "Java", "Android", "AOSP", "Jetpack Compose", "C#", "Visual Basic",
@@ -18,12 +13,12 @@ const TOOLS = [
 <template>
   <section class="section" id="about">
     <div class="shell">
-      <SectionHead label="Who is typing" title="About" />
+      <SectionHead :label="t.about.label" :title="t.about.title" />
 
       <div class="about">
         <div>
           <div
-            v-for="(block, i) in BLOCKS"
+            v-for="(block, i) in t.about.blocks"
             :key="block.heading"
             class="about__block"
             :style="{ '--i': i }"
@@ -36,11 +31,11 @@ const TOOLS = [
             <a href="mailto:contact@nonetwor.cc?subject=Contact">contact@nonetwor.cc</a>
             <!-- Carries only what this page already says out loud: a name, a
                  title, an address and two profiles. No number, no street. -->
-            <a href="/contact.vcf" download="noah-anleitner.vcf">Save my card</a>
+            <a href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a>
           </div>
         </div>
         <div>
-          <p class="label">Tools of the trade</p>
+          <p class="label">{{ t.about.tools }}</p>
           <ul class="tags">
             <li v-for="tool in TOOLS" :key="tool">{{ tool }}</li>
           </ul>

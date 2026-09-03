@@ -12,6 +12,7 @@ import AboutSection from "./components/AboutSection.vue";
 import SiteFooter from "./components/SiteFooter.vue";
 import ScribblePad from "./components/ScribblePad.vue";
 import { hasFinePointer } from "./lib/pointer.js";
+import { t, lang } from "./lib/language.js";
 
 import { useScrollFrame } from "./composables/useScrollFrame.js";
 import { useSmartCursor } from "./composables/useSmartCursor.js";
@@ -52,7 +53,7 @@ useSmartCursor();
 
     <section class="section" id="work">
       <div class="shell">
-        <SectionHead label="Day job" title="Work" />
+        <SectionHead :label="t.work.label" :title="t.work.title" />
         <ProjectTile
           v-for="(entry, i) in content.work"
           :key="entry.title"
@@ -78,7 +79,7 @@ useSmartCursor();
         </svg>
       </div>
       <div class="shell">
-        <SectionHead label="Built in my own time" title="Projects" />
+        <SectionHead :label="t.projects.label" :title="t.projects.title" />
         <ProjectTile
           v-for="(entry, i) in content.projects"
           :key="entry.title"

@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import SectionHead from "./SectionHead.vue";
 import PostStub from "./PostStub.vue";
+import { t } from "../lib/language.js";
 
 defineProps({
   garage: { type: Object, required: true },
@@ -44,10 +45,10 @@ function loadPosts() {
 <template>
   <section class="section" id="garage">
     <div class="shell">
-      <SectionHead label="Away from the keyboard" title="Garage" />
+      <SectionHead :label="t.garage.label" :title="t.garage.title" />
 
       <p class="lede">
-        My car, and the work that goes into it, on
+        {{ t.garage.ledeBefore }}
         <a class="accent" :href="garage.profile" v-live
           ><span class="accent__face">@{{ garage.handle }}</span
           ><span class="accent__face accent__face--alt" aria-hidden="true">@{{ garage.handle }}</span
@@ -56,12 +57,11 @@ function loadPosts() {
 
       <template v-if="!asked">
         <p class="prose tile__note">
-          The posts are not loaded until you ask for them. Pressing the button fetches them from
-          instagram.com, which means Meta receives your IP address and may set cookies.
+          {{ t.garage.consent }}
         </p>
         <div class="hero__actions">
           <button type="button" class="button" @click="loadPosts">
-            Load the posts from Instagram
+            {{ t.garage.load }}
           </button>
         </div>
       </template>

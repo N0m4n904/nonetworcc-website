@@ -1,4 +1,6 @@
 <script setup>
+import { say } from "../lib/language.js";
+
 // One card, from one entry in src/content.yaml.
 //
 // No media means no mark column and a tile that runs full width, which is what
@@ -30,15 +32,15 @@ defineProps({
     <div>
       <!-- No space between the two: .tile__title is a flex row with a gap, so
            a literal one would be trimmed anyway and only muddies the markup. -->
-      <h3 class="heading tile__title">{{ entry.title
-        }}<span v-if="entry.badge" class="badge">{{ entry.badge }}</span></h3>
-      <p class="tile__body">{{ entry.body }}</p>
-      <p v-if="entry.note" class="tile__note">{{ entry.note }}</p>
+      <h3 class="heading tile__title">{{ say(entry.title)
+        }}<span v-if="entry.badge" class="badge">{{ say(entry.badge) }}</span></h3>
+      <p class="tile__body">{{ say(entry.body) }}</p>
+      <p v-if="entry.note" class="tile__note">{{ say(entry.note) }}</p>
       <div v-if="entry.links?.length" class="meta">
         <a v-for="link in entry.links" :key="link.href" :href="link.href">
           <svg v-if="link.icon" class="icon" aria-hidden="true">
             <use :href="`#icon-${link.icon}`" />
-          </svg>{{ link.text }}
+          </svg>{{ say(link.text) }}
         </a>
       </div>
     </div>

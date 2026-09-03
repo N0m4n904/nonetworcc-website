@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useSectionSpy } from "../composables/useSectionSpy.js";
+import { t } from "../lib/language.js";
 
 defineProps({
   // True once the page has moved beneath the bar, which is when it earns its
@@ -9,10 +10,10 @@ defineProps({
 });
 
 const links = [
-  { id: "work", text: "Work" },
-  { id: "projects", text: "Projects" },
-  { id: "garage", text: "Garage" },
-  { id: "about", text: "About" },
+  { id: "work", text: t.nav.work },
+  { id: "projects", text: t.nav.projects },
+  { id: "garage", text: t.nav.garage },
+  { id: "about", text: t.nav.about },
 ];
 
 // Which section is being read: the one genuinely reactive thing on the page.
@@ -72,7 +73,7 @@ onBeforeUnmount(() => window.removeEventListener("resize", place));
           }"
         ></span>
       </nav>
-      <a class="button" href="mailto:contact@nonetwor.cc?subject=Contact">Get in touch</a>
+      <a class="button" href="mailto:contact@nonetwor.cc?subject=Contact">{{ t.contact }}</a>
     </div>
   </header>
 </template>

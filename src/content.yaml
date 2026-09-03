@@ -3,6 +3,16 @@
 #
 # A tile (work and projects both use the same shape):
 #
+# Any text field below may be either a plain string — the same in both
+# languages, which is true of most names — or a map of language to string:
+#
+#     body:
+#       en: A Discord bot in Kotlin for the halogenOS team.
+#       de: Ein Discord-Bot in Kotlin für das halogenOS-Team.
+#
+# German is used when the browser asks for German; everything else gets the
+# English. A missing German falls back to the English rather than vanishing.
+#
 #   title      required.
 #   badge      optional. The pill beside the title, for things not public or
 #              no longer maintained.
@@ -30,7 +40,9 @@
 
 work:
   - title: Dominikus-Ringeisen-Werk
-    body: "Where I work: software development for a social care provider."
+    body:
+      en: "Where I work: software development for a social care provider."
+      de: "Wo ich arbeite: Softwareentwicklung für einen Träger der Sozialwirtschaft."
     media:
       src: https://drw.de/fileadmin/user_upload/storage_drw/_processed_/9/1/csm_signet_baum_web_53658e07f1.jpg
       alt: Dominikus-Ringeisen-Werk signet
@@ -46,23 +58,39 @@ work:
         icon: github
 
   - title: DORINO
-    badge: Not public yet
-    body: >-
-      A barrier-free information system for social institutions: a tiled touch interface,
-      read aloud on request, carrying dashboard, news, weather, calendar, documents, maps
-      and media. Built for homes for people with disabilities, senior homes, day-care
-      centres and schools.
-    note: >-
-      One of its main developers at the DRW, which builds it together with SONNTAG IT
-      Solutions, who sell it.
+    badge:
+      en: Not public yet
+      de: Noch nicht öffentlich
+    body:
+      en: >-
+        A barrier-free information system for social institutions: a tiled touch interface,
+        read aloud on request, carrying dashboard, news, weather, calendar, documents, maps
+        and media. Built for homes for people with disabilities, senior homes, day-care
+        centres and schools.
+      de: >-
+        Ein barrierefreies Informationssystem für soziale Einrichtungen: eine gekachelte
+        Touch-Oberfläche, auf Wunsch vorgelesen, mit Dashboard, Nachrichten, Wetter,
+        Kalender, Dokumenten, Karten und Medien. Gebaut für Wohnheime für Menschen mit
+        Behinderung, Seniorenheime, Tagesstätten und Schulen.
+    note:
+      en: >-
+        One of its main developers at the DRW, which builds it together with SONNTAG IT
+        Solutions, who sell it.
+      de: >-
+        Einer der Hauptentwickler beim DRW, das es gemeinsam mit SONNTAG IT Solutions
+        entwickelt, die es vertreiben.
     links:
       - text: sonntag-its.de
         href: https://www.sonntag-its.de/dorino/
 
 projects:
   - title: halogenOS
-    body: "A cutting-edge Android ROM: simple, smooth and fast."
-    note: "Maintainer of Nothing Phone (2) and OnePlus 7 Pro"
+    body:
+      en: "A cutting-edge Android ROM: simple, smooth and fast."
+      de: "Ein topaktuelles Android-ROM: schlicht, flüssig und schnell."
+    note:
+      en: "Maintainer of Nothing Phone (2) and OnePlus 7 Pro"
+      de: "Maintainer für Nothing Phone (2) und OnePlus 7 Pro"
     media:
       src: /images/halogenos_logo.webp
       alt: halogenOS
@@ -73,9 +101,15 @@ projects:
         href: https://halogenos.org
 
   - title: halogenOS Discordbot
-    badge: No longer maintained
-    body: A Discord bot in Kotlin for the halogenOS team.
-    note: Discontinued in 2026. The sources stay online for reference.
+    badge:
+      en: No longer maintained
+      de: Wird nicht mehr gepflegt
+    body:
+      en: A Discord bot in Kotlin for the halogenOS team.
+      de: Ein Discord-Bot in Kotlin für das halogenOS-Team.
+    note:
+      en: Discontinued in 2026. The sources stay online for reference.
+      de: 2026 eingestellt. Der Quellcode bleibt zum Nachschlagen online.
     media:
       src: /images/halogenos_discordbot.webp
       alt: halogenOS Discordbot
@@ -86,9 +120,13 @@ projects:
         icon: github
 
   - title: NixOS Configuration
-    body: >-
-      My own machines, declared: the stable channel, foundrix, Gnome, COSMIC and
-      Hyprland.
+    body:
+      en: >-
+        My own machines, declared: the stable channel, foundrix, Gnome, COSMIC and
+        Hyprland.
+      de: >-
+        Meine eigenen Rechner, deklariert: Stable-Channel, foundrix, Gnome, COSMIC und
+        Hyprland.
     media:
       src: /images/NixOS.svg
       alt: NixOS
@@ -98,11 +136,18 @@ projects:
         icon: gitlab
 
   - title: Max.Storage Ultimate
-    body: >-
-      A Home Assistant integration for the MaxStorage home battery. Live photovoltaic,
-      battery and grid readings, MPPT strings discovered as it finds them, and relay
-      states, so surplus energy can drive automations.
-    note: Python, installable through HACS. A heavily extended fork of geeks-r-us.
+    body:
+      en: >-
+        A Home Assistant integration for the MaxStorage home battery. Live photovoltaic,
+        battery and grid readings, MPPT strings discovered as it finds them, and relay
+        states, so surplus energy can drive automations.
+      de: >-
+        Eine Home-Assistant-Integration für den MaxStorage-Hausspeicher. Live-Werte von
+        Photovoltaik, Batterie und Netz, MPPT-Strings werden erkannt, sobald sie auftauchen,
+        dazu Relaiszustände – damit überschüssiger Strom Automationen auslösen kann.
+    note:
+      en: Python, installable through HACS. A heavily extended fork of geeks-r-us.
+      de: Python, über HACS installierbar. Ein stark erweiterter Fork von geeks-r-us.
     media:
       src: https://brands.home-assistant.io/maxstorage_ultimate/icon@2x.png
       alt: Max.Storage Ultimate
@@ -115,10 +160,17 @@ projects:
         href: https://github.com/geeks-r-us/maxstorage_ultimate
 
   - title: Smart Cursor
-    body: >-
-      A pointer for the web: a glowing dot and a ring that morphs onto whatever it hovers,
-      yielding to a caret over text. Two files, no build step, no dependencies.
-    note: It is what is drawing your pointer on this page.
+    body:
+      en: >-
+        A pointer for the web: a glowing dot and a ring that morphs onto whatever it hovers,
+        yielding to a caret over text. Two files, no build step, no dependencies.
+      de: >-
+        Ein Mauszeiger fürs Web: ein leuchtender Punkt und ein Ring, der sich auf alles legt,
+        worüber er fährt, und über Text zum Cursor wird. Zwei Dateien, kein Build-Schritt,
+        keine Abhängigkeiten.
+    note:
+      en: It is what is drawing your pointer on this page.
+      de: Er zeichnet gerade deinen Mauszeiger auf dieser Seite.
     media:
       src: /images/smartcursor.svg
       alt: Smart Cursor

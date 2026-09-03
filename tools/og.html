@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Share card</title>
+    <style>
+      /* The card a link to this site turns into. Drawn from the same parts as
+         the page — the same face, the same two brand hues, the same rings — so
+         it cannot drift into being a separate design. Rendered by
+         `npm run og`; the result is committed as public/og.png. */
+
+      @font-face {
+        font-family: 'Shantell Sans';
+        font-style: normal;
+        font-weight: 300 800;
+        src: url(../src/fonts/shantell-sans-latin.woff2) format('woff2');
+      }
+
+      :root {
+        --ground: #0b0a12;
+        --ground-deep: #07060d;
+        --ink: #f4f2fb;
+        --ink-faint: #8b85a3;
+        --violet: #b06bff;
+        --cyan: #4bd8ff;
+      }
+
+      * { box-sizing: border-box; margin: 0; }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+        background: radial-gradient(120% 90% at 50% 0%, var(--ground-deep), var(--ground) 60%);
+        color: var(--ink);
+        font-family: 'Shantell Sans', cursive;
+        display: flex;
+        align-items: center;
+        padding: 0 84px;
+      }
+
+      /* The two glows the page carries, in the corners where they sit there. */
+      .glow {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+      .glow--violet {
+        top: -420px; left: -260px;
+        background: radial-gradient(circle, rgba(140, 11, 232, 0.42), transparent 65%);
+      }
+      .glow--cyan {
+        bottom: -460px; right: -220px;
+        background: radial-gradient(circle, rgba(0, 198, 255, 0.3), transparent 65%);
+      }
+
+      .words { position: relative; max-width: 640px; }
+
+      .label {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+
+      h1 {
+        font-size: 104px;
+        font-weight: 700;
+        line-height: 0.98;
+        letter-spacing: -0.02em;
+        margin-top: 14px;
+      }
+
+      .accent {
+        background-image: linear-gradient(100deg, var(--violet), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .lede {
+        margin-top: 26px;
+        font-size: 27px;
+        line-height: 1.6;
+        color: #b6b1c9;
+      }
+
+      .rings {
+        position: absolute;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 560px;
+        height: 560px;
+      }
+
+      .rings svg { width: 100%; height: 100%; overflow: visible; }
+      .rings path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+      .r-outer { stroke: rgba(176, 107, 255, 0.55); stroke-width: 2; }
+      .r-middle { stroke: rgba(75, 216, 255, 0.45); stroke-width: 1.6; stroke-dasharray: 5 13; }
+      .r-inner { stroke: rgba(176, 107, 255, 0.32); stroke-width: 1.4; stroke-dasharray: 2 10; }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow--violet"></div>
+    <div class="glow glow--cyan"></div>
+
+    <div class="rings">
+      <svg viewBox="0 0 200 200">
+        <path class="r-outer" d="M191.2 100.0C191.2 124.2 183.1 148.3 165.7 165.7C148.3 183.1 124.5 192.4 100.0 192.4C75.5 192.4 52.7 181.4 35.7 164.3C18.6 147.3 8.6 124.2 8.6 100.0C8.6 75.8 18.2 52.5 35.3 35.3C52.5 18.2 75.5 7.6 100.0 7.6C124.5 7.6 147.7 17.8 165.0 35.0C182.2 52.3 191.2 75.8 191.2 100.0" />
+        <path class="r-middle" d="M169.4 100.0C169.4 118.4 162.9 136.5 149.7 149.7C136.5 162.9 118.4 169.2 100.0 169.2C81.6 169.2 63.3 163.2 50.0 150.0C36.8 136.7 30.0 118.6 30.0 100.0C30.0 81.4 38.2 64.1 51.2 51.2C64.1 38.2 81.5 30.4 100.0 30.4C118.5 30.4 136.2 37.7 149.2 50.8C162.3 63.8 169.4 81.6 169.4 100.0" />
+        <path class="r-inner" d="M148.2 100.0C148.2 112.8 143.7 125.4 134.5 134.5C125.4 143.7 112.5 147.1 100.0 147.1C87.5 147.1 75.0 143.1 65.9 134.1C56.9 125.0 52.7 112.5 52.7 100.0C52.7 87.5 57.0 75.1 66.0 66.0C75.1 57.0 87.2 51.6 100.0 51.6C112.8 51.6 125.4 56.3 134.5 65.5C143.7 74.6 148.2 87.2 148.2 100.0" />
+      </svg>
+    </div>
+
+    <div class="words">
+      <p class="label">Software developer</p>
+      <h1>Noah<br /><span class="accent">Anleitner</span></h1>
+      <p class="lede">Software development for a living and for the fun of it, and tuning my car when I am not coding.</p>
+    </div>
+  </body>
+</html>

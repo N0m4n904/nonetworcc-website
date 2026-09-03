@@ -1,4 +1,6 @@
 <script setup>
+import { t } from "../lib/language.js";
+
 // The rings are three elements rather than three groups in one drawing: a
 // transform animated on an SVG group runs on the main thread and lays the page
 // out again every frame, where the same rotation on the box around it is handed
@@ -26,7 +28,7 @@ const RINGS = [
   <section class="section" id="top">
     <div class="shell hero">
       <div>
-        <p class="label" v-reveal>Software developer</p>
+        <p class="label" v-reveal>{{ t.hero.label }}</p>
         <h1 class="display hero__title" :style="{ '--i': 1 }" v-reveal>
           Noah
           <!-- The same word twice, stacked in one grid cell and taking turns.
@@ -38,12 +40,11 @@ const RINGS = [
           </span>
         </h1>
         <p class="lede" :style="{ '--i': 2 }" v-reveal>
-          Software development for a living and for the fun of it, and tuning my car when I am
-          not coding.
+          {{ t.hero.lede }}
         </p>
         <div class="hero__actions" :style="{ '--i': 3 }" v-reveal>
-          <a class="button" href="#work">See the work</a>
-          <a class="button button--quiet" href="#projects">Projects</a>
+          <a class="button" href="#work">{{ t.hero.seeWork }}</a>
+          <a class="button button--quiet" href="#projects">{{ t.hero.seeProjects }}</a>
         </div>
       </div>
       <figure class="hero__art" :style="{ '--i': 2 }" v-reveal>

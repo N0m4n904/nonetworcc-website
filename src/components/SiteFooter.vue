@@ -1,4 +1,6 @@
 <script setup>
+import { t } from "../lib/language.js";
+
 // The footer's links are its own: they are navigation, not entries in a list
 // the page draws. The Instagram profile is the one value shared with the
 // garage, so it comes from the same place rather than being written twice.
@@ -8,15 +10,15 @@ defineProps({
 
 const COLUMNS = [
   {
-    label: "Work",
+    label: t.footer.work,
     links: [
-      { text: "Organisation", href: "https://github.com/Dominikus-Ringeisen-Werk", icon: "github" },
-      { text: "Work account", href: "https://github.com/DRW-NoahAnleitner", icon: "github" },
+      { text: t.footer.organisation, href: "https://github.com/Dominikus-Ringeisen-Werk", icon: "github" },
+      { text: t.footer.workAccount, href: "https://github.com/DRW-NoahAnleitner", icon: "github" },
     ],
   },
   {
-    label: "Legal",
-    links: [{ text: "Privacy", href: "/privacy-policy.txt" }],
+    label: t.footer.legal,
+    links: [{ text: t.footer.privacy, href: "/privacy-policy.txt" }],
   },
 ];
 </script>
@@ -25,7 +27,7 @@ const COLUMNS = [
   <footer class="section footer">
     <div class="shell footer__grid">
       <div>
-        <p class="label">Me</p>
+        <p class="label">{{ t.footer.me }}</p>
         <ul>
           <li>
             <a href="https://github.com/N0m4n904">

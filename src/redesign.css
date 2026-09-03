@@ -882,6 +882,36 @@ main > .section {
   transform: none;
 }
 
+/* Cards do not fly in on a phone. They are simply there.
+
+   A card is the one thing on this page that cannot be moved cheaply. Animating
+   its transform hands it a compositor layer of its own, and at the pixel
+   density of a phone that layer is megabytes — which then has to be drawn
+   again and again for the length of the arrival, because the outline boiling
+   away inside it keeps changing what the layer contains. A stronger phone
+   swallows that; a Nothing Phone (1) does not, and reported it twice.
+
+   Only the cards. The headings and the short blocks in About are text, they
+   cost nothing to move, and without them the page would arrive dead. */
+@media (hover: none) {
+  .tile[data-reveal],
+  .post-stub[data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* And nor do they lift. There is no pointer to hover them with, but a tap
+     leaves :hover behind on a touch device, which lifts the card — promoting
+     exactly the layer above, and leaving it promoted — for a gesture that was
+     meant to follow a link. The colour and the outline still answer a touch;
+     only the movement goes. */
+  .tile:hover,
+  .post-stub:hover {
+    transform: none;
+  }
+}
+
 /* The rule under a heading draws itself. Its dash length is measured from the
    path in the script, since a guessed one either clips or leaves a gap. */
 .section__rule path {

@@ -1051,19 +1051,26 @@ main > .section {
   vector-effect: non-scaling-stroke;
 }
 
-.rings__outer {
+/* Each ring turns on an element of its own. The rotation used to sit on an SVG
+   <g>, which Blink cannot hand to the compositor: it re-ran layout and
+   re-rastered the whole drawing every frame, and was on its own two thirds of
+   everything this page rastered while standing still. On an HTML box the same
+   transform never touches the main thread. */
+.rings__ring {
+  position: absolute;
+  inset: 0;
+}
+
+.rings__ring--outer {
   animation: turn 46s linear infinite;
-  transform-origin: 50% 50%;
 }
 
-.rings__middle {
+.rings__ring--middle {
   animation: turn 32s linear infinite reverse;
-  transform-origin: 50% 50%;
 }
 
-.rings__inner {
+.rings__ring--inner {
   animation: turn 22s linear infinite;
-  transform-origin: 50% 50%;
 }
 
 @keyframes turn {
@@ -1146,18 +1153,18 @@ main > .section {
   animation: boil-b 0.52s steps(1, end) infinite;
 }
 
-.rings__outer path {
+.rings__ring--outer path {
   stroke: color-mix(in srgb, var(--violet-ink) 55%, transparent);
   stroke-width: 2;
 }
 
-.rings__middle path {
+.rings__ring--middle path {
   stroke: color-mix(in srgb, var(--cyan-ink) 45%, transparent);
   stroke-width: 1.6;
   stroke-dasharray: 5 13;
 }
 
-.rings__inner path {
+.rings__ring--inner path {
   stroke: color-mix(in srgb, var(--violet-ink) 32%, transparent);
   stroke-width: 1.4;
   stroke-dasharray: 2 10;

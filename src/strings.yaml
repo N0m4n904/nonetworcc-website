@@ -17,7 +17,6 @@ en:
     garage: Garage
     about: About
   contact: Get in touch
-  skip: Skip to content
 
   hero:
     label: Software developer
@@ -77,7 +76,6 @@ de:
     garage: Garage
     about: Über mich
   contact: Kontakt
-  skip: Zum Inhalt springen
 
   hero:
     label: Softwareentwickler

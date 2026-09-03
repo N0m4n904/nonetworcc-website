@@ -173,29 +173,6 @@ button {
   border-radius: 4px;
 }
 
-/* A way past the bar for anyone moving by keyboard. Out of sight until it is
-   focused, which is the one moment it is wanted. */
-.skip {
-  position: fixed;
-  inset-block-start: 0.75rem;
-  inset-inline-start: 0.75rem;
-  z-index: 60;
-  padding: 0.6rem 1.1rem;
-  border-radius: 999px;
-  background-color: var(--ground);
-  border: 1px solid var(--violet-ink);
-  color: var(--ink);
-  font-size: var(--step-small);
-  font-weight: 600;
-  /* Off the top rather than display:none, so it is still in the tab order. */
-  transform: translateY(-200%);
-  transition: transform 0.2s var(--ease);
-}
-
-.skip:focus-visible {
-  transform: none;
-}
-
 /* ---------------------------------------------------------------------------
    Layout
    --------------------------------------------------------------------------- */

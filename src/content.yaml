@@ -179,6 +179,28 @@ projects:
         href: https://github.com/N0m4n904/smartcursor
         icon: github
 
+  - title: Website
+    body:
+      en: >-
+        This website is itself one of my projects. It is a personal portfolio
+        designed to showcase my projects, experiments and ideas in an interactive
+        and minimal way.
+      de: >-
+        Diese Website ist selbst eines meiner Projekte. Sie ist ein persönliches
+        Portfolio, in dem ich meine Projekte, Experimente und Ideen auf eine
+        interaktive und minimalistische Art präsentiere.
+    note:
+      en: You are looking at the project right now.
+      de: Du siehst das Projekt gerade vor dir.
+    media:
+      src: /images/nonetworcc-logo.webp
+      alt: Website
+    links:
+      - text: GitHub
+        href: https://github.com/N0m4n904/nonetworcc-website
+        icon: github
+
+
 # The garage lists posts rather than tiles. Nothing is fetched from Meta until
 # a visitor presses the button; these are only the permalinks each stub stands
 # in for until they do.

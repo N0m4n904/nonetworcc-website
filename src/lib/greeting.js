@@ -23,13 +23,16 @@ export function greet() {
 
   console.log("%cNoah Anleitner", heading);
   console.log(
-    "%cEverything drawn on this page is drawn by hand — the outlines, the rings,\n" +
-      "the pointer. Two files and no dependencies, if you want to look.\n\n" +
+    "%cThe outlines and the rings are not drawn by hand — they are generated:\n" +
+      "a seeded shake along every edge, so each reload draws the same wobble.\n\n" +
+      "%cBuilt with  %cVue 3 on Vite\n" +
       "%cSource      %chttps://github.com/N0m4n904\n" +
-      "%cThe pointer %chttps://github.com/N0m4n904/smartcursor",
+      "%cThe pointer %chttps://github.com/N0m4n904/smartcursor%c — its own thing,\n" +
+      "            two files and no dependencies",
     quiet,
     quiet, key,
-    quiet, key
+    quiet, key,
+    quiet, key, quiet
   );
 
   // The only way in, so it is the only place it is written down. Not mentioned

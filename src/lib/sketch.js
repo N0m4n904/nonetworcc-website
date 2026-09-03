@@ -1,6 +1,8 @@
-// A rounded box drawn by hand.
+// A rounded box that looks as though it were drawn by hand. It was not: the
+// wobble is generated, by pushing points a seeded pseudo-random distance off
+// each edge. Seeded, so a reload produces the same lines rather than new ones.
 //
-// Drawn at the element's own size rather than stretched to it. A single shape
+// Generated at the element's own size rather than stretched to it. A single shape
 // squashed to fit means the wobble is tiny on a tall box and wild on a wide
 // one, and the corners smear; generating in pixels keeps the hand even
 // everywhere and the corners round.

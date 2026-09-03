@@ -353,6 +353,8 @@ main > .section {
 .bar__nav {
   display: none;
   gap: 1.75rem;
+  /* The line beneath is placed against this, in pixels. */
+  position: relative;
 }
 
 @media (min-width: 56rem) {
@@ -372,27 +374,31 @@ main > .section {
   transition: color 0.3s var(--ease);
 }
 
-.bar__link::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  height: 2px;
-  border-radius: 2px;
-  background-image: linear-gradient(90deg, var(--violet-ink), var(--cyan-ink));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s var(--ease);
-}
-
 .bar__link:hover,
 .bar__link[aria-current='true'] {
   color: var(--ink);
 }
 
-.bar__link:hover::after,
-.bar__link[aria-current='true']::after {
-  transform: scaleX(1);
+/* One line for the whole bar, which travels to whichever section is being
+   read rather than four that take turns appearing. Its position and width are
+   measured in the component and handed here as lengths; they change when the
+   section does, which is at reading speed, so the cost of moving it is a
+   transition and nothing else.
+
+   Above the first section there is nothing to underline: it holds its place
+   and fades instead of sliding off to the corner. */
+.bar__line {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  height: 2px;
+  width: var(--line-w, 0);
+  border-radius: 2px;
+  background-image: linear-gradient(90deg, var(--violet-ink), var(--cyan-ink));
+  transform: translateX(var(--line-x, 0));
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease),
+              opacity 0.3s var(--ease);
+  pointer-events: none;
 }
 
 /* ---------------------------------------------------------------------------

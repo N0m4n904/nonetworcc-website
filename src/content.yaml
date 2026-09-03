@@ -62,6 +62,7 @@ work:
 projects:
   - title: halogenOS
     body: "A cutting-edge Android ROM: simple, smooth and fast."
+    note: "Maintainer of Nothing Phone (2) and OnePlus 7 Pro"
     media:
       src: /images/halogenos_logo.png
       alt: halogenOS

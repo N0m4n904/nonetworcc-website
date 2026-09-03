@@ -148,6 +148,14 @@ img, svg {
   max-width: 100%;
 }
 
+/* Images carry width and height attributes so the browser can hold their space
+   before they arrive. Without this those attributes are also taken as the
+   drawn size, and any rule setting only the width stretches the picture to a
+   thousand-odd pixels tall. */
+img {
+  height: auto;
+}
+
 a {
   color: inherit;
   text-decoration: none;

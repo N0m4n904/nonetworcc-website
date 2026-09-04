@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Smart Cursor">
+<!-- The viewBox is the artwork's own bounds, not a round 256 the pointer happens
+     to sit in the middle of. Padding baked into a mark is invisible to the CSS
+     that lays it out, so a loose box renders as a mark drawn half-size next to
+     the others. The dot's glow falls inside the ring, so nothing is clipped. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50.5 70.5 135 135" role="img" aria-label="Smart Cursor">
   <defs>
     <linearGradient id="smartcursor-brand" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8c0be8" />

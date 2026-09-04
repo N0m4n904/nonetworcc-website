@@ -495,10 +495,23 @@ main > .section {
   /* The rings sit 18% outside this box and are meant to run past the edge of a
      narrow screen; the page's overflow rule crops them, which is the look. */
   width: min(100%, 26rem);
+  /* Square, as it has to be for the rings to come out round. It used to be the
+     logo standing in flow that said so, which stopped being true once the logo
+     was cropped to its own artwork. */
+  aspect-ratio: 1;
 }
 
+/* Where the mark sits inside the ring composition, said out loud. It used to be
+   said by the transparent margin around the artwork in the file — which held the
+   mark at this size and this much above centre — and a margin no eye can see is
+   a poor place to keep a layout decision: the same file read as a half-size mark
+   wherever it was laid out on its own terms, as it is in the project tiles.
+   Taken out of flow so the box above, and the rings drawn from it, do not move. */
 .hero__art img {
-  width: 100%;
+  position: absolute;
+  inset-block-start: 16.7%;
+  inset-inline-start: 20.41%;
+  width: 59.57%;
 }
 
 /* ---------------------------------------------------------------------------
@@ -582,8 +595,14 @@ main > .section {
   justify-content: center;
 }
 
+/* Every mark occupies the same square, whatever shape it arrives in — marks
+   come from elsewhere and are not all drawn to one ratio, so a wide signet is
+   fitted inside the square rather than left standing shorter than the icons
+   around it. The treatments below then have one shape to decorate. */
 .tile__media img {
-  width: min(100%, 8.5rem);
+  inline-size: min(100%, 8.5rem);
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 
 /* A tile for marks that carry their own opaque background and would otherwise

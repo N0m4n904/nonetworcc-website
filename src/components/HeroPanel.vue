@@ -61,10 +61,10 @@ const RINGS = [
             </svg>
           </div>
         </div>
-        <!-- Sized for the ~416px it is drawn at, not for the 1024 it was
-             stored at. Decoding is the expensive part on a phone, and it is
-             paid in the pixels an image has rather than the ones it shows. -->
-        <img class="hero__logo" src="/images/nonetworcc-logo.webp" alt="" width="1024" height="1024" />
+        <!-- Sized for the ~248px it is drawn at, not for the 610 it is stored
+             at. Decoding is the expensive part on a phone, and it is paid in
+             the pixels an image has rather than the ones it shows. -->
+        <img class="hero__logo" src="/images/nonetworcc-logo.webp" alt="" width="610" height="610" />
       </figure>
     </div>
   </section>

@@ -19,7 +19,6 @@ en:
   contact: Get in touch
 
   hero:
-    label: Software developer
     lede: >-
       Software development for a living and for the fun of it, and tuning my car when I am
       not coding.
@@ -27,14 +26,11 @@ en:
     seeProjects: Projects
 
   work:
-    label: Day job
     title: Work
   projects:
-    label: Built in my own time
     title: Projects
 
   garage:
-    label: Away from the keyboard
     title: Garage
     ledeBefore: My car, and the work that goes into it, on
     consent: >-
@@ -44,7 +40,6 @@ en:
     post: Instagram post
 
   about:
-    label: Who is typing
     title: About
     blocks:
       - heading: Who I am
@@ -78,7 +73,6 @@ de:
   contact: Kontakt
 
   hero:
-    label: Softwareentwickler
     lede: >-
       Softwareentwicklung als Beruf und aus Spaß an der Sache – und wenn ich nicht
       programmiere, schraube ich an meinem Auto.
@@ -86,14 +80,11 @@ de:
     seeProjects: Projekte
 
   work:
-    label: Hauptberuflich
     title: Arbeit
   projects:
-    label: In meiner Freizeit entstanden
     title: Projekte
 
   garage:
-    label: Abseits der Tastatur
     title: Garage
     ledeBefore: Mein Auto und die Arbeit, die darin steckt, auf
     consent: >-
@@ -103,7 +94,6 @@ de:
     post: Instagram-Beitrag
 
   about:
-    label: Wer hier tippt
     title: Über mich
     blocks:
       - heading: Wer ich bin

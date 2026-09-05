@@ -53,7 +53,7 @@ useSmartCursor();
 
     <section class="section" id="work">
       <div class="shell">
-        <SectionHead :label="t.work.label" :title="t.work.title" />
+        <SectionHead :title="t.work.title" />
         <ProjectTile
           v-for="(entry, i) in content.work"
           :key="entry.title"
@@ -79,7 +79,7 @@ useSmartCursor();
         </svg>
       </div>
       <div class="shell">
-        <SectionHead :label="t.projects.label" :title="t.projects.title" />
+        <SectionHead :title="t.projects.title" />
         <ProjectTile
           v-for="(entry, i) in content.projects"
           :key="entry.title"
@@ -90,7 +90,7 @@ useSmartCursor();
     </section>
 
     <GarageSection :garage="content.garage" />
-    <AboutSection />
+    <AboutSection :tools="content.tools" />
   </main>
 
   <SiteFooter :profile="content.garage.profile" />

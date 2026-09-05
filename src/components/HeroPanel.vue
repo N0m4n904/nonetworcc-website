@@ -28,16 +28,9 @@ const RINGS = [
   <section class="section" id="top">
     <div class="shell hero">
       <div>
-        <p class="label" v-reveal>{{ t.hero.label }}</p>
         <h1 class="display hero__title" :style="{ '--i': 1 }" v-reveal>
           Noah
-          <!-- The same word twice, stacked in one grid cell and taking turns.
-               The second face is the animation and nothing else, so it is kept
-               away from anything reading the page aloud. -->
-          <span class="accent" v-live>
-            <span class="accent__face">Anleitner</span>
-            <span class="accent__face accent__face--alt" aria-hidden="true">Anleitner</span>
-          </span>
+          <span class="accent">Anleitner</span>
         </h1>
         <p class="lede" :style="{ '--i': 2 }" v-reveal>
           {{ t.hero.lede }}

@@ -1,19 +1,24 @@
 <script setup>
+import { computed } from "vue";
+
 import SectionHead from "./SectionHead.vue";
 import { t } from "../lib/language.js";
 
-const TOOLS = [
-  "Kotlin", "Java", "Android", "AOSP", "Jetpack Compose", "C#", "Visual Basic",
-  "TypeScript", "Vue 3", "PHP", "Linux", "NixOS", "MySQL", "SQLite", "MSSQL",
-  "Jira", "Confluence", "Scriptrunner", "JobRouter", "Nextcloud", "Tailscale",
-  "Apache APISIX", "Claude Code", "Kord"
-];
+const props = defineProps({
+  tools: { type: Array, required: true },
+});
+
+// A tool is a name, or a name with somewhere to go. Both shapes arrive here as
+// the same one, so the template asks about the link and nothing else.
+const entries = computed(() =>
+  props.tools.map((tool) => (typeof tool === "string" ? { name: tool } : tool))
+);
 </script>
 
 <template>
   <section class="section" id="about">
     <div class="shell">
-      <SectionHead :label="t.about.label" :title="t.about.title" />
+      <SectionHead :title="t.about.title" />
 
       <div class="about">
         <div>
@@ -39,7 +44,13 @@ const TOOLS = [
         <div>
           <p class="label">{{ t.about.tools }}</p>
           <ul class="tags">
-            <li v-for="tool in TOOLS" :key="tool">{{ tool }}</li>
+            <!-- The pill is the padding, so whatever is inside it fills it:
+                 a linked tool is clickable across the whole shape rather than
+                 only on its letters. -->
+            <li v-for="tool in entries" :key="tool.name">
+              <a v-if="tool.href" :href="tool.href">{{ tool.name }}</a>
+              <span v-else>{{ tool.name }}</span>
+            </li>
           </ul>
         </div>
       </div>

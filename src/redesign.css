@@ -2,37 +2,16 @@
    Noah Anleitner — design system
 
    One handwritten family throughout, on a ground that carries depth rather
-   than a flat fill. Everything below is driven by the tokens in this first
-   block: both themes are the same design with different values, so nothing
-   downstream ever asks which theme is active.
+   than a flat fill. Every colour below comes from palette.css and none is
+   written here: both themes are the same design with different values, so
+   nothing downstream ever asks which theme is active.
    --------------------------------------------------------------------------- */
 
+/* Not a src file: 404.html links the same one by URL, so it lives in public/
+   and is bundled from there. */
+@import '../public/palette.css';
+
 :root {
-  /* Ground and surfaces. The ground is never a flat colour on screen — the
-     glows in .aura sit on top of it — so it stays deliberately plain here. */
-  --ground: #f7f6fb;
-  --ground-deep: #eceaf5;
-  --surface: rgba(20, 18, 28, 0.04);
-  --surface-strong: rgba(20, 18, 28, 0.07);
-  --edge: rgba(20, 18, 28, 0.12);
-
-  --ink: #14121c;
-  --ink-soft: #4b4661;
-  --ink-faint: #6f6987;
-
-  /* The brand pair. -ink variants are the same hues pulled dark enough to
-     read as text on a light ground, where the plain cyan cannot. */
-  --violet: #8c0be8;
-  --cyan: #00c6ff;
-  --violet-ink: #7209c0;
-  --cyan-ink: #0479a3;
-
-  --glow-violet: rgba(140, 11, 232, 0.18);
-  --glow-cyan: rgba(0, 198, 255, 0.16);
-
-  --shadow-low: 0 2px 10px rgba(20, 18, 28, 0.08);
-  --shadow-high: 0 24px 60px rgba(20, 18, 28, 0.16);
-
   /* Fluid type. Each step interpolates between a phone and a wide desktop, so
      there are no breakpoint jumps in the headings. */
   --step-display: clamp(3rem, 1.2rem + 7.5vw, 8rem);
@@ -50,31 +29,14 @@
   --radius: 22px;
   --radius-lg: 32px;
 
+  /* Stacking. The only two things the page holds above its own content, stated
+     together because their order is the whole point of them. The pointer's
+     ring reads these from the outside: it is drawn at the height of whatever
+     it is hugging, so it is above the bar only while what it hugs is. */
+  --layer-bar: 40;
+  --layer-controls: 41;
+
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ground: #0b0a12;
-    --ground-deep: #07060d;
-    --surface: rgba(255, 255, 255, 0.045);
-    --surface-strong: rgba(255, 255, 255, 0.08);
-    --edge: rgba(255, 255, 255, 0.12);
-
-    --ink: #f4f2fb;
-    --ink-soft: #b6b1c9;
-    --ink-faint: #8b85a3;
-
-    /* On a dark ground the pure hues are the readable ones. */
-    --violet-ink: #b06bff;
-    --cyan-ink: #4bd8ff;
-
-    --glow-violet: rgba(140, 11, 232, 0.3);
-    --glow-cyan: rgba(0, 198, 255, 0.22);
-
-    --shadow-low: 0 2px 12px rgba(0, 0, 0, 0.5);
-    --shadow-high: 0 24px 70px rgba(0, 0, 0, 0.7);
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -168,7 +130,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--cyan-ink);
+  outline: 2px solid var(--accent-alt-ink);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -250,17 +212,24 @@ main > .section {
   color: var(--ink-faint);
 }
 
-/* Two faces of the same word, stacked in a single grid cell so they line up by
-   construction rather than by being positioned on top of one another. Only one
-   of them is the word as far as the document is concerned; the other carries
-   aria-hidden and exists to be faded. */
+/* Words in the accent. Flat colour: the hue is loud enough on its own, and a
+   word that is being read rather than looked at wants one of them. */
 .accent {
+  color: var(--accent-ink);
+}
+
+/* The shifting treatment, for the one place that is decoration rather than
+   text: two faces of the same word, stacked in a single grid cell so they line
+   up by construction rather than by being positioned on top of one another.
+   Only one of them is the word as far as the document is concerned; the other
+   carries aria-hidden and exists to be faded. */
+.accent--shift {
   display: inline-grid;
 }
 
-.accent__face {
+.accent--shift .accent__face {
   grid-area: 1 / 1;
-  background-image: linear-gradient(100deg, var(--violet-ink), var(--cyan-ink));
+  background-image: linear-gradient(100deg, var(--accent-ink), var(--accent-alt-ink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -304,13 +273,13 @@ main > .section {
 .aura::before {
   top: -30vmax;
   left: -20vmax;
-  background: radial-gradient(circle, var(--glow-violet), transparent 65%);
+  background: radial-gradient(circle, var(--glow-accent), transparent 65%);
 }
 
 .aura::after {
   top: 30vmax;
   right: -30vmax;
-  background: radial-gradient(circle, var(--glow-cyan), transparent 65%);
+  background: radial-gradient(circle, var(--glow-accent-alt), transparent 65%);
 }
 
 /* ---------------------------------------------------------------------------
@@ -321,7 +290,7 @@ main > .section {
   position: fixed;
   inset-block-start: 0;
   inset-inline: 0;
-  z-index: 40;
+  z-index: var(--layer-bar);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   background-color: color-mix(in srgb, var(--ground) 72%, transparent);
@@ -406,7 +375,7 @@ main > .section {
   height: 2px;
   width: var(--line-w, 0);
   border-radius: 2px;
-  background-image: linear-gradient(90deg, var(--violet-ink), var(--cyan-ink));
+  background-image: linear-gradient(90deg, var(--accent-ink), var(--accent-alt-ink));
   transform: translateX(var(--line-x, 0));
   transition: transform 0.45s var(--ease), width 0.45s var(--ease),
               opacity 0.3s var(--ease);
@@ -433,9 +402,10 @@ main > .section {
      finds it — the cursor's luminance probe read this button as a light
      surface and drew itself dark on a dark page. Stating the colour the
      gradient starts from replaces it with the truth. */
-  background-color: var(--violet);
-  background-image: linear-gradient(100deg, var(--violet), var(--cyan));
-  color: #fff;
+  background-color: var(--accent);
+  background-image: linear-gradient(100deg, var(--accent), var(--accent-alt));
+  /* The fill is light rather than pigment, so the label is cut out of it. */
+  color: var(--ink-on-accent);
   box-shadow: var(--shadow-low);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
@@ -688,8 +658,8 @@ main > .section {
 }
 
 .meta a:hover {
-  color: var(--violet-ink);
-  border-bottom-color: var(--violet-ink);
+  color: var(--accent-ink);
+  border-bottom-color: var(--accent-ink);
 }
 
 .icon {
@@ -707,7 +677,6 @@ main > .section {
 }
 
 .tags li {
-  padding: 0.3rem 0.85rem;
   border: 1px solid var(--edge);
   border-radius: 999px;
   font-size: var(--step-small);
@@ -715,8 +684,16 @@ main > .section {
   transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
-.tags li:hover {
-  border-color: var(--cyan-ink);
+/* The padding belongs to what is inside the pill rather than to the pill, so
+   the whole shape is the link on the tools that have one. */
+.tags li > * {
+  display: block;
+  padding: 0.3rem 0.85rem;
+}
+
+/* Only the ones that go somewhere answer the pointer. */
+.tags li:has(a):hover {
+  border-color: var(--accent-alt-ink);
   color: var(--ink);
 }
 
@@ -788,7 +765,7 @@ main > .section {
 .post-stub svg:not(.drawn) {
   width: 2.5rem;
   height: 2.5rem;
-  fill: var(--violet-ink);
+  fill: var(--accent-ink);
   /* The mark drifts while it waits. It is the mark rather than the stub that
      moves, so this cannot fight the reveal transform on the stub itself. */
   animation: bob 4.5s ease-in-out infinite;
@@ -806,7 +783,7 @@ main > .section {
 }
 
 .post-stub:hover {
-  border-color: var(--violet-ink);
+  border-color: var(--accent-ink);
   background-color: var(--surface);
   transform: translateY(-4px);
 }
@@ -1216,7 +1193,7 @@ main > .section {
 
 .tile--sketched:hover .drawn path,
 .post-stub--sketched:hover .drawn path {
-  stroke: var(--violet-ink);
+  stroke: var(--accent-ink);
 }
 
 /* ---------------------------------------------------------------------------
@@ -1301,7 +1278,7 @@ main > .section {
   fill: none;
   /* Stronger than a plain edge: masked and behind content, a hairline simply
      disappears. */
-  stroke: color-mix(in srgb, var(--violet-ink) 38%, transparent);
+  stroke: color-mix(in srgb, var(--accent-ink) 38%, transparent);
   stroke-width: 1.4;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
@@ -1312,21 +1289,19 @@ main > .section {
   to { transform: translate3d(1.5%, 1%, 0) rotate(0.6deg); }
 }
 
-/* The name's gradient never quite settles.
+/* The shifting accent never quite settles.
 
-   It used to slide under the letters, which meant repainting the largest words
-   on the page every frame — three quarters of all the paint this page did, and
-   it did it whether or not the hero was on screen. No CSS property moves a
-   gradient inside text without repainting what it fills, so the two ends trade
-   places instead: the second face carries the same gradient reversed and fades
-   over the first. Opacity is one of the few things the compositor animates by
-   itself, so both faces are rasterised once and mixed per frame rather than
-   drawn again.
+   It used to slide under the letters, which meant repainting them every frame.
+   No CSS property moves a gradient inside text without repainting what it
+   fills, so the two ends trade places instead: the second face carries the same
+   gradient reversed and fades over the first. Opacity is one of the few things
+   the compositor animates by itself, so both faces are rasterised once and
+   mixed per frame rather than drawn again.
 
    It reads as the colour turning over rather than travelling across — the same
    restlessness arrived at from the other side. */
-.accent__face--alt {
-  background-image: linear-gradient(100deg, var(--cyan-ink), var(--violet-ink));
+.accent--shift .accent__face--alt {
+  background-image: linear-gradient(100deg, var(--accent-alt-ink), var(--accent-ink));
   animation: settle 14s ease-in-out infinite alternate;
 }
 
@@ -1362,18 +1337,18 @@ main > .section {
 }
 
 .rings__ring--outer path {
-  stroke: color-mix(in srgb, var(--violet-ink) 55%, transparent);
+  stroke: color-mix(in srgb, var(--accent-ink) 55%, transparent);
   stroke-width: 2;
 }
 
 .rings__ring--middle path {
-  stroke: color-mix(in srgb, var(--cyan-ink) 45%, transparent);
+  stroke: color-mix(in srgb, var(--accent-alt-ink) 45%, transparent);
   stroke-width: 1.6;
   stroke-dasharray: 5 13;
 }
 
 .rings__ring--inner path {
-  stroke: color-mix(in srgb, var(--violet-ink) 32%, transparent);
+  stroke: color-mix(in srgb, var(--accent-ink) 32%, transparent);
   stroke-width: 1.4;
   stroke-dasharray: 2 10;
 }
@@ -1418,7 +1393,7 @@ main > .section {
 
 .scribble path {
   fill: none;
-  stroke: var(--violet-ink);
+  stroke: var(--accent-ink);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1438,12 +1413,12 @@ main > .section {
   position: fixed;
   inset-block-end: clamp(0.75rem, 2vw, 1.5rem);
   inset-inline-end: clamp(0.75rem, 2vw, 1.5rem);
-  z-index: 41;
+  z-index: var(--layer-controls);
   display: flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.5rem 0.4rem 0.9rem;
-  border: 1px solid var(--violet-ink);
+  border: 1px solid var(--accent-ink);
   border-radius: 999px;
   background-color: var(--ground);
   box-shadow: var(--shadow-low);
@@ -1470,7 +1445,7 @@ main > .section {
 
 .scribble-key:hover:not([disabled]) {
   color: var(--ink);
-  border-color: var(--violet-ink);
+  border-color: var(--accent-ink);
 }
 
 .scribble-key[disabled] {
@@ -1491,8 +1466,10 @@ main > .section {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background-color: rgba(255, 255, 255, 0.08); /* Dezenter, transparenter Hintergrund */
-  color: #888888; /* Grauer Text wie im Screenshot */
+  /* Dezenter, transparenter Hintergrund — aus der Palette, damit die Kapsel
+     auch auf hellem Grund noch zu sehen ist. */
+  background-color: var(--surface-strong);
+  color: var(--ink-faint);
   border-radius: 9999px;
   font-weight: 500;
 }

@@ -45,11 +45,11 @@ function loadPosts() {
 <template>
   <section class="section" id="garage">
     <div class="shell">
-      <SectionHead :label="t.garage.label" :title="t.garage.title" />
+      <SectionHead :title="t.garage.title" />
 
       <p class="lede">
         {{ t.garage.ledeBefore }}
-        <a class="accent" :href="garage.profile" v-live
+        <a class="accent accent--shift" :href="garage.profile" v-live
           ><span class="accent__face">@{{ garage.handle }}</span
           ><span class="accent__face accent__face--alt" aria-hidden="true">@{{ garage.handle }}</span
         ></a>.

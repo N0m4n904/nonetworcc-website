@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 
 defineProps({
-  label: { type: String, required: true },
   title: { type: String, required: true },
 });
 
@@ -23,7 +22,6 @@ onMounted(() => {
 
 <template>
   <div class="section__head" v-reveal>
-    <p class="label">{{ label }}</p>
     <h2 class="title">{{ title }}</h2>
     <svg ref="rule" class="section__rule" viewBox="0 0 200 14" aria-hidden="true">
       <path d="M2 9c28-6 52 2 78-1s52-7 118-2" />

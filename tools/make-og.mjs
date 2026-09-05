@@ -76,6 +76,10 @@ const call = (method, params) => cdp.send(method, params, sessionId);
 
 await call("Emulation.setDeviceMetricsOverride",
   { width: WIDTH, height: HEIGHT, deviceScaleFactor: 1, mobile: false });
+// The card is the site's dark theme, and the palette keys that off the media
+// query. Headless Chromium answers it with "light" unless it is told otherwise.
+await call("Emulation.setEmulatedMedia",
+  { features: [{ name: "prefers-color-scheme", value: "dark" }] });
 await call("Page.navigate", { url: `http://localhost:${PORT}/` });
 // The handwriting has to have arrived, or the card is rendered in the fallback.
 await wait(1500);

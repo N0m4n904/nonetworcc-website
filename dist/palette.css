@@ -1,0 +1,133 @@
+/* ---------------------------------------------------------------------------
+   Palette — the one place colour is decided.
+
+   Two hues are seeded at the top. Everything else the page draws with, in both
+   themes, is mixed from them: the neutrals are the accent bled into black and
+   white, and surfaces, edges, inks, glows and shadows are stated as ratios
+   rather than as values. Change a seed and the whole design follows — nothing
+   downstream, here or in the components, names a colour of its own.
+
+   Consumed by src/redesign.css (which imports it into the bundle), by the
+   console note in src/lib/greeting.js, by the share card in tools/og.html and
+   by public/404.html, so the site and everything drawn from it stay one design.
+
+   It lives in public/ rather than src/ for the sake of the last of those: the
+   404 is a plain page served straight off disk with no bundle behind it, and
+   it links this file by a stable path. Everything else reaches the same file
+   through the build.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* ---- The seeds -------------------------------------------------------- */
+
+  /* Terminal green, and the acid end every gradient runs to. */
+  --seed-accent: #00ff66;
+  --seed-accent-alt: #a3ff12;
+
+  /* How much of the accent bleeds into the neutrals. Enough that the black is
+     a lit black rather than a dead one, not enough to read as a colour. */
+  --seed-tint: 7%;
+
+  --black: color-mix(in srgb, var(--seed-accent) var(--seed-tint), #000);
+  --white: color-mix(in srgb, var(--seed-accent) var(--seed-tint), #fff);
+
+  /* ---- Light theme ------------------------------------------------------
+     Only what a ground can change is set per theme; the rest is derived from
+     these and holds for both. */
+
+  --ground: var(--white);
+  --ground-deep: color-mix(in srgb, var(--seed-accent) 10%, var(--white));
+  --ink: var(--black);
+
+  /* The seeds themselves are light rather than pigment: they are what a dark
+     ground is lit by, and are unreadable as text on a pale one. The -deep
+     variants are the same hues pulled down into the black until they read. */
+  --accent-ink: var(--accent-deep);
+  --accent-alt-ink: var(--accent-alt-deep);
+
+  /* Strengths, not colours: the glows and shadows are the same mixes in both
+     themes and only ever differ in how far they are pushed. */
+  --glow-strength: 16%;
+  --shade-low: 10%;
+  --shade-high: 18%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: var(--black);
+    --ground-deep: color-mix(in srgb, var(--black) 55%, #000);
+    --ink: var(--white);
+
+    /* On black the pure hues are the readable ones, and the point of them. */
+    --accent-ink: var(--seed-accent);
+    --accent-alt-ink: var(--seed-accent-alt);
+
+    /* Green carries further than a cooler hue at the same strength, so the
+       fields are pushed less far than the ground would otherwise take. */
+    --glow-strength: 20%;
+    --shade-low: 55%;
+    --shade-high: 72%;
+  }
+}
+
+:root {
+  /* ---- Derived ---------------------------------------------------------- */
+
+  /* Filled surfaces are lit by the accent itself whatever the ground: a green
+     pill on white and on black is the same green pill. */
+  --accent: var(--seed-accent);
+  --accent-alt: var(--seed-accent-alt);
+  --ink-on-accent: var(--black);
+
+  /* The hues as they read on a pale surface. The light theme's inks are these;
+     they are stated out here rather than in it because the pointer below needs
+     them whichever theme is running — the surface it is drawn against is not
+     always the one the page is set to. */
+  --accent-deep: color-mix(in srgb, var(--seed-accent) 45%, var(--black));
+  --accent-alt-deep: color-mix(in srgb, var(--seed-accent-alt) 45%, var(--black));
+
+  /* Softer voices of the same ink, mixed toward whatever it is written on, so
+     one pair of ratios holds for both themes. */
+  --ink-soft: color-mix(in srgb, var(--ink) 72%, var(--ground));
+  --ink-faint: color-mix(in srgb, var(--ink) 55%, var(--ground));
+
+  --surface: color-mix(in srgb, var(--ink) 4%, transparent);
+  --surface-strong: color-mix(in srgb, var(--ink) 8%, transparent);
+  /* Hairlines are the accent rather than the ink: it is the line the whole
+     page is drawn with. */
+  --edge: color-mix(in srgb, var(--accent-ink) 25%, transparent);
+
+  --glow-accent: color-mix(in srgb, var(--seed-accent) var(--glow-strength), transparent);
+  --glow-accent-alt: color-mix(in srgb, var(--seed-accent-alt) var(--glow-strength), transparent);
+
+  --shadow-low: 0 2px 10px color-mix(in srgb, #000 var(--shade-low), transparent);
+  --shadow-high: 0 24px 60px color-mix(in srgb, #000 var(--shade-high), transparent);
+
+  /* The pointer is a tag with tokens of its own; its colours are the site's,
+     so they are decided here with everything else rather than written down a
+     second time.
+
+     The dot is drawn on top of whatever is under the pointer, and the pointer
+     is inside the thing it is over — a green button included. So its two
+     colours are named for the surface, not for the theme, and stay put when
+     the theme changes: the deep hue where the surface is pale, the lit one
+     where it is dark. */
+  --brand: var(--accent-deep);
+  --brand-light: var(--seed-accent);
+
+  /* The ring is the other way round, twice over.
+
+     It hugs an element from a pad's distance, so it is drawn on the ground
+     around the thing rather than on the thing itself: what it must stay
+     legible against is the page, not the surface the probe measures. Toned for
+     the latter, it turned dark the moment it reached the one bright button on
+     a black page and disappeared. Both variants therefore follow the ground.
+
+     And it is ink rather than accent, deliberately. A card wears a drawn green
+     outline when the pointer is on it; a green ring hugging that card is a
+     second drawn green outline a few pixels outside the first, and which line
+     is the pointer stops being readable. The ring is the one thing on the page
+     that is not part of the page. */
+  --sc-ring-on-light: color-mix(in srgb, var(--ink) 85%, transparent);
+  --sc-ring-on-dark: color-mix(in srgb, var(--ink) 85%, transparent);
+}

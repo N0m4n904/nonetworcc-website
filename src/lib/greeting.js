@@ -6,20 +6,35 @@
 
 import { hasFinePointer } from "./pointer.js";
 
-const BRAND = "#8c0be8";
-const CYAN = "#00c6ff";
+// The note is printed in the page's own colours rather than in a copy of them.
+// A custom property computes to the text it was written as — in the palette's
+// case a color-mix() the console will not parse — so each one is resolved by
+// asking an element what it would actually paint.
+function paints(...properties) {
+  const probe = document.createElement("span");
+  probe.style.display = "none";
+  document.documentElement.append(probe);
+  const colours = properties.map((property) => {
+    probe.style.color = `var(${property})`;
+    return getComputedStyle(probe).color;
+  });
+  probe.remove();
+  return colours;
+}
 
 export function greet() {
+  const [accent, accentAlt, faint] = paints("--accent-ink", "--accent-alt-ink", "--ink-faint");
+
   const heading = [
     "font-family: 'Shantell Sans', cursive, sans-serif",
     "font-size: 20px",
     "font-weight: 700",
-    `color: ${BRAND}`,
+    `color: ${accent}`,
     "padding: 6px 0 2px",
   ].join(";");
 
-  const quiet = "color:#8b85a3;font-size:12px;line-height:1.6";
-  const key = `color:${CYAN};font-weight:700`;
+  const quiet = `color:${faint};font-size:12px;line-height:1.6`;
+  const key = `color:${accentAlt};font-weight:700`;
 
   console.log("%cNoah Anleitner", heading);
   console.log(

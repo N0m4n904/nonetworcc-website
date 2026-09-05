@@ -80,8 +80,9 @@
     transform: none !important;
   }
 
-  /* Gradient text is painted into transparent letters, which prints as an
-     empty space where the name should be. */
+  /* On paper the accent is ink like everything else, and the shifting pair is
+     one word: gradient text is painted into transparent letters, which prints
+     as an empty space where the word should be. */
   .accent,
   .accent__face {
     background: none !important;
@@ -112,9 +113,8 @@
   .label {
     font-size: 8pt;
     /* Tracked out on screen for the small-caps effect. On paper it makes the
-       words come apart when the text is extracted — "SOFTWA RE DEVELOPER" —
-       and a job title is exactly the phrase an employer's software searches
-       for. */
+       words come apart when the text is extracted — "CONT ACT" — and these
+       labels head the columns an employer's software reads. */
     letter-spacing: 0.04em;
     color: #555;
   }
@@ -175,6 +175,14 @@
     color: #222;
     padding: 0.5mm 2mm;
     font-size: 9pt;
+  }
+
+  /* On screen the padding is on the link inside the pill, so the whole shape
+     can be clicked. On paper there is nothing to click and the pill takes its
+     own padding back. */
+  .tags li > * {
+    display: inline;
+    padding: 0;
   }
 
   .about {

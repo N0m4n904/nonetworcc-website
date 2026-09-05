@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>Share card</title>
+    <!-- The card's colours are the site's, taken from the one file that
+         decides them. make-og renders it with the dark theme emulated, which
+         is the branch of the palette this card is drawn in. -->
+    <link rel="stylesheet" href="/public/palette.css" />
     <style>
       /* The card a link to this site turns into. Drawn from the same parts as
          the page — the same face, the same two brand hues, the same rings — so
@@ -14,15 +18,6 @@
         font-style: normal;
         font-weight: 300 800;
         src: url(../src/fonts/shantell-sans-latin.woff2) format('woff2');
-      }
-
-      :root {
-        --ground: #0b0a12;
-        --ground-deep: #07060d;
-        --ink: #f4f2fb;
-        --ink-faint: #8b85a3;
-        --violet: #b06bff;
-        --cyan: #4bd8ff;
       }
 
       * { box-sizing: border-box; margin: 0; }
@@ -49,45 +44,34 @@
         filter: blur(90px);
         pointer-events: none;
       }
-      .glow--violet {
+      /* Pushed harder than on the page: the card is looked at once, small. */
+      .glow--accent {
         top: -420px; left: -260px;
-        background: radial-gradient(circle, rgba(140, 11, 232, 0.42), transparent 65%);
+        background: radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent), transparent 65%);
       }
-      .glow--cyan {
+      .glow--accent-alt {
         bottom: -460px; right: -220px;
-        background: radial-gradient(circle, rgba(0, 198, 255, 0.3), transparent 65%);
+        background: radial-gradient(circle, color-mix(in srgb, var(--accent-alt) 30%, transparent), transparent 65%);
       }
 
       .words { position: relative; max-width: 640px; }
-
-      .label {
-        font-size: 22px;
-        font-weight: 600;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--ink-faint);
-      }
 
       h1 {
         font-size: 104px;
         font-weight: 700;
         line-height: 0.98;
         letter-spacing: -0.02em;
-        margin-top: 14px;
       }
 
       .accent {
-        background-image: linear-gradient(100deg, var(--violet), var(--cyan));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: var(--accent-ink);
       }
 
       .lede {
         margin-top: 26px;
         font-size: 27px;
         line-height: 1.6;
-        color: #b6b1c9;
+        color: var(--ink-soft);
       }
 
       .rings {
@@ -101,14 +85,14 @@
 
       .rings svg { width: 100%; height: 100%; overflow: visible; }
       .rings path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-      .r-outer { stroke: rgba(176, 107, 255, 0.55); stroke-width: 2; }
-      .r-middle { stroke: rgba(75, 216, 255, 0.45); stroke-width: 1.6; stroke-dasharray: 5 13; }
-      .r-inner { stroke: rgba(176, 107, 255, 0.32); stroke-width: 1.4; stroke-dasharray: 2 10; }
+      .r-outer { stroke: color-mix(in srgb, var(--accent-ink) 55%, transparent); stroke-width: 2; }
+      .r-middle { stroke: color-mix(in srgb, var(--accent-alt-ink) 45%, transparent); stroke-width: 1.6; stroke-dasharray: 5 13; }
+      .r-inner { stroke: color-mix(in srgb, var(--accent-ink) 32%, transparent); stroke-width: 1.4; stroke-dasharray: 2 10; }
     </style>
   </head>
   <body>
-    <div class="glow glow--violet"></div>
-    <div class="glow glow--cyan"></div>
+    <div class="glow glow--accent"></div>
+    <div class="glow glow--accent-alt"></div>
 
     <div class="rings">
       <svg viewBox="0 0 200 200">
@@ -119,7 +103,6 @@
     </div>
 
     <div class="words">
-      <p class="label">Software developer</p>
       <h1>Noah<br /><span class="accent">Anleitner</span></h1>
       <p class="lede">Software development for a living and for the fun of it, and tuning my car when I am not coding.</p>
     </div>

@@ -38,6 +38,17 @@
 #     href       where it goes.
 #     icon       one of: github, gitlab, instagram. Omit for a bare link.
 #                Must match a symbol id in index.html, minus the "icon-".
+#
+# Below the tiles come the two sections that are lists of something else: the
+# garage's permalinks, and the tools at the end.
+#
+# A tool is a name and where that name goes:
+#
+#     - name: Kotlin
+#       href: https://kotlinlang.org
+#
+# The href is optional — a bare string is a tool with nowhere to go, and is
+# drawn as a pill that does not answer the pointer.
 
 work:
   - title: Dominikus-Ringeisen-Werk
@@ -222,3 +233,56 @@ garage:
     - https://www.instagram.com/p/DP9LiDeiEnN/
     - https://www.instagram.com/p/DXkKKZLiHxB/
     - https://www.instagram.com/p/DHdemuSoo_N/
+
+# The About section's list, in the order it is read. Names of things rather
+# than sentences about them, so there is nothing here to translate: what the
+# list is called lives in strings.yaml with the rest of the words.
+tools:
+  - name: Kotlin
+    href: https://kotlinlang.org
+  - name: Java
+    href: https://openjdk.org
+  - name: Android
+    href: https://developer.android.com
+  - name: AOSP
+    href: https://source.android.com
+  - name: Jetpack Compose
+    href: https://developer.android.com/compose
+  - name: C#
+    href: https://learn.microsoft.com/dotnet/csharp/
+  - name: Visual Basic
+    href: https://learn.microsoft.com/dotnet/visual-basic/
+  - name: TypeScript
+    href: https://www.typescriptlang.org
+  - name: Vue 3
+    href: https://vuejs.org
+  - name: PHP
+    href: https://www.php.net
+  - name: Linux
+    href: https://www.kernel.org
+  - name: NixOS
+    href: https://nixos.org
+  - name: MySQL
+    href: https://www.mysql.com
+  - name: SQLite
+    href: https://www.sqlite.org
+  - name: MSSQL
+    href: https://www.microsoft.com/en-us/sql-server
+  - name: Jira
+    href: https://www.atlassian.com/software/jira
+  - name: Confluence
+    href: https://www.atlassian.com/software/confluence
+  - name: Scriptrunner
+    href: https://www.adaptavist.com/products/scriptrunner
+  - name: JobRouter
+    href: https://www.jobrouter.com
+  - name: Nextcloud
+    href: https://nextcloud.com
+  - name: Tailscale
+    href: https://tailscale.com
+  - name: Apache APISIX
+    href: https://apisix.apache.org
+  - name: Claude Code
+    href: https://github.com/anthropics/claude-code
+  - name: Kord
+    href: https://kord.dev

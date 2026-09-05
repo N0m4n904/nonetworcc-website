@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="preload" href="/assets/shantell-sans-latin-B8jqu5lV.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/shantell-sans-latin-ext-CkCuiz5d.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.css"
-          integrity="sha384-DJ28qhylHcyHeG8xQ+6dpdA7kmM/WA6RYJDSMoATHaPbTUWBbFuR2m8NJsrh+GiL" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.4.0/smartcursor.js"
-            integrity="sha384-10cf4kvCVDBb2inFJcb2OHHVqejWTZZLCXDeeA9pgIwYD6Pglz/Cn31yUu0BRdOP" crossorigin="anonymous" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.6.0/smartcursor.css"
+          integrity="sha384-ure51TiRpN+5RSDObvTYQdOPenAnTO1x8dMGHv9U6c2YtLaHVu+udg53Eh18rcRz" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/N0m4n904/smartcursor@v1.6.0/smartcursor.js"
+            integrity="sha384-l0F2/cjZRHQmQJZ4+ejeBMTCZshwMjQqM3sffCsFCk8PJVk++1gi7HiquFWWtekI" crossorigin="anonymous" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noah Anleitner</title>
@@ -53,10 +53,6 @@
           "https://github.com/N0m4n904",
           "https://gitlab.com/N0m4n904",
           "https://www.instagram.com/b9_allroad_kru/"
-        ],
-        "knowsAbout": [
-          "Kotlin", "Java", "Android", "AOSP", "Jetpack Compose",
-          "TypeScript", "Vue", "PHP", "Linux", "NixOS"
         ]
       }
     </script>
@@ -64,11 +60,9 @@
       /* Kept here rather than in the stylesheet because it configures the two
          tags above it: these are the cursor's own tokens, not the page's. */
 
-      /* Smart cursor dot, in the two ends of the site gradient. Named for the
-         surface each is drawn on, so this holds for light and dark alike. */
+      /* The pointer's colours are the site's and are set with the rest of them
+         in public/palette.css; what is left here is its shape. */
       :root {
-        --brand: #8c0be8;
-        --brand-light: #00c6ff;
         /* The pointer's ring is generated the same way the outlines are: a
            seeded wobble pushed off each edge, not anything drawn by a person. */
         --sc-sketch: 1;
@@ -79,11 +73,12 @@
         --sc-ease: 0.45;
       }
 
-      /* The ring is left at the height smartcursor gives it, above everything
-         including the bar. It was pushed under the bar once, on the reasoning
-         that it hugs page content and so belongs where that content does — but
-         it also hugs the links in the bar, and there it was hidden behind the
-         very thing it was drawing around. */
+      /* Nothing here says where the ring is drawn. It was set under the bar
+         once, on the reasoning that it hugs page content and so belongs where
+         that content does — but it also hugs the links in the bar, and there it
+         was hidden behind the very thing it was drawing around. Since v1.5.0 it
+         takes the height of whatever it is hugging and neither answer has to be
+         chosen here. */
 
       /* The mark is white line art, which needs reversing on a light ground. */
       @media (prefers-color-scheme: light) {
@@ -92,8 +87,8 @@
         }
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-Cj_T9_Ct.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Bw88Qw-R.css">
+    <script type="module" crossorigin src="/assets/index-BHNKbNOs.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BFY_O6mY.css">
   </head>
   <body>
     <div id="app"></div>

@@ -7,6 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "og": "node tools/make-og.mjs",
+    "mark": "node tools/draw-mark.mjs",
+    "favicon": "node tools/make-favicon.mjs",
     "pdf": "vite build && node tools/make-pdf.mjs && vite build"
   },
   "devDependencies": {

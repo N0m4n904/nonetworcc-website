@@ -471,17 +471,17 @@ main > .section {
   aspect-ratio: 1;
 }
 
-/* Where the mark sits inside the ring composition, said out loud. It used to be
-   said by the transparent margin around the artwork in the file — which held the
-   mark at this size and this much above centre — and a margin no eye can see is
-   a poor place to keep a layout decision: the same file read as a half-size mark
-   wherever it was laid out on its own terms, as it is in the project tiles.
-   Taken out of flow so the box above, and the rings drawn from it, do not move. */
-.hero__art img {
+/* The mark, in the middle of the rings and inside the innermost one. Taken out
+   of flow so the box above, and the rings drawn from it, do not move. */
+.hero__mark {
   position: absolute;
-  inset-block-start: 16.7%;
-  inset-inline-start: 20.41%;
-  width: 59.57%;
+  inset: 0;
+  margin: auto;
+  /* Inside the innermost ring, which reaches 65% across this box: the rings are
+     drawn in a frame 18% larger than it on every side, so their radii are not
+     this box's percentages. */
+  width: 55%;
+  height: 55%;
 }
 
 /* ---------------------------------------------------------------------------
@@ -587,14 +587,22 @@ main > .section {
   border-radius: 22%;
 }
 
-/* White line art has nothing to sit on when the ground turns pale, so it is
-   reversed there. The hero's mark is the same drawing and takes the same rule:
-   one fact about one image, stated once. */
-@media (prefers-color-scheme: light) {
-  .hero__logo,
-  .tile__media--reversed img {
-    filter: invert(1);
-  }
+/* The site's own mark is drawn rather than fetched, so it fills whatever box it
+   is put in and is already the ink of the page it is on. The box is the caller's
+   to set: sizing the mark itself here would land after .hero__mark in this file
+   and quietly win against it. */
+.mark {
+  display: block;
+}
+
+.mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tile__media .mark {
+  inline-size: min(100%, 8.5rem);
+  aspect-ratio: 1;
 }
 
 /* Retired work reads as retired: colour drains out and returns on hover. */

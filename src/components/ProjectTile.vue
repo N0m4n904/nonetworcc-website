@@ -1,4 +1,5 @@
 <script setup>
+import SiteMark from "./SiteMark.vue";
 import { say } from "../lib/language.js";
 
 // One card, from one entry in src/content.yaml.
@@ -27,7 +28,10 @@ defineProps({
       class="tile__media"
       :class="entry.media.treatment && `tile__media--${entry.media.treatment}`"
     >
-      <img :src="entry.media.src" :alt="entry.media.alt || ''" />
+      <!-- One entry is this site, and its mark is the site's own: drawn rather
+           than fetched, and already the right colour on either ground. -->
+      <SiteMark v-if="entry.media.mark" />
+      <img v-else :src="entry.media.src" :alt="entry.media.alt || ''" />
     </div>
     <div>
       <!-- No space between the two: .tile__title is a flex row with a gap, so

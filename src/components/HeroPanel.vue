@@ -1,4 +1,5 @@
 <script setup>
+import SiteMark from "./SiteMark.vue";
 import { t } from "../lib/language.js";
 
 // The rings are three elements rather than three groups in one drawing: a
@@ -54,10 +55,10 @@ const RINGS = [
             </svg>
           </div>
         </div>
-        <!-- Sized for the ~248px it is drawn at, not for the 610 it is stored
-             at. Decoding is the expensive part on a phone, and it is paid in
-             the pixels an image has rather than the ones it shows. -->
-        <img class="hero__logo" src="/images/nonetworcc-logo.webp" alt="" width="610" height="610" />
+        <!-- The mark sits inside the innermost ring. Two hundred bytes of path
+             rather than a raster: nothing to decode, and it is the same drawing
+             at any size the page asks for. -->
+        <SiteMark class="hero__mark" />
       </figure>
     </div>
   </section>

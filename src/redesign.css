@@ -587,6 +587,16 @@ main > .section {
   border-radius: 22%;
 }
 
+/* White line art has nothing to sit on when the ground turns pale, so it is
+   reversed there. The hero's mark is the same drawing and takes the same rule:
+   one fact about one image, stated once. */
+@media (prefers-color-scheme: light) {
+  .hero__logo,
+  .tile__media--reversed img {
+    filter: invert(1);
+  }
+}
+
 /* Retired work reads as retired: colour drains out and returns on hover. */
 .tile__media--past img {
   filter: grayscale(1);

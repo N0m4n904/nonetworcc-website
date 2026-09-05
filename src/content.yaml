@@ -25,7 +25,7 @@
 #     src        path or URL of the mark.
 #     alt        empty string for a mark that repeats the title; the title is
 #                right there, and a screen reader does not need it twice.
-#     treatment  one of: plate, past, rounded. Omit for a plain mark.
+#     treatment  one of: plate, past, rounded, reversed. Omit for a plain mark.
 #                  plate    — white plate behind marks carrying their own
 #                             opaque background, which would otherwise sit as
 #                             a hard rectangle on the page.
@@ -33,6 +33,8 @@
 #                             that is over.
 #                  rounded  — squircle corners, for app icons already drawn
 #                             to be masked.
+#                  reversed — white line art, which has nothing to sit on when
+#                             the ground turns pale, so it is inverted there.
 #   links      optional. The row beneath.
 #     text       what the link says.
 #     href       where it goes.
@@ -214,6 +216,7 @@ projects:
     media:
       src: /images/nonetworcc-logo.webp
       alt: Website
+      treatment: reversed
     links:
       - text: GitHub
         href: https://github.com/N0m4n904/nonetworcc-website

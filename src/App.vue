@@ -65,19 +65,9 @@ useSmartCursor();
 
     <section class="section" id="projects">
       <!-- A drawn field that drifts, far enough back to read as paper texture
-           rather than as content. -->
-      <div class="field" aria-hidden="true" v-live>
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-          <path d="M0 40c60-8 120 6 180-2s140-10 220 4" />
-          <path d="M0 92c70 10 130-8 195 2s140 12 205-4" />
-          <path d="M0 148c55-12 118 8 178 0s150-12 222 6" />
-          <path d="M0 206c78 8 128-10 196 0s130 14 204-2" />
-          <path d="M0 258c62-10 126 8 186 2s136-12 214 4" />
-          <path d="M64 0c-8 70 8 130-2 190s6 80 2 110" />
-          <path d="M198 0c10 66-8 128 2 188s-6 82-2 112" />
-          <path d="M330 0c-6 74 10 126 0 186s8 84 2 114" />
-        </svg>
-      </div>
+           rather than as content. The eight strokes are in lib/field.js and
+           v-field paints them onto a canvas it owns. -->
+      <div class="field" aria-hidden="true" v-field v-live></div>
       <div class="shell">
         <SectionHead :title="t.projects.title" />
         <ProjectTile

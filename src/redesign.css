@@ -1275,6 +1275,12 @@ main > .section {
 /* ---------------------------------------------------------------------------
    Behind the projects — a drawn field that drifts, far enough back to read as
    paper texture rather than as content.
+
+   The drawing is a canvas that v-field paints, and the fade at its edges is
+   painted into it. It used to be a mask here, over an opacity here, and either
+   one alone is enough to pull the field out of the section's flat paint into a
+   surface of its own — eight megapixels of it, recomposited for a drift that
+   rotates. What is left is a plain box with a plain layer inside it.
    --------------------------------------------------------------------------- */
 
 .field {
@@ -1283,27 +1289,25 @@ main > .section {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.85;
-  mask-image: radial-gradient(75% 60% at 50% 50%, #000, transparent 75%);
-  -webkit-mask-image: radial-gradient(75% 60% at 50% 50%, #000, transparent 75%);
 }
 
-.field svg {
-  width: 160%;
+/* The oversize is the drift's slack: the drawing has to be larger than the
+   window it moves inside or its edge would swing into view.
+
+   100% across rather than the 160% this asked for while it was an SVG, because
+   `img, svg { max-width: 100% }` above was quietly clamping it there anyway and
+   a canvas would not have been clamped. Written out so the drawing stays the
+   one that ships. */
+.field canvas {
+  display: block;
+  width: 100%;
   height: 160%;
   margin-left: -30%;
   margin-top: -30%;
+  /* Read by the painter rather than applied here — a canvas has no stroke, and
+     a colour belongs in the palette either way. */
+  color: color-mix(in srgb, var(--accent-ink) 38%, transparent);
   animation: drift 34s ease-in-out infinite alternate;
-}
-
-.field path {
-  fill: none;
-  /* Stronger than a plain edge: masked and behind content, a hairline simply
-     disappears. */
-  stroke: color-mix(in srgb, var(--accent-ink) 38%, transparent);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
 }
 
 @keyframes drift {

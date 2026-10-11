@@ -221,6 +221,22 @@ projects:
         href: https://github.com/N0m4n904/nonetworcc-website
         icon: github
 
+  - title: K100-QMK
+    body:
+      en: >-
+        An attempt to run QMK and VIA on the Corsair K100 RGB (OPX optical, ISO DE) in place of its stock firmware.
+      de: >-
+        Ein Versuch, QMK und VIA auf der Corsair K100 RGB (OPX optical, ISO DE) anstelle der Standard-Firmware zu nutzen.
+    date: "2026 -"
+    media:
+      src: https://qmk.fm/qmk-logo-light.svg
+      alt: QMK Logo
+      treatment: rounded
+    links:
+      - text: GitHub
+        href: https://github.com/N0m4n904/k100-qmk
+        icon: github
+
 
 # The garage lists posts rather than tiles. Nothing is fetched from Meta until
 # a visitor presses the button; these are only the permalinks each stub stands

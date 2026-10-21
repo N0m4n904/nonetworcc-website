@@ -95,7 +95,6 @@ work:
     media:
       src: /images/DORINO.svg
       alt: DORINO logo
-      treatment: past
     links:
       - text: sonntag-its.de
         href: https://www.sonntag-its.de/dorino/

@@ -74,9 +74,6 @@ work:
         icon: github
 
   - title: DORINO
-    badge:
-      en: Not public yet
-      de: Noch nicht öffentlich
     body:
       en: >-
         A barrier-free information system for social institutions: a tiled touch interface,
@@ -95,6 +92,10 @@ work:
       de: >-
         Einer der Hauptentwickler beim DRW, das es gemeinsam mit SONNTAG IT Solutions
         entwickelt, die es vertreiben.
+    media:
+      src: /images/DORINO.svg
+      alt: DORINO logo
+      treatment: past
     links:
       - text: sonntag-its.de
         href: https://www.sonntag-its.de/dorino/

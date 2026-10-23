@@ -5,8 +5,11 @@ import { say } from "../lib/language.js";
 // One card, from one entry in src/content.yaml.
 //
 // No media means no mark column and a tile that runs full width, which is what
-// tile--plain says. The three directives are the page's own machinery: arrive
-// once on the way in, hold still when off screen, wear a drawn outline.
+// tile--plain says. A treatment is named on both the tile and the mark, since
+// some of them decorate the mark and some change the column it stands in; the
+// stylesheet decides which, so nothing here needs to know them apart. The three
+// directives are the page's own machinery: arrive once on the way in, hold still
+// when off screen, wear a drawn outline.
 
 defineProps({
   entry: { type: Object, required: true },
@@ -17,7 +20,10 @@ defineProps({
 <template>
   <article
     class="tile"
-    :class="{ 'tile--plain': !entry.media }"
+    :class="[
+      { 'tile--plain': !entry.media },
+      entry.media?.treatment && `tile--${entry.media.treatment}`,
+    ]"
     :style="{ '--i': index }"
     v-reveal
     v-live

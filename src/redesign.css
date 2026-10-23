@@ -537,6 +537,10 @@ main > .section {
    The border below is only what shows before the outline is injected. */
 .tile {
   display: grid;
+  /* The mark's column, as a track rather than a width: a treatment that needs
+     a different one says so by redefining this, and the grid below is the only
+     place that reads it. */
+  --mark-track: 10rem;
   gap: clamp(1.25rem, 3vw, 2.5rem);
   padding: clamp(1.5rem, 3vw, 2.75rem);
   border: 1px solid var(--edge);
@@ -550,7 +554,7 @@ main > .section {
 
 @media (min-width: 48rem) {
   .tile {
-    grid-template-columns: 10rem 1fr;
+    grid-template-columns: var(--mark-track) 1fr;
     align-items: center;
   }
 }
@@ -585,6 +589,21 @@ main > .section {
 
 .tile__media--rounded img {
   border-radius: 22%;
+}
+
+/* A wordmark is a line of type, not an icon. Fitted into the square above it
+   paints a fraction of the height the icons beside it get, so it keeps its own
+   ratio and is given a wider column to be read in. The column is a flex factor
+   rather than a length: it follows the tile it is in instead of a guessed
+   viewport width, and keeps 10rem as the floor every other mark stands on. The
+   words are capped at 62ch either way and lose nothing to it. */
+.tile--wordmark {
+  --mark-track: minmax(10rem, 0.4fr);
+}
+
+.tile__media--wordmark img {
+  inline-size: 100%;
+  aspect-ratio: auto;
 }
 
 /* The site's own mark is drawn rather than fetched, so it fills whatever box it

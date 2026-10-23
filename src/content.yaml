@@ -28,7 +28,7 @@
 #     src        path or URL of the mark.
 #     alt        empty string for a mark that repeats the title; the title is
 #                right there, and a screen reader does not need it twice.
-#     treatment  one of: plate, past, rounded. Omit for a plain mark.
+#     treatment  one of: plate, past, rounded, wordmark. Omit for a plain mark.
 #                  plate    — white plate behind marks carrying their own
 #                             opaque background, which would otherwise sit as
 #                             a hard rectangle on the page.
@@ -36,6 +36,10 @@
 #                             that is over.
 #                  rounded  — squircle corners, for app icons already drawn
 #                             to be masked.
+#                  wordmark — for a logo that is a line of type rather than an
+#                             icon. It keeps its own ratio and takes a wider
+#                             column, instead of being fitted into the square
+#                             the icons share and left a fraction their height.
 #   links      optional. The row beneath.
 #     text       what the link says.
 #     href       where it goes.
@@ -95,6 +99,7 @@ work:
     media:
       src: /images/DORINO.svg
       alt: DORINO logo
+      treatment: wordmark
     links:
       - text: sonntag-its.de
         href: https://www.sonntag-its.de/dorino/

@@ -154,6 +154,22 @@ projects:
         href: https://github.com/N0m4n904/nixos-config
         icon: github
 
+  - title: K100-QMK
+    body:
+      en: >-
+        Successfully ported QMK with VIA support to the Corsair K100 RGB (OPX optical, ISO DE), replacing the stock firmware entirely.
+      de: >-
+        QMK mit VIA-Unterstützung erfolgreich auf die Corsair K100 RGB (OPX optical, ISO DE) portiert, als vollständiger Ersatz für die Standard-Firmware.
+    date: "2026 -"
+    media:
+      src: https://qmk.fm/qmk-logo-light.svg
+      alt: QMK Logo
+      treatment: rounded
+    links:
+      - text: GitHub
+        href: https://github.com/N0m4n904/k100-qmk
+        icon: github
+
   - title: Max.Storage Ultimate
     body:
       en: >-
@@ -219,22 +235,6 @@ projects:
     links:
       - text: GitHub
         href: https://github.com/N0m4n904/nonetworcc-website
-        icon: github
-
-  - title: K100-QMK
-    body:
-      en: >-
-        An attempt to run QMK and VIA on the Corsair K100 RGB (OPX optical, ISO DE) in place of its stock firmware.
-      de: >-
-        Ein Versuch, QMK und VIA auf der Corsair K100 RGB (OPX optical, ISO DE) anstelle der Standard-Firmware zu nutzen.
-    date: "2026 -"
-    media:
-      src: https://qmk.fm/qmk-logo-light.svg
-      alt: QMK Logo
-      treatment: rounded
-    links:
-      - text: GitHub
-        href: https://github.com/N0m4n904/k100-qmk
         icon: github
 
 

@@ -50,7 +50,8 @@ We have no influence over the extent of the data collected by Meta, nor over how
 The following files are requested from external servers when a page of this website is opened. To deliver them, the operator of the respective server necessarily receives your IP address and technical information about your browser. No cookies are set by these files and they are not used to analyse your behaviour:
 
 - cdn.jsdelivr.net, for the script and stylesheet of the mouse pointer used on this site
-- brands.home-assistant.io, for the logo shown next to one of the listed projects
+- brands.home-assistant.io, for the logo shown next to the project Max.Storage Ultimate
+- qmk.fm, for the logo shown next to the project K100-QMK
 - drw.de, for the emblem of Dominikus-Ringeisen-Werk shown in the work section
 
 The legal basis is our legitimate interest in delivering this website reliably, Art. 6 Para. 1 lit. f) GDPR.
@@ -59,8 +60,13 @@ The typeface used on this website is delivered from our own server. No connectio
 
 3. Storage on your device
 
-This website stores a single entry named "smartCursorV2" in the local storage of your browser. It records nothing but whether the custom mouse pointer is switched on. It contains no personal data, is not transmitted anywhere, and is not used to recognise you. You can delete it at any time through your browser settings.
+This website stores up to two entries in the local storage of your browser:
 
-Last updated: 15 August 2026
+- "smartCursorV2" contains nothing but whether the custom mouse pointer is switched on. It contains no personal data.
+- "scribbleV1" contains the lines drawn on the page with the pencil, so that they are still there on your next visit. It is written only once you draw, and the website reads it for nothing but showing your drawing again.
+
+Neither entry is transmitted anywhere or used to recognise you. You can delete both at any time through your browser settings.
+
+Last updated: 12 November 2026
 
 Model Data Protection Statement for Anwaltskanzlei Weiß & Partner

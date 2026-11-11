@@ -1,0 +1,239 @@
+exports[`the edges are laid out as recorded 1`] = `
+{
+  "shape": "torn",
+  "width": 1920,
+  "layers": "dae66f71e2beed1df6adb62de46c7ea9bd981d94683c1b89e943ee865803d25d"
+}
+`;
+
+exports[`the edges are laid out as recorded 2`] = `
+{
+  "shape": "torn",
+  "width": 1366,
+  "layers": "f9823d87e3a3453d0a3efa8636c1ddc3ad698591d0adadc94e83fabbc56096eb"
+}
+`;
+
+exports[`the edges are laid out as recorded 3`] = `
+{
+  "shape": "torn",
+  "width": 390,
+  "layers": "8723525e55383ba32ae0e2841f49784bc1a04e3c9bff8c1a5ef04e3dfaa38d75"
+}
+`;
+
+exports[`the edges are laid out as recorded 4`] = `
+{
+  "shape": "cut",
+  "width": 1920,
+  "layers": "902ffe90aa8493095394155c49b0c8324b9ddefc853badd533d187b1ee76efd7"
+}
+`;
+
+exports[`the edges are laid out as recorded 5`] = `
+{
+  "shape": "cut",
+  "width": 1366,
+  "layers": "e64672dc353329f88121fcaebf9833b7309e4cf9b9725a06d778f4afd03000e5"
+}
+`;
+
+exports[`the edges are laid out as recorded 6`] = `
+{
+  "shape": "cut",
+  "width": 390,
+  "layers": "a2739d6b6766e15c434f1385175771f7a375768effc1fa902971c0831864f5a5"
+}
+`;
+
+exports[`the hand draws the camera as recorded 1`] = `
+{
+  "shownWidth": 260,
+  "strokeCount": 34,
+  "paths": "2287fb32d97bd485b53583080c99e97fa5d7d6072dacd399e7e06365e7112d79"
+}
+`;
+
+exports[`the hand draws the camera as recorded 2`] = `
+{
+  "shownWidth": 161,
+  "strokeCount": 31,
+  "paths": "98e57fce2b9bb724e45ed55ba188ac594f21fcdad5c7d7316ee14c91d5329e5d"
+}
+`;
+
+exports[`the hand draws the camera as recorded 3`] = `
+{
+  "shownWidth": 78,
+  "strokeCount": 28,
+  "paths": "a93905f3766cebb238597f1b691a3aac3876a3346f1e5add5db918fd058c6ed1"
+}
+`;
+
+exports[`the hand draws the flourish as recorded 1`] = `
+{
+  "shownWidth": 640,
+  "strokeCount": 1,
+  "paths": "6ad21d49b3270f7c78a1676520eaaf0ac17ae82b28e1e8c55ccb0a0ea66693f6"
+}
+`;
+
+exports[`the hand draws the flourish as recorded 2`] = `
+{
+  "shownWidth": 397,
+  "strokeCount": 1,
+  "paths": "d157a448048ccc12d6d5a9b530ca0407ea6615315bfc537fa1b2763df9fef31f"
+}
+`;
+
+exports[`the hand draws the flourish as recorded 3`] = `
+{
+  "shownWidth": 192,
+  "strokeCount": 1,
+  "paths": "0c3b29b2b4b89d83670508eef1272ee07b2b72ce13f5da002a3efd2c40734fdc"
+}
+`;
+
+exports[`the hand draws the keyboard as recorded 1`] = `
+{
+  "shownWidth": 560,
+  "strokeCount": 148,
+  "paths": "c98584abfb59cb1ac78113f5825c9b05ef3e8beeae36dc541f1e44133b794bc5"
+}
+`;
+
+exports[`the hand draws the keyboard as recorded 2`] = `
+{
+  "shownWidth": 347,
+  "strokeCount": 133,
+  "paths": "96d97cc2446c61d24b4c86d26b089784dd0dc639f90e1d7f34a30962835d656b"
+}
+`;
+
+exports[`the hand draws the keyboard as recorded 3`] = `
+{
+  "shownWidth": 168,
+  "strokeCount": 131,
+  "paths": "a874029c04639f09b7d27695b976147ebb8c912d9283e2e2ca115ffa94af2e21"
+}
+`;
+
+exports[`the hand draws the kiosk as recorded 1`] = `
+{
+  "shownWidth": 400,
+  "strokeCount": 105,
+  "paths": "a1d30bd1d4815a0ba338f2ec8a5fdb8e093a7e6c26707467ac8d28c578721f7b"
+}
+`;
+
+exports[`the hand draws the kiosk as recorded 2`] = `
+{
+  "shownWidth": 248,
+  "strokeCount": 83,
+  "paths": "e7288f190e09336d1fbdf31cff1764f8dfc10e04d36ae941752e450dcefbf82f"
+}
+`;
+
+exports[`the hand draws the kiosk as recorded 3`] = `
+{
+  "shownWidth": 120,
+  "strokeCount": 62,
+  "paths": "d863fc4d35d92c5101b417fd07dfdbd3d7ba846748cd9981f14bf3784d33af0e"
+}
+`;
+
+exports[`the hand draws the pencil as recorded 1`] = `
+{
+  "shownWidth": 150,
+  "strokeCount": 13,
+  "paths": "e98b1bd44317afac0cb4bf5fe13c2e31024959211782229b44aa35b3510c4135"
+}
+`;
+
+exports[`the hand draws the pencil as recorded 2`] = `
+{
+  "shownWidth": 93,
+  "strokeCount": 17,
+  "paths": "daec3bd09651654ac50e283ce57d8aba4df7dd7c10f4e8b6a5ec9107eac62759"
+}
+`;
+
+exports[`the hand draws the pencil as recorded 3`] = `
+{
+  "shownWidth": 45,
+  "strokeCount": 17,
+  "paths": "59b0ff030d0e197d024d20963d2dcce3fe661ec9e1e758f07e332cfd1e582adc"
+}
+`;
+
+exports[`the hand draws the phone as recorded 1`] = `
+{
+  "shownWidth": 170,
+  "strokeCount": 21,
+  "paths": "ee92246c4e125dac6c77945c76a2706b98c117f61c66694cb3e13dcfcf383371"
+}
+`;
+
+exports[`the hand draws the phone as recorded 2`] = `
+{
+  "shownWidth": 105,
+  "strokeCount": 21,
+  "paths": "51bf73b08732b0a41849d11e91e7155a54e5494e3ca3f1930edc53b323873378"
+}
+`;
+
+exports[`the hand draws the phone as recorded 3`] = `
+{
+  "shownWidth": 51,
+  "strokeCount": 21,
+  "paths": "5c460b18007baf8eab064f0237350d84a374becbe35fecacfbf21206a0867e32"
+}
+`;
+
+exports[`the hand draws the rule as recorded 1`] = `
+{
+  "shownWidth": 200,
+  "strokeCount": 1,
+  "paths": "67c260b817cde27171bcd4fc97543194cfe72d4dd716be859ea186fd85f1b8d7"
+}
+`;
+
+exports[`the hand draws the rule as recorded 2`] = `
+{
+  "shownWidth": 124,
+  "strokeCount": 1,
+  "paths": "d4e9884c43e9a34c1bf6ba1ef81733d0af286d5a980d78704114261233b4205b"
+}
+`;
+
+exports[`the hand draws the rule as recorded 3`] = `
+{
+  "shownWidth": 60,
+  "strokeCount": 1,
+  "paths": "226063b871385b43cb48876c9eac514ad1332708f7031968a26ec59670fb5390"
+}
+`;
+
+exports[`the hand draws the wheel as recorded 1`] = `
+{
+  "shownWidth": 560,
+  "strokeCount": 148,
+  "paths": "e2c3877bb5ad724828565de96d19102fbf9c229b82a23758f35c23715b0b3a84"
+}
+`;
+
+exports[`the hand draws the wheel as recorded 2`] = `
+{
+  "shownWidth": 347,
+  "strokeCount": 112,
+  "paths": "27b4dc6c66defe0b49d0e1eb9a876140aea93c222dc9a537a93611b7f83e7003"
+}
+`;
+
+exports[`the hand draws the wheel as recorded 3`] = `
+{
+  "shownWidth": 168,
+  "strokeCount": 79,
+  "paths": "666ff38f401324a8125d16384f03634b01740c50b29c3b4b9b1007b896fc8b08"
+}
+`;

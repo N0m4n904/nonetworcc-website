@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test": "node --test \"test/*.test.js\"",
     "og": "node tools/make-og.mjs",
     "mark": "node tools/draw-mark.mjs",
     "favicon": "node tools/make-favicon.mjs",

@@ -23,8 +23,9 @@
     <meta name="description" content="Software developer. Projects, work and a car." />
 
     <!-- What a link to this site turns into when it is shared. Without these it
-         arrives as a bare URL. The card is drawn from the page's own parts by
-         `npm run og`, so it cannot drift into a separate design.
+         arrives as a bare URL. The card is rendered by `npm run og` with the
+         colours of the palette. Its design is the one the site had before the
+         sketchbook.
 
          These are read by crawlers, which do not run the language detection, so
          they stay in English whatever the visitor's browser is set to. -->
@@ -69,22 +70,17 @@
       /* The pointer's colours are the site's and are set with the rest of them
          in public/palette.css; what is left here is its shape. */
       :root {
-        /* The pointer's ring is generated the same way the outlines are: a
-           seeded wobble pushed off each edge, not anything drawn by a person. */
+        /* The ring is drawn by hand, like every other line in the book. */
         --sc-sketch: 1;
         --sc-sketch-wiggle: 2.4px;
         --sc-ring-width: 2.6px;
-        /* Closes on its target faster than the default, so the outline arrives
-           with the pointer rather than catching up to it. */
+        /* The ring closes on its target faster than the default, so the
+           outline arrives together with the pointer. */
         --sc-ease: 0.45;
       }
 
-      /* Nothing here says where the ring is drawn. It was set under the bar
-         once, on the reasoning that it hugs page content and so belongs where
-         that content does — but it also hugs the links in the bar, and there it
-         was hidden behind the very thing it was drawing around. Since v1.5.0 it
-         takes the height of whatever it is hugging and neither answer has to be
-         chosen here. */
+      /* No rule here sets the layer of the ring. Since v1.5.0 it is drawn at
+         the height of the element it is around. */
     </style>
   </head>
   <body>

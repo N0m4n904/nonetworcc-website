@@ -1,0 +1,20 @@
+/* ---------------------------------------------------------------------------
+   Motion is opt-in where it is declared and opt-out here, for a visitor who
+   asked for less of it. What a device that is touched leaves out is in
+   phone.css.
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

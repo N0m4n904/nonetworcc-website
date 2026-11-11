@@ -1,7 +1,7 @@
 # Everything the page lists, in the order it lists it. Adding an entry here is
 # meant to be the whole job — the page builds each section by walking these.
 #
-# A tile (work and projects both use the same shape):
+# An entry (work and projects both use the same shape):
 #
 # Any text field below may be either a plain string — the same in both
 # languages, which is true of most names — or a map of language to string:
@@ -14,48 +14,58 @@
 # English. A missing German falls back to the English rather than vanishing.
 #
 #   title      required.
-#   badge      optional. The pill beside the title, for things not public or
+#   badge      optional. The stamp beside the title, for things not public or
 #              no longer maintained.
 #   body       required. The sentence or two under the title.
 #   note       optional. The quieter line under the body, for provenance and
 #              caveats rather than description.
-#   date       optional. The date since when I work on that project
-#   media      optional. Leave it out and the tile drops the mark column and
-#              runs full width, which is what tile--plain used to say.
+#   date       optional. Since when I work on it, written "2022 -", or from
+#              when until when, written "2022 - 2026". It stands under the
+#              logo, set with a dash.
+#   media      optional. The logo beside the words. Leave it out and the entry
+#              stands without one, its words in line with those of the others.
 #     mark       true for the site's own mark, drawn inline from src/mark.svg
 #                and already the right colour on either ground. It takes the
 #                place of src, alt and treatment, which it has no use for.
-#     src        path or URL of the mark.
-#     alt        empty string for a mark that repeats the title; the title is
+#     src        path or URL of the logo.
+#     alt        empty string for a logo that repeats the title; the title is
 #                right there, and a screen reader does not need it twice.
-#     treatment  one of: plate, past, rounded, wordmark. Omit for a plain mark.
-#                  plate    — white plate behind marks carrying their own
-#                             opaque background, which would otherwise sit as
-#                             a hard rectangle on the page.
-#                  past     — colour drained, returning on hover. For work
-#                             that is over.
-#                  rounded  — squircle corners, for app icons already drawn
-#                             to be masked.
-#                  wordmark — for a logo that is a line of type rather than an
-#                             icon. It keeps its own ratio and takes a wider
-#                             column, instead of being fitted into the square
-#                             the icons share and left a fraction their height.
+#     treatment  one of: plate, past, rounded, wordmark, as src/lib/content.js
+#                lists them. Omit for a logo that stands on the paper as its
+#                file is. Under work every logo is printed on white as a
+#                sticker, whatever its treatment.
+#                  plate:    printed on white wherever it is shown. For a
+#                            logo whose file has an opaque background of its
+#                            own, which would show as a hard rectangle on
+#                            the paper.
+#                  past:     colour drained, and back while the entry is
+#                            under the pointer or has the focus. For work
+#                            that is over.
+#                  rounded:  for an app icon. It fills its square, has round
+#                            corners and is printed on white, which shows
+#                            wherever the file is clear.
+#                  wordmark: for a logo that is a line of type. It has its
+#                            own ratio and is shown above the words in place
+#                            of the title, which a screen reader still reads.
 #   links      optional. The row beneath.
 #     text       what the link says.
 #     href       where it goes.
-#     icon       one of: github, gitlab, instagram. Omit for a bare link.
-#                Must match a symbol id in index.html, minus the "icon-".
+#     icon       one of: github, gitlab, instagram, as src/lib/content.js
+#                lists them. Omit for a link without an icon.
 #
-# Below the tiles come the two sections that are lists of something else: the
-# garage's permalinks, and the tools at the end.
+# Below the entries come the two sections that are lists of something else:
+# the garage's permalinks, and the tools at the end.
 #
 # A tool is a name and where that name goes:
 #
 #     - name: Kotlin
 #       href: https://kotlinlang.org
 #
-# The href is optional — a bare string is a tool with nowhere to go, and is
-# drawn as a pill that does not answer the pointer.
+# The href is optional, and a tool without one may be written as its name
+# alone, as in `- Kotlin`. It is then a word that cannot be pressed.
+#
+# The page is built only from a file that passes the check of
+# src/lib/content.js.
 
 work:
   - title: Dominikus-Ringeisen-Werk
@@ -243,9 +253,9 @@ projects:
         icon: github
 
 
-# The garage lists posts rather than tiles. Nothing is fetched from Meta until
-# a visitor presses the button; these are only the permalinks each stub stands
-# in for until they do.
+# The garage is a list of posts. Nothing is fetched from Meta until a visitor
+# presses the button. Until then an empty frame is shown for each permalink,
+# and afterwards each frame links to its post.
 garage:
   handle: b9_allroad_kru
   profile: https://www.instagram.com/b9_allroad_kru/

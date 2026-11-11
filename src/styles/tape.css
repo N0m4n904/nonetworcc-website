@@ -1,0 +1,76 @@
+/* ---------------------------------------------------------------------------
+   Tape: every button is a strip of it, cut with pinking shears.
+   --------------------------------------------------------------------------- */
+
+.tape {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.4rem 1.1rem;
+  border: 0;
+  border-radius: 2px;
+  /* Set as the colour of the element, since the pointer reads it to choose
+     its own. */
+  background-color: var(--accent);
+  color: var(--ink-on-accent);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  /* How askew a strip was stuck on. A variant sets its own tilt here, so
+     that the one rule that straightens a strip applies to all of them. */
+  rotate: var(--tape-tilt, -1.2deg);
+  box-shadow: var(--shadow-low);
+}
+
+.tape::before,
+.tape::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  width: 5px;
+  background-color: inherit;
+}
+
+.tape::before {
+  inset-inline-end: calc(100% - 0.5px);
+  clip-path: polygon(100% 0, 0 12.5%, 100% 25%, 0 37.5%, 100% 50%, 0 62.5%, 100% 75%, 0 87.5%, 100% 100%);
+}
+
+.tape::after {
+  inset-inline-start: calc(100% - 0.5px);
+  clip-path: polygon(0 0, 100% 12.5%, 0 25%, 100% 37.5%, 0 50%, 100% 62.5%, 0 75%, 100% 87.5%, 0 100%);
+}
+
+.tape:active {
+  translate: 0 1px;
+}
+
+/* A strip of tape straightens under the finger that is about to press it.
+   Only where there is a pointer: a tap would leave it straightened. */
+@media (hover: hover) {
+  .tape {
+    transition: rotate 0.25s var(--ease);
+  }
+
+  .tape:hover:not([disabled]) {
+    rotate: 0deg;
+  }
+}
+
+.tape--paper {
+  --tape-tilt: 1deg;
+  background-color: var(--tape-paper);
+  color: var(--ink);
+}
+
+/* A tab of paper tape with torn corners, on which a control of the book lies:
+   the label, the index and the pencil. */
+.tab {
+  border: 0;
+  border-radius: 12px 16px 13px 17px;
+  background-color: var(--tape-paper);
+  box-shadow: var(--shadow-low);
+}

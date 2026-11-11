@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------------------------
+   A device that is touched gets less than one that is pointed at. Everything
+   it gets differently is in this one block.
+
+   Imported after every component, so that a rule here overrides the styles
+   of any of them.
+   --------------------------------------------------------------------------- */
+
+/* A phone gets the drawings as they are: nothing draws itself in, and no
+   leaf casts a shadow that has to be painted the width of the screen. */
+@media (hover: none) {
+  :root {
+    --draws-in: 0;
+  }
+
+  .edge__shade {
+    display: none;
+  }
+
+  .insert {
+    box-shadow: none;
+  }
+
+  /* A finger needs more room than a pointer: a link or a tool that stands on
+     its own is at least 44 pixels tall. A link inside a sentence is as tall
+     as its line. */
+  .index__link,
+  .entry__links .link,
+  .reach .link,
+  .tool,
+  .cover__links .link {
+    min-height: 2.75rem;
+  }
+}

@@ -1,8 +1,7 @@
 // Renders tools/og.html to public/og.png at the size link previews expect.
 //
-// The card is built from the page's own parts, so it is drawn rather than
-// designed twice. Run `npm run og` after changing tools/og.html; the result is
-// committed, since nothing runs on the server.
+// Run `npm run og` after changing tools/og.html; the result is committed,
+// since nothing runs on the server.
 
 import { spawn } from "node:child_process";
 import fs from "node:fs";

@@ -1,10 +1,9 @@
 // Draws src/mark.svg.
 //
-// The mark is a ring cut in two places with a node inside it — "no network",
-// which is what the domain says. It is generated rather than drawn, the same
-// way the page's card outlines are (see src/lib/sketch.js): ideal geometry
-// pushed off true by a seeded hand, so it wanders without being random and a
-// rerun produces the file that is already committed.
+// The mark is a ring cut in two places with a node inside it: "no network",
+// as in the name of the domain. It is generated: ideal geometry pushed off
+// true by a seeded hand, so it wanders the same way in every run and a rerun
+// writes the file that is already committed.
 //
 // Run `npm run mark` after changing anything here, then `npm run favicon`,
 // which renders the same file to the icon a browser tab wants.

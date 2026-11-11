@@ -3,90 +3,58 @@ import { ref } from "vue";
 import content from "./content.yaml";
 
 import IconSprite from "./components/IconSprite.vue";
-import SiteBar from "./components/SiteBar.vue";
-import HeroPanel from "./components/HeroPanel.vue";
-import SectionHead from "./components/SectionHead.vue";
-import ProjectTile from "./components/ProjectTile.vue";
+import PageCorner from "./components/PageCorner.vue";
+import BookBinding from "./components/BookBinding.vue";
+import FirstSpread from "./components/FirstSpread.vue";
+import WorkSection from "./components/WorkSection.vue";
+import ProjectsSection from "./components/ProjectsSection.vue";
 import GarageSection from "./components/GarageSection.vue";
 import AboutSection from "./components/AboutSection.vue";
-import SiteFooter from "./components/SiteFooter.vue";
+import BookCover from "./components/BookCover.vue";
 import ScribblePad from "./components/ScribblePad.vue";
 import { hasFinePointer } from "./lib/pointer.js";
-import { t, lang } from "./lib/language.js";
+import { SectionId } from "./lib/sections.js";
 
-import { useScrollFrame } from "./composables/useScrollFrame.js";
 import { useSmartCursor } from "./composables/useSmartCursor.js";
 
-const aura = ref(null);
-const thread = ref(null);
+// The name is written across the first spread, and a page opens on it. The
+// first spread says when that changes, and the corner takes the name over.
+const nameInWindow = ref(true);
 
-const { scrolled } = useScrollFrame({ thread, aura });
+// The sections of the book in the order they are bound into it and listed in
+// the index, each with what it is given of src/content.yaml.
+const sections = [
+  { id: SectionId.Work, component: WorkSection, given: { entries: content.work } },
+  { id: SectionId.Projects, component: ProjectsSection, given: { entries: content.projects } },
+  { id: SectionId.Garage, component: GarageSection, given: { garage: content.garage } },
+  { id: SectionId.About, component: AboutSection, given: { tools: content.tools } },
+];
+
 useSmartCursor();
 </script>
 
 <template>
-  <!-- The ground's depth: two soft radial fields, larger than the viewport so
-       their edges never show, drifting against the scroll. -->
-  <div class="aura" ref="aura" aria-hidden="true" v-live></div>
-
   <IconSprite />
 
-  <!-- Drawn in proportion to how much of the page has gone by.
+  <PageCorner :named="!nameInWindow" :sections="sections.map((section) => section.id)" />
 
-       pathLength="1" declares the line to be one unit long whatever its real
-       geometry, so the dash can be written as a fraction and nobody — neither
-       the script nor the stylesheet — has to measure it first. -->
-  <svg
-    class="thread"
-    ref="thread"
-    viewBox="0 0 42 1000"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-  >
-    <path pathLength="1" d="M21 0c-14 120 14 190 0 300s-16 190 0 300 12 220 0 400" />
-  </svg>
-
-  <SiteBar :scrolled="scrolled" />
-
-  <main>
-    <HeroPanel />
-
-    <section class="section" id="work">
-      <div class="shell">
-        <SectionHead :title="t.work.title" />
-        <ProjectTile
-          v-for="(entry, i) in content.work"
-          :key="entry.title"
-          :entry="entry"
-          :index="i"
-        />
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <!-- A drawn field that drifts, far enough back to read as paper texture
-           rather than as content. The eight strokes are in lib/field.js and
-           v-field paints them onto a canvas it owns. -->
-      <div class="field" aria-hidden="true" v-field v-live></div>
-      <div class="shell">
-        <SectionHead :title="t.projects.title" />
-        <ProjectTile
-          v-for="(entry, i) in content.projects"
-          :key="entry.title"
-          :entry="entry"
-          :index="i"
-        />
-      </div>
-    </section>
-
-    <GarageSection :garage="content.garage" />
-    <AboutSection :tools="content.tools" />
+  <!-- One book: the wire, and the parts bound into it in the order they are
+       read. Each part is one component and brings its own sheet. -->
+  <main class="book">
+    <BookBinding />
+    <FirstSpread @name-in-window="nameInWindow = $event" />
+    <component
+      :is="section.component"
+      v-for="section in sections"
+      :id="section.id"
+      :key="section.id"
+      v-bind="section.given"
+    />
   </main>
 
-  <SiteFooter :profile="content.garage.profile" />
+  <BookCover :profile="content.garage.profile" />
 
-  <!-- Last, so it lies over everything it might be drawn on. Left out
-       entirely without a pointer and a keyboard to reach it with, rather
-       than built and hidden. -->
+  <!-- Last, so it lies over everything it might be drawn on. Without a mouse
+       or a stylus to draw with, it is not built at all. -->
   <ScribblePad v-if="hasFinePointer" />
 </template>

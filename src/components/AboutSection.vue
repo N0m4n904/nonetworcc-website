@@ -1,59 +1,107 @@
 <script setup>
-import { computed } from "vue";
-
-import SectionHead from "./SectionHead.vue";
+import BookSpread from "./BookSpread.vue";
+import camera from "../drawings/camera.js";
+import { MAIL_ADDRESS, MAIL_LINK } from "../lib/contact.js";
 import { t } from "../lib/language.js";
 
-const props = defineProps({
+defineProps({
+  // `tools` in src/content.yaml, as readContent of src/lib/content.js returns
+  // them: each a name, and the address it leads to where it has one.
   tools: { type: Array, required: true },
 });
-
-// A tool is a name, or a name with somewhere to go. Both shapes arrive here as
-// the same one, so the template asks about the link and nothing else.
-const entries = computed(() =>
-  props.tools.map((tool) => (typeof tool === "string" ? { name: tool } : tool))
-);
 </script>
 
 <template>
-  <section class="section" id="about">
-    <div class="shell">
-      <SectionHead :title="t.about.title" />
-
-      <div class="about">
-        <div>
-          <div
-            v-for="(block, i) in t.about.blocks"
-            :key="block.heading"
-            class="about__block"
-            :style="{ '--i': i }"
-            v-reveal
-          >
-            <h3>{{ block.heading }}</h3>
-            <p>{{ block.text }}</p>
-          </div>
-          <div class="meta">
-            <a href="mailto:contact@nonetwor.cc?subject=Contact">contact@nonetwor.cc</a>
-            <!-- Carries only what this page already says out loud: a name, a
-                 title, an address and two profiles. No number, no street. -->
-            <a href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a>
-            <!-- The same page, printed. Whichever language is being read. -->
-            <a :href="t.about.pdfFile" download>{{ t.about.pdf }}</a>
-          </div>
-        </div>
-        <div>
-          <p class="label">{{ t.about.tools }}</p>
-          <ul class="tags">
-            <!-- The pill is the padding, so whatever is inside it fills it:
-                 a linked tool is clickable across the whole shape rather than
-                 only on its letters. -->
-            <li v-for="tool in entries" :key="tool.name">
-              <a v-if="tool.href" :href="tool.href">{{ tool.name }}</a>
-              <span v-else>{{ tool.name }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <!-- about.title is the title of the section on who Noah is. -->
+  <BookSpread class="spread--under-title" :title="t.about.title" :rule-seed="12">
+    <!-- about.blocks are the facts about Noah, each a heading and a sentence. -->
+    <div v-for="block in t.about.blocks" :key="block.heading" class="fact">
+      <h3 class="subhead">{{ block.heading }}</h3>
+      <p>{{ block.text }}</p>
     </div>
-  </section>
+    <ul class="reach">
+      <li><a class="link" :href="MAIL_LINK">{{ MAIL_ADDRESS }}</a></li>
+      <!-- The card contains only what this page shows: a name, a title, an
+           address and two profiles. It has neither a phone number nor a
+           street. -->
+      <li><a class="link" href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a></li>
+      <!-- The same page, printed, in the language it is being read in. -->
+      <li><a class="link" :href="t.about.pdfFile" download>{{ t.about.pdf }}</a></li>
+    </ul>
+    <template #right>
+      <!-- about.tools is the heading of the list of what Noah works with. -->
+      <h3 class="subhead tools-head">{{ t.about.tools }}</h3>
+      <ul class="tools">
+        <li v-for="tool in tools" :key="tool.name">
+          <!-- A tool without an address is a word that cannot be pressed. -->
+          <component :is="tool.href ? 'a' : 'span'" class="tool" :href="tool.href">{{ tool.name }}</component>
+        </li>
+      </ul>
+      <div class="about__camera"><svg v-drawing="{ drawing: camera, seed: 13 }" v-live /></div>
+    </template>
+  </BookSpread>
 </template>
+
+<style>
+.fact + .fact {
+  margin-block-start: 1.6rem;
+}
+
+.fact p {
+  margin-block-start: 0.2rem;
+  color: var(--ink-soft);
+  font-size: var(--step-lead);
+  line-height: 1.5;
+}
+
+.reach {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.6rem;
+  margin-block-start: 2.25rem;
+}
+
+.tools-head {
+  margin-block-end: 1rem;
+}
+
+.tools {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.1rem 1rem;
+}
+
+@media (min-width: 34rem) {
+  .tools {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Bare words in a list. The ring of the pointer is their only outline. */
+.tool {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.15rem 0.7rem;
+  margin-inline-start: -0.7rem;
+  border-radius: 1.25rem;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--pencil-faint);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+  transition: color 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
+}
+
+a.tool:hover {
+  color: var(--ink);
+  text-decoration-color: var(--accent-ink);
+}
+
+.about__camera {
+  width: min(15rem, 62%);
+  margin-block-start: clamp(2.5rem, 6vw, 3.5rem);
+  margin-inline-start: auto;
+  rotate: -5deg;
+}
+</style>

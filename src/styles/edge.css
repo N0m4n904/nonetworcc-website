@@ -1,0 +1,40 @@
+/* ---------------------------------------------------------------------------
+   Edges: where one leaf ends over the next. v-edge lays each out at the
+   width it has, and it has the colour of the paper of its sheet.
+   --------------------------------------------------------------------------- */
+
+.edge {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: calc(100% - 1px);
+  z-index: var(--layer-edge);
+  width: 100%;
+  height: 2.25rem;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.edge--above {
+  inset-block-start: auto;
+  inset-block-end: calc(100% - 1px);
+  transform: scaleY(-1);
+}
+
+.edge__paper {
+  fill: var(--paper-here);
+}
+
+.edge__fibre {
+  fill: var(--paper-fibre);
+}
+
+.edge__line {
+  fill: none;
+  stroke: var(--pencil-faint);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.edge__shade {
+  fill: var(--shade-edge);
+}

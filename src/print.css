@@ -1,205 +1,218 @@
 /* ---------------------------------------------------------------------------
    On paper.
 
-   Everything this page is made of — the drawn outlines, the boil, the rings,
-   the thread, the glows — exists to be looked at on a screen that can move.
-   None of it survives a printer, and most of it wastes ink trying. What is
-   left is what the page is actually about: who this is, what they have built,
-   and how to reach them.
+   The drawings, the boil, the wire, the torn edges, the tape and the glows
+   are made for a screen. A printer shows none of them well, and most of them
+   cost ink. Paper gets what the page is about: who this is, what they have
+   built, and how to reach them.
 
-   Treated as a document rather than a screenshot of a website. Not a CV —
-   there is no history or education here, only what the page itself says.
+   The print is a document with the words of the page. It is not a CV: it
+   shows the present job and the year it began, but no earlier job and no
+   education. Its colours are those of the palette, which is black on white
+   in print.
    --------------------------------------------------------------------------- */
 
 @media print {
-  /* Decoration, all of it. */
-  .aura,
-  .thread,
-  .rings,
-  .field,
-  .drawn,
-  .bar,
-  .hero__art,
-  .section__rule,
+  /* Everything that makes the page a sketchbook. */
+  .corner,
+  .binding,
+  .edge,
+  .dogear,
+  .drawing,
+  .hero__studies,
+  .hero__car,
+  .leaf:has(> .scene),
+  .insert__scene,
+  .about__camera,
+  .strip,
   .posts,
-  .post-stub,
-  .post-frame,
-  .smart-cursor,
-  .smart-cursor-ring,
+  .mark,
+  .sticker,
+  .icon,
+  .pencil,
   .scribble,
-  .scribble-controls {
+  .smart-cursor,
+  .smart-cursor-ring {
     display: none !important;
   }
 
-  /* Buttons are for pressing. On paper they are a shape with a word in it. */
-  .button,
-  .hero__actions {
+  /* A button cannot be pressed on paper, and the consent of the garage is
+     about pressing one. */
+  .actions,
+  .tape,
+  .consent {
     display: none !important;
   }
 
+  .book::after {
+    content: none;
+  }
+
+  /* The type scale, in the units of paper. */
   :root {
-    --ink: #000;
-    --ink-soft: #222;
-    --ink-faint: #555;
-    --edge: #bbb;
-    --surface: transparent;
-    --surface-strong: transparent;
-  }
-
-  html {
-    /* An anchor offset for a bar that is no longer there. */
-    scroll-padding-top: 0;
+    --step-title: 15pt;
+    --step-heading: 12pt;
+    --step-lead: 11pt;
+    --step-body: 10.5pt;
+    --step-small: 9pt;
   }
 
   body {
-    background: #fff !important;
-    color: #000;
-    font-size: 10.5pt;
     line-height: 1.45;
   }
 
-  /* A screen's worth of height per section turns four sections into eight
-     pages of white. */
-  main > .section,
-  .section,
-  .footer {
-    min-height: 0 !important;
-    display: block !important;
-    padding-block: 0 0 !important;
-    margin-block-end: 10mm;
+  /* Nothing is filled and nothing casts a shadow: the paper is the page. */
+  body,
+  .sheet,
+  .insert,
+  .cover {
+    background: none;
+    box-shadow: none;
   }
 
-  .shell {
-    max-width: none;
-    padding-inline: 0;
-  }
-
-  /* Nothing arrives on paper; it is simply there. */
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* On paper the accent is ink like everything else, and the shifting pair is
-     one word: gradient text is painted into transparent letters, which prints
-     as an empty space where the word should be. */
-  .accent,
-  .accent__face {
-    background: none !important;
-    -webkit-text-fill-color: #000;
-    color: #000 !important;
-    display: inline !important;
-  }
-
-  .accent__face--alt {
-    display: none !important;
-  }
-
-  .display {
-    font-size: 24pt;
-    line-height: 1.1;
-  }
-
-  .title {
-    font-size: 15pt;
-    margin-block-start: 6mm;
-  }
-
-  .heading,
-  .tile__title {
-    font-size: 12pt;
-  }
-
-  .label {
-    font-size: 8pt;
-    /* Tracked out on screen for the small-caps effect. On paper it makes the
-       words come apart when the text is extracted — "CONT ACT" — and these
-       labels head the columns an employer's software reads. */
-    letter-spacing: 0.04em;
-    color: #555;
-  }
-
-  .lede {
-    font-size: 11pt;
-    max-width: none;
-  }
-
-  /* A card should not be split across a page break if it can be helped. */
-  .tile {
-    border: 1px solid #ccc !important;
-    border-radius: 4px;
-    padding: 4mm;
-    margin-block-start: 4mm !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    display: block !important;
-  }
-
-  .tile__media {
-    display: none !important;
-  }
-
-  .badge {
-    border: 1px solid #999;
-    color: #333;
-    font-size: 7.5pt;
-  }
-
-  /* A link on paper is only useful if it says where it goes. Internal anchors
-     and mail links are left alone: one is meaningless off-screen and the other
-     already reads as an address. */
-  .meta a[href^="http"]::after,
-  .footer__grid a[href^="http"]::after {
-    content: " (" attr(href) ")";
-    font-size: 8pt;
-    color: #555;
-    word-break: break-all;
-  }
-
-  .meta a,
-  .footer__grid a {
-    border: 0 !important;
-    color: #000 !important;
-  }
-
-  .icon {
-    display: none !important;
-  }
-
-  .tags {
-    gap: 2mm;
-  }
-
-  .tags li {
-    border: 1px solid #ccc;
-    color: #222;
-    padding: 0.5mm 2mm;
-    font-size: 9pt;
-  }
-
-  /* On screen the padding is on the link inside the pill, so the whole shape
-     can be clicked. On paper there is nothing to click and the pill takes its
-     own padding back. */
-  .tags li > * {
-    display: inline;
+  /* With the height of a screen and the margin of the wire on every section,
+     five sections print as ten pages that are mostly white. */
+  .sheet,
+  .hero,
+  .leaf,
+  .garage,
+  .insert,
+  .cover {
+    min-height: 0;
+    margin: 0;
     padding: 0;
   }
 
-  .about {
-    display: block !important;
+  .sheet + .sheet,
+  .cover {
+    margin-block-start: 10mm;
   }
 
-  .footer__grid {
-    display: block !important;
+  /* A second leaf goes on where the first ends. */
+  .leaf + .leaf {
+    padding-block-start: 6mm;
   }
 
-  a {
+  .insert,
+  .cover__inner {
+    display: block;
+  }
+
+  /* Written straight on paper, nothing askew. */
+  .hero__name,
+  .title,
+  .stamp {
+    rotate: none;
+  }
+
+  .hero {
+    --step-name: 24pt;
+  }
+
+  .hero__words {
+    margin-block-start: 3mm;
+  }
+
+  .title,
+  .insert__words .title {
+    margin-block: 0 4mm;
+    /* The line of a title has room for the dots of Ä, Ö and Ü, which in the
+       handwriting need at least 1.22 at this weight. Dots above a tighter
+       first line of a page are printed a second time, at the foot of the
+       page before. */
+    line-height: 1.25;
+    break-after: avoid;
+  }
+
+  /* An entry reads down one column, with its date where a reader looks for
+     it after the words: under the note, above the links. */
+  .entry {
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+  }
+
+  .entry__aside,
+  .entry__words {
+    display: contents;
+  }
+
+  .entry + .entry {
+    margin-block-start: 6mm;
+  }
+
+  .entry .entry__title,
+  .subhead {
+    font-size: var(--step-heading);
+  }
+
+  .entry__date {
+    order: 1;
+    margin-block-start: 0.45rem;
+  }
+
+  .entry__links {
+    order: 2;
+    gap: 0 1.4rem;
+    margin-block-start: 0.45rem;
+  }
+
+  .fact,
+  .insert__words,
+  .cover__inner > * {
+    break-inside: avoid;
+  }
+
+  .subhead {
+    break-after: avoid;
+  }
+
+  .reach {
+    margin-block-start: 5mm;
+  }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1mm 5mm;
+  }
+
+  .tool,
+  .entry__links .link,
+  .reach .link,
+  .cover__links .link {
+    min-height: 0;
+  }
+
+  .tool {
+    padding: 0;
+    margin: 0;
+  }
+
+  .cover__inner > * + * {
+    margin-block-start: 5mm;
+  }
+
+  .link,
+  .tool {
     text-decoration: none;
   }
 
+  /* A link on paper is only useful if it says where it goes. Links within
+     the page and to a file of it are left alone: one is meaningless off
+     screen and the other already reads as what it is. */
+  .entry__links a[href^="http"]::after,
+  .cover__links a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    color: var(--ink-note);
+    font-size: 8pt;
+    font-weight: 400;
+    word-break: break-all;
+  }
+
   @page {
-    /* Stated, or the browser prints whatever its locale defaults to — which
-       is Letter in a US-configured Chrome, and this is read in Germany. */
+    /* Without a size the browser prints on the paper of its locale, which is
+       Letter in a Chrome set up for the US. The page is read in Germany. */
     size: A4;
     margin: 14mm;
   }

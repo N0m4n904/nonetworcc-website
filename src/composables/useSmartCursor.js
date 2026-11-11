@@ -7,10 +7,8 @@
 
 import { onMounted } from "vue";
 
-// The tags are list items, which nothing in the built-in list matches. Tiles
-// are deliberately absent: they carry a drawn outline already.
-const INTERACTIVE =
-  'a, button, select, label, summary, [role="button"], .tile, .tags li, .post-stub';
+// A control that cannot be pressed is not caught by the ring.
+const INTERACTIVE = 'a, button:not(:disabled), select, label, summary, [role="button"]';
 
 function enable() {
   const cursor = window.smartCursor;

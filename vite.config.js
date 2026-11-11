@@ -7,6 +7,9 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { parse } from "yaml";
 
+import { readContent } from "./src/lib/content.js";
+
+const CONTENT = fileURLToPath(new URL("./src/content.yaml", import.meta.url));
 const DRAWINGS = fileURLToPath(new URL("./src/drawings", import.meta.url));
 const WORDS = fileURLToPath(new URL("./src/lib", import.meta.url));
 const EVALUATE_DRAWING = new URL("./tools/evaluate-drawing.mjs", import.meta.url);
@@ -14,13 +17,17 @@ const EVALUATE_DRAWING = new URL("./tools/evaluate-drawing.mjs", import.meta.url
 // YAML becomes a module at build time rather than something the browser has to
 // fetch and parse. The page ships the content, not a parser: `yaml` stays a
 // build dependency and never reaches the bundle.
+//
+// src/content.yaml is checked on the way (see src/lib/content.js): a name it
+// may not use or a date in another form fails the build.
 function yaml() {
   return {
     name: "yaml",
     transform(code, id) {
       if (!id.endsWith(".yaml") && !id.endsWith(".yml")) return null;
+      const parsed = parse(code);
       return {
-        code: `export default ${JSON.stringify(parse(code))}`,
+        code: `export default ${JSON.stringify(id === CONTENT ? readContent(parsed) : parsed)}`,
         map: { mappings: "" },
       };
     },

@@ -1,171 +1,166 @@
 // Drawing on the page.
 //
-// The whole site is pretending to be drawn by hand, so it seemed only fair to
-// let a visitor pick up the pencil. Strokes are kept in the browser that made
-// them and nowhere else — they never leave the machine, and clearing them is
-// one press.
+// The page looks drawn by hand, and a visitor can pick up the pencil as well.
+// The strokes are stored in the browser that made them and are sent nowhere.
 //
-// Costs nothing while it is off: no listeners are attached until the pencil is
-// picked up, and the overlay is inert.
+// While the pencil lies on the page the sheet is inert: a press goes through
+// it to whatever is beneath.
 
 import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
 
+import { PENCIL_KEY } from "../lib/pencil-key.js";
+
+// The strokes are stored under this name as a list of path data, in the
+// coordinates of the page.
 const STORE = "scribbleV1";
-// Enough to draw on, far short of enough to fill localStorage with.
-const MOST_STROKES = 300;
 // Points closer together than this add nothing a reader could see.
 const LEAST_MOVE = 2.4;
 
-export function useScribble() {
-  const drawing = ref(false); // is the pencil in hand?
-  const strokes = ref([]);
-  const height = ref(0);
-  const live = ref(null); // the stroke being drawn right now
+// Clearing the page is a step like a stroke, so that undo takes it back.
+const CLEARED = Symbol("cleared");
 
-  let observer = null;
+// A browser that blocks its store throws a DOMException, and an entry that is
+// no JSON a SyntaxError. The page then starts without strokes.
+function readStoredStrokes() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORE) ?? "[]");
+    return Array.isArray(stored) ? stored.filter((d) => typeof d === "string") : [];
+  } catch (error) {
+    if (error instanceof DOMException || error instanceof SyntaxError) return [];
+    throw error;
+  }
+}
+
+// A store that is full or blocked throws a DOMException. The strokes are then
+// on the page for this visit, and the store has what it had.
+function storeStrokes(strokes) {
+  try {
+    localStorage.setItem(STORE, JSON.stringify(strokes));
+  } catch (error) {
+    if (!(error instanceof DOMException)) throw error;
+  }
+}
+
+// A stroke as a smooth line through its points. Straight segments would meet
+// at corners a reader can see.
+function toPath(points) {
+  // A tap is a dot: a line without a length is drawn as one by its round cap.
+  if (points.length < 2) return `M${points[0][0]} ${points[0][1]}l0 0`;
+  let d = `M${points[0][0]} ${points[0][1]}`;
+  for (let i = 1; i < points.length - 1; i++) {
+    const [x, y] = points[i];
+    const [nextX, nextY] = points[i + 1];
+    d += `Q${x} ${y} ${(x + nextX) / 2} ${(y + nextY) / 2}`;
+  }
+  const [lastX, lastY] = points.at(-1);
+  return `${d}L${lastX} ${lastY}`;
+}
+
+// Where on the page a pointer is, to a tenth of a pixel. A stroke is stored
+// in the coordinates of the page, so it scrolls with what it was drawn on.
+const readPagePlace = (event) => [
+  Math.round((event.pageX + Number.EPSILON) * 10) / 10,
+  Math.round((event.pageY + Number.EPSILON) * 10) / 10,
+];
+
+export function useScribble() {
+  const inHand = ref(false);
+  // What was done to the page, oldest first: a stroke as path data, or
+  // CLEARED. Undo takes the last step back.
+  const steps = ref(readStoredStrokes());
+  const strokes = computed(() => steps.value.slice(steps.value.lastIndexOf(CLEARED) + 1));
+  const strokeInProgress = ref(null);
+
   let pointer = null;
   let points = [];
 
-  const empty = computed(() => strokes.value.length === 0 && !live.value);
+  const canUndo = computed(() => steps.value.length > 0);
+  const canClear = computed(() => strokes.value.length > 0);
 
-  function load() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORE) || "[]");
-      if (Array.isArray(saved)) strokes.value = saved.filter((d) => typeof d === "string");
-    } catch {
-      // A corrupted or unavailable store is not worth a broken page.
-      strokes.value = [];
-    }
+  watch(strokes, storeStrokes);
+
+  function abandonStroke() {
+    pointer = null;
+    points = [];
+    strokeInProgress.value = null;
   }
 
-  function save() {
-    try {
-      localStorage.setItem(STORE, JSON.stringify(strokes.value));
-    } catch {
-      // Private windows and full quotas both land here. The drawing still
-      // works for this visit; it simply will not be waiting next time.
-    }
-  }
-
-  // A stroke as a smooth line through the points, rather than a run of
-  // straight segments meeting at visible corners.
-  function toPath(pts) {
-    if (pts.length < 2) {
-      const [p] = pts;
-      // A tap is a dot: a zero-length line with a round cap draws one.
-      return p ? `M${p[0]} ${p[1]}l0 0` : "";
-    }
-    let d = `M${pts[0][0]} ${pts[0][1]}`;
-    for (let i = 1; i < pts.length - 1; i++) {
-      const [x, y] = pts[i];
-      const [nx, ny] = pts[i + 1];
-      d += `Q${x} ${y} ${(x + nx) / 2} ${(y + ny) / 2}`;
-    }
-    const last = pts[pts.length - 1];
-    return `${d}L${last[0]} ${last[1]}`;
-  }
-
-  function measure() {
-    height.value = document.documentElement.scrollHeight;
-  }
-
-  // Page coordinates rather than viewport ones, so a drawing stays where it
-  // was made when the page scrolls.
-  function at(event) {
-    return [
-      Math.round((event.pageX + Number.EPSILON) * 10) / 10,
-      Math.round((event.pageY + Number.EPSILON) * 10) / 10,
-    ];
-  }
-
-  function down(event) {
+  function startStroke(event) {
     if (!event.isPrimary) return;
     pointer = event.pointerId;
     event.currentTarget.setPointerCapture(pointer);
-    points = [at(event)];
-    live.value = toPath(points);
+    points = [readPagePlace(event)];
+    strokeInProgress.value = toPath(points);
   }
 
-  function move(event) {
-    if (pointer === null || event.pointerId !== pointer) return;
-    const point = at(event);
-    const previous = points[points.length - 1];
-    const far =
-      Math.abs(point[0] - previous[0]) + Math.abs(point[1] - previous[1]) >= LEAST_MOVE;
-    if (!far) return;
-    points.push(point);
-    live.value = toPath(points);
+  function extendStroke(event) {
+    if (event.pointerId !== pointer) return;
+    const place = readPagePlace(event);
+    const [lastX, lastY] = points.at(-1);
+    if (Math.abs(place[0] - lastX) + Math.abs(place[1] - lastY) < LEAST_MOVE) return;
+    points.push(place);
+    strokeInProgress.value = toPath(points);
   }
 
-  function up(event) {
-    if (pointer === null || event.pointerId !== pointer) return;
-    pointer = null;
-    if (points.length) {
-      strokes.value = [...strokes.value, toPath(points)].slice(-MOST_STROKES);
-      save();
-    }
-    points = [];
-    live.value = null;
+  function endStroke(event) {
+    if (event.pointerId !== pointer) return;
+    steps.value = [...steps.value, toPath(points)];
+    abandonStroke();
   }
 
   function undo() {
-    strokes.value = strokes.value.slice(0, -1);
-    save();
+    steps.value = steps.value.slice(0, -1);
   }
 
   function clear() {
-    strokes.value = [];
-    save();
+    steps.value = [...steps.value, CLEARED];
   }
 
-  // Pick the pencil up, put it down, or swap.
-  function put(on = !drawing.value) {
-    drawing.value = on;
+  function pickUpOrPutDown() {
+    inHand.value = !inHand.value;
   }
 
-  // The key is the only way in — there is no button to find, and the console
-  // note is what tells anyone it exists. Escape is the way back out, because
-  // it is the way out of everything else.
+  function putDown() {
+    inHand.value = false;
+  }
+
+  // The key does what the tab of the pencil does. Escape puts the pencil
+  // down as well, as it closes everything else.
   function onKey(event) {
     if (event.metaKey || event.ctrlKey || event.altKey) return;
-    // Not while someone is typing into something.
-    const el = document.activeElement;
-    if (el && (el.isContentEditable || /^(input|textarea|select)$/i.test(el.tagName))) return;
+    // A key typed into a field is text.
+    const focused = document.activeElement;
+    if (focused && (focused.isContentEditable || /^(input|textarea|select)$/i.test(focused.tagName))) return;
 
-    if (event.key === "p" || event.key === "P") {
+    if (event.key.toUpperCase() === PENCIL_KEY) {
       event.preventDefault();
-      put();
-    } else if (event.key === "Escape" && drawing.value) {
+      pickUpOrPutDown();
+    } else if (event.key === "Escape" && inHand.value) {
       event.preventDefault();
-      put(false);
+      putDown();
     }
   }
 
-  onMounted(() => {
-    load();
-    measure();
-    if ("ResizeObserver" in window) {
-      observer = new ResizeObserver(measure);
-      observer.observe(document.documentElement);
-    }
-    window.addEventListener("keydown", onKey);
+  onMounted(() => window.addEventListener("keydown", onKey));
+  onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
+
+  // A stroke that is being drawn while the pencil is put down is dropped.
+  watch(inHand, (held) => {
+    if (!held) abandonStroke();
   });
 
-  onBeforeUnmount(() => {
-    if (observer) observer.disconnect();
-    window.removeEventListener("keydown", onKey);
-  });
-
-  // Drawing and scrolling are the same gesture on a touch screen, so the page
-  // is held still while the pencil is out.
-  watch(drawing, (on) => {
-    document.documentElement.classList.toggle("is-drawing", on);
-    if (!on && pointer !== null) {
-      pointer = null;
-      points = [];
-      live.value = null;
-    }
-  });
-
-  return { drawing, strokes, live, height, empty, put, undo, clear, down, move, up };
+  return {
+    inHand,
+    strokes,
+    strokeInProgress,
+    canUndo,
+    canClear,
+    pickUpOrPutDown,
+    putDown,
+    undo,
+    clear,
+    startStroke,
+    extendStroke,
+    endStroke,
+  };
 }

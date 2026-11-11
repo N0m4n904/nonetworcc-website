@@ -18,6 +18,12 @@ en:
     about: About
   contact: Get in touch
 
+  index:
+    # Accessible name of the navigation.
+    sections: Sections
+    # On the folded index while no section is being read.
+    contents: Contents
+
   hero:
     lede: >-
       Software development for a living and for the fun of it, and tuning my car when I am
@@ -32,11 +38,16 @@ en:
 
   garage:
     title: Garage
-    ledeBefore: My car, and the work that goes into it, on
+    # `{handle}` is the place of the link to the Instagram profile.
+    lede: My car, and the work that goes into it, on {handle}.
     consent: >-
       The posts are not loaded until you ask for them. Pressing the button fetches them from
       instagram.com, which means Meta receives your IP address and may set cookies.
     load: Load the posts from Instagram
+    # Shown above the consent when Instagram's script did not arrive.
+    failed: >-
+      The posts could not be loaded. Each frame links to its post on Instagram, or press the
+      button to try again.
     post: Instagram post
 
   about:
@@ -61,6 +72,13 @@ en:
     organisation: Organisation
     workAccount: Work account
 
+  pencil:
+    # Accessible name and tooltip of the control that picks the pencil up.
+    pick: Draw on the page
+    undo: Undo
+    clear: Clear
+    done: Done
+
 de:
   documentTitle: Noah Anleitner
   description: Softwareentwickler. Projekte, Arbeit und ein Auto.
@@ -71,6 +89,10 @@ de:
     garage: Garage
     about: Über mich
   contact: Kontakt
+
+  index:
+    sections: Abschnitte
+    contents: Inhalt
 
   hero:
     lede: >-
@@ -86,11 +108,14 @@ de:
 
   garage:
     title: Garage
-    ledeBefore: Mein Auto und die Arbeit, die darin steckt, auf
+    lede: Mein Auto und die Arbeit, die darin steckt, auf {handle}.
     consent: >-
       Die Beiträge werden erst geladen, wenn du es möchtest. Mit einem Klick werden sie von
       instagram.com abgerufen – dabei erhält Meta deine IP-Adresse und kann Cookies setzen.
     load: Beiträge von Instagram laden
+    failed: >-
+      Die Beiträge konnten nicht geladen werden. Jeder Rahmen führt zu seinem Beitrag auf
+      Instagram, und mit dem Button kannst du es noch einmal versuchen.
     post: Instagram-Beitrag
 
   about:
@@ -114,3 +139,9 @@ de:
     privacy: Datenschutz
     organisation: Organisation
     workAccount: Arbeitsaccount
+
+  pencil:
+    pick: Auf der Seite zeichnen
+    undo: Rückgängig
+    clear: Alles löschen
+    done: Fertig

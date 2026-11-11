@@ -1,0 +1,94 @@
+/* ---------------------------------------------------------------------------
+   The book
+   --------------------------------------------------------------------------- */
+
+.book {
+  position: relative;
+}
+
+/* A leaf, or a pair of them. The paper is the section's own, and an edge
+   hanging below it is cut from the same paper. */
+.sheet {
+  --paper-here: var(--paper);
+  position: relative;
+  padding-inline-start: var(--binding);
+  background-color: var(--paper-here);
+}
+
+.sheet--raised {
+  --paper-here: var(--paper-raised);
+}
+
+/* The leaf above lies on this one, and shades it where they meet. */
+.sheet--under {
+  background-image: linear-gradient(to bottom, var(--shade-edge), transparent 0.9rem);
+}
+
+.leaf {
+  padding: var(--margin-block) var(--margin-outer) var(--margin-block) var(--margin-inner);
+}
+
+.leaf > * {
+  max-width: 46rem;
+}
+
+.leaf + .leaf {
+  padding-block-start: 0;
+}
+
+@media (min-width: 78rem) {
+  .sheet {
+    padding-inline-start: 0;
+  }
+
+  .spread {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--binding);
+  }
+
+  /* Both leaves keep their words close to the wire: the outer margin takes
+     whatever a leaf is wider than a line is long. */
+  .leaf {
+    --margin-wide: max(var(--margin-outer), calc(100% - var(--leaf-measure) - var(--margin-inner)));
+    padding-inline: var(--margin-inner) var(--margin-wide);
+  }
+
+  .leaf--left {
+    padding-inline: var(--margin-wide) var(--margin-inner);
+  }
+
+  .leaf > * {
+    max-width: none;
+  }
+
+  .leaf + .leaf {
+    padding-block-start: var(--margin-block);
+  }
+
+  /* The title has a row of the spread to itself, so the right leaf starts on
+     the line where the left one starts under its title. */
+  .spread--under-title {
+    grid-template-rows: auto 1fr;
+  }
+
+  .spread--under-title > .leaf--left {
+    display: grid;
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+  }
+
+  .spread--under-title > .leaf + .leaf {
+    grid-row: 2;
+    padding-block-start: 0;
+  }
+}
+
+/* Where the book ends: the edges of its leaves, above the inside of the
+   cover. */
+.book::after {
+  content: '';
+  display: block;
+  height: 0.9rem;
+  background-image: repeating-linear-gradient(to bottom, var(--paper) 0 3px, var(--pencil-faint) 3px 4px);
+}

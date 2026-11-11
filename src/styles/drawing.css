@@ -1,0 +1,127 @@
+/* ---------------------------------------------------------------------------
+   The pencil line
+
+   A drawing is written once as data. v-drawing has the hand draw it twice, and
+   the boil takes turns with the two. v-drawing gives every path the class of
+   its kind, `stroke` or `tone`, and the class of the pencil or the wash it is
+   drawn with. Widths are in drawing units times --unit, which the directive
+   sets to one pixel, times --fit, which thins the line of a drawing shown
+   smaller than it was composed.
+
+   Every colour is a token of palette.css.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* Read by v-drawing: whether a drawing draws itself in on arrival. */
+  --draws-in: 1;
+}
+
+/* A visitor who asked for less motion gets the drawings as they are: nothing
+   draws itself in. Nor does it on a phone, which phone.css says. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --draws-in: 0;
+  }
+}
+
+.drawing {
+  /* The colour of the plain and the heavy pencil. A component that places a
+     drawing can set another one for it. */
+  --pencil-plain: var(--pencil);
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* A pencil has a colour, --mark, and a weight, --w. A drawing that gives a
+   mark a weight of its own has v-drawing set --w on the stroke. */
+.drawing .pencil--faint { --mark: var(--pencil-faint); --w: 1; }
+.drawing .pencil--light { --mark: var(--pencil-soft); --w: 1.4; }
+.drawing .pencil--plain { --mark: var(--pencil-plain); --w: 2.1; }
+.drawing .pencil--heavy { --mark: var(--pencil-plain); --w: 3; }
+.drawing .pencil--lit { --mark: var(--accent-ink); --w: 2.5; }
+
+.drawing .wash--paint { --mark: var(--wash-paint); }
+.drawing .wash--glass { --mark: var(--wash-glass); }
+.drawing .wash--shade { --mark: var(--wash-shade); }
+.drawing .wash--metal { --mark: var(--wash-metal); }
+
+.drawing .stroke {
+  stroke: var(--mark);
+  stroke-width: calc(var(--w) * var(--unit, 1) * var(--fit, 1) * 1px);
+}
+
+/* The second stroke over a retraced line. */
+.drawing .stroke--again {
+  --mark: var(--pencil-faint);
+}
+
+/* The area inside a filled shape has the colour of the pencil the shape is
+   drawn with. */
+.drawing .tone {
+  fill: var(--mark);
+}
+
+.drawing .pass--b {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hidden until it is on screen, so that it can be watched being drawn. */
+  .drawing[data-arrival='waiting'] {
+    visibility: hidden;
+  }
+
+  .drawing[data-arrival='drawing'] .pass--a > * {
+    stroke-dasharray: 1;
+    animation: stroke-drawn-in 0.5s cubic-bezier(0.3, 0.6, 0.3, 1) calc(var(--i) * var(--beat, 6ms)) both;
+  }
+
+  .drawing[data-arrival='drawing'] .pass--a > .tone {
+    animation-name: tone-drawn-in;
+  }
+
+  .drawing[data-arrival='done'] .pass--a {
+    animation: boil-first-pass var(--boil, 0.36s) steps(1, end) infinite;
+  }
+
+  .drawing[data-arrival='done'] .pass--b {
+    animation: boil-second-pass var(--boil, 0.36s) steps(1, end) infinite;
+  }
+
+  /* Off screen, the two passes are not swapped. */
+  .drawing[data-live='false'] .pass {
+    animation-play-state: paused;
+  }
+}
+
+/* v-drawing gives every stroke a length of 1, so the dash and its offset are
+   shares of the stroke as the browser measures it. */
+@keyframes stroke-drawn-in {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  2% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes tone-drawn-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Swapped by visibility and not by opacity: a swap is a repaint and never a
+   layer. */
+@keyframes boil-first-pass {
+  0%, 49.99% { visibility: visible; }
+  50%, 100% { visibility: hidden; }
+}
+
+@keyframes boil-second-pass {
+  0%, 49.99% { visibility: hidden; }
+  50%, 100% { visibility: visible; }
+}

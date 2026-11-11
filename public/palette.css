@@ -1,20 +1,20 @@
 /* ---------------------------------------------------------------------------
-   Palette — the one place colour is decided.
+   Palette: every colour of the page is set in this file.
 
    Two hues are seeded at the top. Everything else the page draws with, in both
    themes, is mixed from them: the neutrals are the accent bled into black and
-   white, and surfaces, edges, inks, glows and shadows are stated as ratios
-   rather than as values. Change a seed and the whole design follows — nothing
-   downstream, here or in the components, names a colour of its own.
+   white, and surfaces, edges, inks, glows and shadows are written as ratios of
+   those. With another seed the whole design follows, since no other file
+   writes a colour of its own.
 
-   Consumed by src/redesign.css (which imports it into the bundle), by the
+   Read by src/styles/tokens.css, which imports it into the bundle, by the
    console note in src/lib/greeting.js, by the share card in tools/og.html and
-   by public/404.html, so the site and everything drawn from it stay one design.
+   by public/404.html. The share card and the 404 page have the design the
+   site had before the sketchbook, and their colours are set here as well.
 
-   It lives in public/ rather than src/ for the sake of the last of those: the
-   404 is a plain page served straight off disk with no bundle behind it, and
-   it links this file by a stable path. Everything else reaches the same file
-   through the build.
+   The file is in public/ for the 404 page, which is a plain page served from
+   disk without a bundle and links this file by a fixed path. Everything else
+   gets the same file through the build.
    --------------------------------------------------------------------------- */
 
 :root {
@@ -45,14 +45,33 @@
   --accent-ink: var(--accent-deep);
   --accent-alt-ink: var(--accent-alt-deep);
 
+  /* Washes that hide what is drawn under them, for a thing drawn solid: its
+     paint, its glass, what lies in its shade and its polished metal. On pale
+     paper they are pencil tones, the darker the less light a part gives
+     back. */
+  --wash-paint: color-mix(in srgb, var(--ink) 14%, var(--ground));
+  --wash-glass: color-mix(in srgb, var(--ink) 40%, var(--ground));
+  --wash-shade: color-mix(in srgb, var(--ink) 58%, var(--ground));
+  --wash-metal: var(--ground);
+
+  /* What shows where the book ends: the desk it lies on, and the inside of
+     its cover. */
+  --desk: color-mix(in srgb, var(--ink) 16%, var(--ground));
+  --cover: color-mix(in srgb, var(--accent-deep) 20%, var(--ground));
+
+  /* A logo of work that is over has its colour drained. On pale paper it is
+     darkened as well, or its light parts are lost on the paper. */
+  --drained: grayscale(1) brightness(0.62);
+
   /* Strengths, not colours: the glows and shadows are the same mixes in both
      themes and only ever differ in how far they are pushed. */
   --glow-strength: 16%;
   --shade-low: 10%;
-  --shade-high: 18%;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Paper is pale whatever the screen is set to, so the dark theme is for
+   screens alone. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --ground: var(--black);
     --ground-deep: color-mix(in srgb, var(--black) 55%, #000);
@@ -62,11 +81,32 @@
     --accent-ink: var(--seed-accent);
     --accent-alt-ink: var(--seed-accent-alt);
 
+    /* On black paper the pencil is the light: paint is lit a little, glass
+       and shade are black, and metal shines. */
+    --wash-paint: color-mix(in srgb, var(--ink) 10%, var(--ground));
+    --wash-glass: var(--ground-deep);
+    --wash-shade: var(--ground-deep);
+    --wash-metal: color-mix(in srgb, var(--ink) 80%, var(--ground));
+
+    /* Under a black book the desk and the cover are the deeper black. */
+    --desk: var(--ground-deep);
+    --cover: var(--ground-deep);
+
+    --drained: grayscale(1);
+
     /* Green carries further than a cooler hue at the same strength, so the
        fields are pushed less far than the ground would otherwise take. */
     --glow-strength: 20%;
     --shade-low: 55%;
-    --shade-high: 72%;
+  }
+}
+
+/* Print is black on white, without the accent bled into either: a tinted
+   black is printed as a mix of colours. */
+@media print {
+  :root {
+    --ground: #fff;
+    --ink: #000;
   }
 }
 
@@ -90,18 +130,44 @@
      one pair of ratios holds for both themes. */
   --ink-soft: color-mix(in srgb, var(--ink) 72%, var(--ground));
   --ink-faint: color-mix(in srgb, var(--ink) 55%, var(--ground));
+  /* The ink of notes and dates, which are small text. The faint ink has a
+     contrast under 4.5:1 on pale paper. */
+  --ink-note: color-mix(in srgb, var(--ink) 68%, var(--ground));
 
-  --surface: color-mix(in srgb, var(--ink) 4%, transparent);
-  --surface-strong: color-mix(in srgb, var(--ink) 8%, transparent);
-  /* Hairlines are the accent rather than the ink: it is the line the whole
-     page is drawn with. */
-  --edge: color-mix(in srgb, var(--accent-ink) 25%, transparent);
+  /* The pencil the drawings are made with, at three pressures. */
+  --pencil: color-mix(in srgb, var(--ink) 88%, transparent);
+  --pencil-soft: color-mix(in srgb, var(--ink) 58%, transparent);
+  --pencil-faint: color-mix(in srgb, var(--ink) 24%, transparent);
+
+  /* The leaves of the book: one paper, a lighter leaf laid over it, the fibre
+     that shows where a leaf is torn, and the green sheet taped in for the
+     garage. */
+  --paper: var(--ground);
+  --paper-raised: color-mix(in srgb, var(--ink) 7%, var(--ground));
+  --paper-fibre: color-mix(in srgb, var(--ink) 18%, var(--ground));
+  --sheet: color-mix(in srgb, var(--seed-accent) 17%, var(--ground));
+
+  /* A sticker is printed on white in both themes: several of the logos have an
+     opaque white background of their own, which shows as a rectangle on any
+     other white. */
+  --paper-white: #fff;
+
+  /* A strip of paper tape, and one of clear tape, through which the sheet
+     under it shows. */
+  --tape-paper: color-mix(in srgb, var(--ink) 13%, var(--ground));
+  --tape-clear: color-mix(in srgb, var(--ink) 16%, transparent);
+
+  /* The line under a link, and the marker's swipe under the section being
+     read. */
+  --underline: color-mix(in srgb, var(--accent-ink) 55%, transparent);
+  --highlight: color-mix(in srgb, var(--accent-alt) 36%, transparent);
 
   --glow-accent: color-mix(in srgb, var(--seed-accent) var(--glow-strength), transparent);
   --glow-accent-alt: color-mix(in srgb, var(--seed-accent-alt) var(--glow-strength), transparent);
 
   --shadow-low: 0 2px 10px color-mix(in srgb, #000 var(--shade-low), transparent);
-  --shadow-high: 0 24px 60px color-mix(in srgb, #000 var(--shade-high), transparent);
+  /* The shade a leaf casts on the one it lies on. */
+  --shade-edge: color-mix(in srgb, #000 var(--shade-low), transparent);
 
   /* The pointer is a tag with tokens of its own; its colours are the site's,
      so they are decided here with everything else rather than written down a
@@ -123,11 +189,9 @@
      the latter, it turned dark the moment it reached the one bright button on
      a black page and disappeared. Both variants therefore follow the ground.
 
-     And it is ink rather than accent, deliberately. A card wears a drawn green
-     outline when the pointer is on it; a green ring hugging that card is a
-     second drawn green outline a few pixels outside the first, and which line
-     is the pointer stops being readable. The ring is the one thing on the page
-     that is not part of the page. */
+     And it has the colour of the ink, where the page uses the accent, on
+     purpose: the ring is the one thing on the page that is not part of the
+     page. */
   --sc-ring-on-light: color-mix(in srgb, var(--ink) 85%, transparent);
   --sc-ring-on-dark: color-mix(in srgb, var(--ink) 85%, transparent);
 }

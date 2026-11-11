@@ -1,9 +1,9 @@
 // v-live — hold still when nobody can see it.
 //
-// Everything decorative on this page moves continuously, and a browser will
-// keep painting all of it while it sits three screens away. This marks an
-// element as carrying a running animation; the stylesheet pauses anything
-// marked "false", descendants included.
+// A drawing on this page moves continuously, and a browser will keep painting
+// it while it sits three screens away. This marks an element as carrying a
+// running animation; the stylesheet of what is marked pauses it while it is
+// marked "false".
 //
 // The attribute ships empty and only this writes "false", so a browser without
 // IntersectionObserver leaves the page animating rather than frozen.
@@ -18,8 +18,8 @@ function watcher() {
         entry.target.dataset.live = entry.isIntersecting ? "true" : "false";
       }
       // A little before the edge rather than at it. Resuming needs no run-up —
-      // a paused animation carries on from the angle it stopped at — but the
-      // callback is asynchronous, and this is the margin that keeps a ring from
+      // a paused animation carries on from where it stopped — but the callback
+      // is asynchronous, and this is the margin that keeps a drawing from
       // being seen frozen for the frame it takes.
     },
     { rootMargin: "20% 0px" }

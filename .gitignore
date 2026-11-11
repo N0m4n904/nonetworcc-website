@@ -9,3 +9,6 @@ node_modules/
 *.swp
 .vscode/
 .idea/
+
+# What Python keeps of tools/car once `npm run car` has run
+__pycache__/

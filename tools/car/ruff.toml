@@ -1,0 +1,9 @@
+# What `ruff check tools/car` checks the generator of the car for, beyond the
+# defaults of ruff.
+[lint]
+# PLC0415: imports are at the top of a file.
+# FBT: a boolean is passed by name.
+# A: no name hides a builtin.
+# PGH and RUF: a check is switched off for one named rule, and only where it
+# reports something.
+select = ["E", "F", "W", "I", "B", "UP", "PLC0415", "FBT", "A", "PGH", "RUF"]

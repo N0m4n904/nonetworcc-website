@@ -70,6 +70,30 @@ exports[`the hand draws the camera as recorded 3`] = `
 }
 `;
 
+exports[`the hand draws the car as recorded 1`] = `
+{
+  "shownWidth": 1150,
+  "strokeCount": 242,
+  "paths": "699261a0f1369fb76209fea7aa9ce06e107b46a89502ae63bbb2899203b7cd5d"
+}
+`;
+
+exports[`the hand draws the car as recorded 2`] = `
+{
+  "shownWidth": 713,
+  "strokeCount": 186,
+  "paths": "09fcc797afff6f6564256cd8bbde83029d8f22b46c828f6e3792f062edf0c375"
+}
+`;
+
+exports[`the hand draws the car as recorded 3`] = `
+{
+  "shownWidth": 345,
+  "strokeCount": 136,
+  "paths": "81b3fc5c43010ecb7f97d2059a02a2283872369a28c0206d09760008cbda257b"
+}
+`;
+
 exports[`the hand draws the flourish as recorded 1`] = `
 {
   "shownWidth": 640,

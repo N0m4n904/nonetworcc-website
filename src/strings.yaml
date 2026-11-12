@@ -61,8 +61,6 @@ en:
         text: Tuning my car and photographing it.
     tools: Tools of the trade
     card: Save my card
-    pdf: Download as PDF
-    pdfFile: /noah-anleitner-en.pdf
 
   footer:
     me: Me
@@ -129,8 +127,6 @@ de:
         text: An meinem Auto schrauben und es fotografieren.
     tools: Womit ich arbeite
     card: Kontakt speichern
-    pdf: Als PDF speichern
-    pdfFile: /noah-anleitner-de.pdf
 
   footer:
     me: Ich

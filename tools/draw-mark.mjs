@@ -5,8 +5,9 @@
 // true by a seeded hand, so it wanders the same way in every run and a rerun
 // writes the file that is already committed.
 //
-// Run `npm run mark` after changing anything here, then `npm run favicon`,
-// which renders the same file to the icon a browser tab wants.
+// Run `npm run mark` after changing anything here. The icon shown in a browser
+// tab, public/images/favicon.png, is a picture of the mark, made once and not
+// drawn again, so it does not change when the mark changes here.
 
 import fs from "node:fs";
 import path from "node:path";

@@ -25,8 +25,6 @@ defineProps({
            address and two profiles. It has neither a phone number nor a
            street. -->
       <li><a class="link" href="/contact.vcf" download="noah-anleitner.vcf">{{ t.about.card }}</a></li>
-      <!-- The same page, printed, in the language it is being read in. -->
-      <li><a class="link" :href="t.about.pdfFile" download>{{ t.about.pdf }}</a></li>
     </ul>
     <template #right>
       <!-- about.tools is the heading of the list of what Noah works with. -->

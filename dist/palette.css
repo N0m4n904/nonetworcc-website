@@ -5,12 +5,13 @@
    themes, is mixed from them: the neutrals are the accent bled into black and
    white, and surfaces, edges, inks, glows and shadows are written as ratios of
    those. With another seed the whole design follows, since no other file
-   writes a colour of its own.
+   writes a colour of its own. The exception is public/images/favicon.png, a
+   picture of the mark in the accent used when it was made. It does not
+   change when the seed changes.
 
    Read by src/styles/tokens.css, which imports it into the bundle, by the
-   console note in src/lib/greeting.js, by the share card in tools/og.html and
-   by public/404.html. The share card and the 404 page have the design the
-   site had before the sketchbook, and their colours are set here as well.
+   console note in src/lib/greeting.js and by public/404.html. The 404 page
+   has its own design, and its colours are set here as well.
 
    The file is in public/ for the 404 page, which is a plain page served from
    disk without a bundle and links this file by a fixed path. Everything else
@@ -36,7 +37,6 @@
      these and holds for both. */
 
   --ground: var(--white);
-  --ground-deep: color-mix(in srgb, var(--seed-accent) 10%, var(--white));
   --ink: var(--black);
 
   /* The seeds themselves are light rather than pigment: they are what a dark

@@ -56,7 +56,7 @@ function flattenSpline(spotAt, spans, step, out) {
 }
 
 // Angles are in radians from here on.
-const placeOnRound = ([cx, cy], radius, angle) => [cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius];
+export const placeOnRound = ([cx, cy], radius, angle) => [cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius];
 
 // The caller adds the place the arc starts at.
 function flattenArc(center, radius, from, to, step, out) {

@@ -2,7 +2,7 @@ exports[`the edges are laid out as recorded 1`] = `
 {
   "shape": "torn",
   "width": 1920,
-  "layers": "dae66f71e2beed1df6adb62de46c7ea9bd981d94683c1b89e943ee865803d25d"
+  "layers": "0f2a27d5386b907c35ac0f6e4edb170e1b8ea2778b96bae89359d50ab42c2b08"
 }
 `;
 
@@ -10,7 +10,7 @@ exports[`the edges are laid out as recorded 2`] = `
 {
   "shape": "torn",
   "width": 1366,
-  "layers": "f9823d87e3a3453d0a3efa8636c1ddc3ad698591d0adadc94e83fabbc56096eb"
+  "layers": "0cd01f4b8dc0bc789eeafad366288f6ea95c76b2e30e91d1c90b0d004c9bc0dd"
 }
 `;
 
@@ -18,7 +18,7 @@ exports[`the edges are laid out as recorded 3`] = `
 {
   "shape": "torn",
   "width": 390,
-  "layers": "8723525e55383ba32ae0e2841f49784bc1a04e3c9bff8c1a5ef04e3dfaa38d75"
+  "layers": "f0766c944d864f021c4ca252bfc8c65511474118339285dbf714f94babbbe6c4"
 }
 `;
 
@@ -26,7 +26,7 @@ exports[`the edges are laid out as recorded 4`] = `
 {
   "shape": "cut",
   "width": 1920,
-  "layers": "902ffe90aa8493095394155c49b0c8324b9ddefc853badd533d187b1ee76efd7"
+  "layers": "63cf9e2daace523a7ac833de46b40b227ea18c54307fe00a841361281b96f1ed"
 }
 `;
 
@@ -34,7 +34,7 @@ exports[`the edges are laid out as recorded 5`] = `
 {
   "shape": "cut",
   "width": 1366,
-  "layers": "e64672dc353329f88121fcaebf9833b7309e4cf9b9725a06d778f4afd03000e5"
+  "layers": "a07417c01b6b69207f3deb088cf84c379a27b31637965a87de2d9aa4af3ceb57"
 }
 `;
 
@@ -42,7 +42,7 @@ exports[`the edges are laid out as recorded 6`] = `
 {
   "shape": "cut",
   "width": 390,
-  "layers": "a2739d6b6766e15c434f1385175771f7a375768effc1fa902971c0831864f5a5"
+  "layers": "d29244b402b3931770681f026382ae2c96961d371d0d7b616d6e34ede8ba868e"
 }
 `;
 

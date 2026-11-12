@@ -8,6 +8,7 @@
 // Nothing here uses the DOM: an edge is returned as path data, and v-edge
 // makes the elements.
 
+import { writePolygon, writePolyline } from "./path-data.js";
 import { createRandom, pickAroundZero } from "./random.js";
 
 export const EdgeShape = Object.freeze({ Torn: "torn", Cut: "cut" });
@@ -50,11 +51,9 @@ const LAY_LINE = {
   },
 };
 
-const passThrough = (places) => places.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join("L");
-
 // The area between the top of the edge and a line, the line let down by `drop`.
 const fillDownTo = (width, places, drop = 0) =>
-  `M0 0L${passThrough(places.map(([x, y]) => [x, y + drop]))}L${width} 0Z`;
+  writePolygon([[0, 0], ...places.map(([x, y]) => [x, y + drop]), [width, 0]]);
 
 // The edge of `shape`, `width` pixels wide: its layers from the bottom up,
 // each with the path data that paints it.
@@ -64,6 +63,6 @@ export function layEdge(shape, { width, seed }) {
     { layer: EdgeLayer.Shade, d: fillDownTo(width, fibre ?? line, drop) },
     ...(fibre ? [{ layer: EdgeLayer.Fibre, d: fillDownTo(width, fibre) }] : []),
     { layer: EdgeLayer.Paper, d: fillDownTo(width, line) },
-    { layer: EdgeLayer.Line, d: `M${passThrough(line)}` },
+    { layer: EdgeLayer.Line, d: writePolyline(line) },
   ];
 }

@@ -9,6 +9,7 @@
 // is laid out. The directive that uses it makes the elements.
 
 import { Mark } from "./mark.js";
+import { writePlace, writePolygon } from "./path-data.js";
 import { createRandom, pickAroundZero } from "./random.js";
 import { findSplineControls, flattenShape } from "./shape.js";
 import { IDENTITY, applyTransform, rotation, toRadians } from "./transform.js";
@@ -172,8 +173,6 @@ function pickStations(points, at, total, spacing) {
   return picked;
 }
 
-const writePlace = ([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`;
-
 // Catmull-Rom through the points, written as cubics. The first point has none
 // before it and the last none after it: each stands in for that neighbour.
 function toSplinePath(points) {
@@ -271,10 +270,10 @@ function layHatching(contours, degrees, gap, rng, unit) {
 
 // The area a tone fills, its edge strayed from the outlines by up to `stray`.
 function fillArea(outlines, rng, stray, unit) {
-  const strayPlace = ([x, y]) => writePlace([x + pickAroundZero(rng, stray), y + pickAroundZero(rng, stray)]);
+  const strayPlace = ([x, y]) => [x + pickAroundZero(rng, stray), y + pickAroundZero(rng, stray)];
   return outlines
     .map(({ points }) => densify(points, true, 12 * unit))
-    .map((points) => `M${points.map(strayPlace).join("L")}Z`)
+    .map((points) => writePolygon(points.map(strayPlace)))
     .join("");
 }
 

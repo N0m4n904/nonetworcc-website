@@ -10,3 +10,6 @@ export function createRandom(seed) {
     return s / 4294967296;
   };
 }
+
+// The next number from `random`, moved to run from -width / 2 up to width / 2.
+export const pickAroundZero = (random, width) => (random() - 0.5) * width;

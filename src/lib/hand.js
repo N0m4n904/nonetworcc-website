@@ -9,7 +9,7 @@
 // is laid out. The directive that uses it makes the elements.
 
 import { Mark } from "./mark.js";
-import { createRandom } from "./random.js";
+import { createRandom, pickAroundZero } from "./random.js";
 import { findSplineControls, flattenShape } from "./shape.js";
 import { IDENTITY, applyTransform, rotation, toRadians } from "./transform.js";
 
@@ -50,7 +50,7 @@ const OVERSHOOT_AGAIN = 1.6;
 // Smooth one-dimensional noise: random knots, eased between.
 function createWander(rng, wavelength) {
   const knots = [];
-  const knot = (i) => (knots[i] ??= rng() * 2 - 1);
+  const knot = (i) => (knots[i] ??= pickAroundZero(rng, 2));
   return (s) => {
     const at = s / wavelength;
     const i = Math.floor(at);
@@ -205,7 +205,7 @@ function drawStroke(run, rng, style, unit) {
   const slow = createWander(rng, SLOW_WANDER * unit);
   const quick = createWander(rng, QUICK_WANDER * unit);
   // A straight line drawn freehand bows a little.
-  const bow = (rng() - 0.5) * Math.min(style.bow * unit, length * MOST_BOW) * 2;
+  const bow = pickAroundZero(rng, Math.min(style.bow * unit, length * MOST_BOW) * 2);
 
   const total = length + overlap;
   const out = [];
@@ -271,7 +271,7 @@ function layHatching(contours, degrees, gap, rng, unit) {
 
 // The area a tone fills, its edge strayed from the outlines by up to `stray`.
 function fillArea(outlines, rng, stray, unit) {
-  const strayPlace = ([x, y]) => writePlace([x + (rng() - 0.5) * stray, y + (rng() - 0.5) * stray]);
+  const strayPlace = ([x, y]) => writePlace([x + pickAroundZero(rng, stray), y + pickAroundZero(rng, stray)]);
   return outlines
     .map(({ points }) => densify(points, true, 12 * unit))
     .map((points) => `M${points.map(strayPlace).join("L")}Z`)

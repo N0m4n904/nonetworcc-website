@@ -8,7 +8,7 @@
 // Nothing here uses the DOM: an edge is returned as path data, and v-edge
 // makes the elements.
 
-import { createRandom } from "./random.js";
+import { createRandom, pickAroundZero } from "./random.js";
 
 export const EdgeShape = Object.freeze({ Torn: "torn", Cut: "cut" });
 
@@ -29,19 +29,19 @@ const LAY_LINE = {
     const line = [];
     let drift = 0;
     for (let x = 0; x < width; x += 5 + rng() * 13) {
-      drift += (rng() - 0.5) * 3.2;
+      drift += pickAroundZero(rng, 3.2);
       drift *= 0.82;
       const nick = rng() < 0.07 ? 5 + rng() * 6 : 0;
-      line.push([x, 11 + drift + (rng() - 0.5) * 4.5 + nick]);
+      line.push([x, 11 + drift + pickAroundZero(rng, 4.5) + nick]);
     }
     line.push([width, 11 + drift]);
-    return { line, fibre: line.map(([x, y]) => [x + (rng() - 0.5) * 3, y + 1.6 + rng() * 2.4]), drop: 3.5 };
+    return { line, fibre: line.map(([x, y]) => [x + pickAroundZero(rng, 3), y + 1.6 + rng() * 2.4]), drop: 3.5 };
   },
   [EdgeShape.Cut]: (width, rng) => {
     const line = [];
     let drift = 0;
     for (let x = 0; x < width; x += 46 + rng() * 60) {
-      drift += (rng() - 0.5) * 1.8;
+      drift += pickAroundZero(rng, 1.8);
       drift *= 0.7;
       line.push([x, 2.5 + drift]);
     }

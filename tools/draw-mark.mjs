@@ -13,7 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { createRandom } from "../src/lib/random.js";
+import { createRandom, pickAroundZero } from "../src/lib/random.js";
 import { placeOnRound } from "../src/lib/shape.js";
 import { toRadians } from "../src/lib/transform.js";
 
@@ -43,7 +43,7 @@ function drawArc(fromDeg, toDeg, random) {
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
     const ends = i === 0 || i === steps;
-    const stray = (random() - 0.5) * WIGGLE * (ends ? END_STRAY : MIDDLE_STRAY);
+    const stray = pickAroundZero(random, WIGGLE * (ends ? END_STRAY : MIDDLE_STRAY));
     const [x, y] = placeOnRound(CENTER, RADIUS + stray, toRadians(fromDeg + span * t));
     out.push(`${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`);
   }

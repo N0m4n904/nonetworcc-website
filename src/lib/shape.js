@@ -58,10 +58,17 @@ function flattenSpline(spotAt, spans, step, out) {
 // Angles are in radians from here on.
 export const placeOnRound = ([cx, cy], radius, angle) => [cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius];
 
+// The angles that cut an arc of `radius` from `from` to `to` into even steps,
+// none longer than `step` along the arc and at least three of them. Both ends
+// are listed.
+export function divideArc(radius, from, to, step) {
+  const n = Math.max(3, Math.ceil((Math.abs(to - from) * radius) / step));
+  return Array.from({ length: n + 1 }, (_, i) => from + ((to - from) * i) / n);
+}
+
 // The caller adds the place the arc starts at.
 function flattenArc(center, radius, from, to, step, out) {
-  const n = Math.max(3, Math.ceil((Math.abs(to - from) * radius) / step));
-  for (let i = 1; i <= n; i++) out.push(placeOnRound(center, radius, from + ((to - from) * i) / n));
+  for (const angle of divideArc(radius, from, to, step).slice(1)) out.push(placeOnRound(center, radius, angle));
 }
 
 const FOLLOW_LINK = {

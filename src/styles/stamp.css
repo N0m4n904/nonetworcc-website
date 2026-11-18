@@ -1,0 +1,17 @@
+/* ---------------------------------------------------------------------------
+   A rubber stamp, pressed on a little askew: beside the title of an entry no
+   longer maintained, and under the title of a project with a release.
+   --------------------------------------------------------------------------- */
+
+.stamp {
+  padding: 0.15rem 0.6rem;
+  border: 2px solid currentColor;
+  border-radius: 6px 9px 5px 8px;
+  color: var(--ink-note);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  rotate: -3deg;
+}

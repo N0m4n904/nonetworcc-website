@@ -6,6 +6,8 @@
 // listed here, a date in another form or a tool without a name fails the
 // build with the place it was read at.
 
+import { findReleases } from "./release-sources.js";
+
 // How a logo is shown, as an entry writes it under `media.treatment`.
 export const Treatment = Object.freeze({ Plate: "plate", Past: "past", Rounded: "rounded", Wordmark: "wordmark" });
 
@@ -51,12 +53,20 @@ function readTool(tool, where) {
   return named;
 }
 
+// A project whose links lead to a repository at a source of releases gets
+// `releases`: where the browser asks for its latest one.
+function readProject(project, where) {
+  const entry = readEntry(project, where);
+  const releases = findReleases(project.links ?? []);
+  return releases ? { ...entry, releases } : entry;
+}
+
 const readList = (list, name, read) => list.map((item, place) => read(item, `${name}[${place}]`));
 
 // The content as the page shows it: every name checked, every date formatted.
 export const readContent = ({ work, projects, tools, ...others }) => ({
   ...others,
   work: readList(work, "work", readEntry),
-  projects: readList(projects, "projects", readEntry),
+  projects: readList(projects, "projects", readProject),
   tools: readList(tools, "tools", readTool),
 });

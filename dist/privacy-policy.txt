@@ -53,6 +53,7 @@ The following files are requested from external servers when a page of this webs
 - brands.home-assistant.io, for the logo shown next to the project Max.Storage Ultimate
 - qmk.fm, for the logo shown next to the project K100-QMK
 - drw.de, for the emblem of Dominikus-Ringeisen-Werk shown in the work section
+- api.github.com, operated by GitHub, Inc., for the latest release of each project shown in the projects section. Your browser sends these requests without cookies and without the address of the page you are on. This may involve the transfer of data to servers outside the European Union.
 
 The legal basis is our legitimate interest in delivering this website reliably, Art. 6 Para. 1 lit. f) GDPR.
 
@@ -60,13 +61,14 @@ The typeface used on this website is delivered from our own server. No connectio
 
 3. Storage on your device
 
-This website stores up to two entries in the local storage of your browser:
+This website stores up to three entries in the local storage of your browser:
 
 - "smartCursorV2" contains nothing but whether the custom mouse pointer is switched on. It contains no personal data.
 - "scribbleV1" contains the lines drawn on the page with the pencil, so that they are still there on your next visit. It is written only once you draw, and the website reads it for nothing but showing your drawing again.
+- "releasesV1" contains the latest release of each project shown in the projects section, or that it has none, with the time GitHub was asked. Within an hour of that time, a further visit shows these releases without asking GitHub again. Older answers are not used and are removed. It contains no personal data.
 
-Neither entry is transmitted anywhere or used to recognise you. You can delete both at any time through your browser settings.
+No entry is transmitted anywhere or used to recognise you. You can delete all of them at any time through your browser settings.
 
-Last updated: 12 November 2026
+Last updated: 20 November 2026
 
 Model Data Protection Statement for Anwaltskanzlei Weiß & Partner

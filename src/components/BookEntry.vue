@@ -22,6 +22,7 @@ const TILTS = [-4, 3, -2, 4, -3, 2, -5];
 import { computed } from "vue";
 
 import IconLink from "./IconLink.vue";
+import ReleaseStamp from "./ReleaseStamp.vue";
 import SiteMark from "./SiteMark.vue";
 import { say } from "../lib/language.js";
 
@@ -59,6 +60,7 @@ const tilt = computed(() => `${TILTS[props.place % TILTS.length]}deg`);
         <span class="entry__name">{{ say(entry.title) }}</span>
         <span v-if="entry.badge" class="stamp">{{ say(entry.badge) }}</span>
       </h3>
+      <ReleaseStamp v-if="entry.releases" :releases="entry.releases" />
       <p class="entry__body">{{ say(entry.body) }}</p>
       <p v-if="entry.note" class="note entry__note">{{ say(entry.note) }}</p>
       <ul v-if="entry.links?.length" class="entry__links">
@@ -175,20 +177,6 @@ const tilt = computed(() => `${TILTS[props.place % TILTS.length]}deg`);
   font-size: var(--step-heading);
   font-weight: 700;
   line-height: 1.2;
-}
-
-/* A rubber stamp, pressed on a little askew. */
-.stamp {
-  padding: 0.15rem 0.6rem;
-  border: 2px solid currentColor;
-  border-radius: 6px 9px 5px 8px;
-  color: var(--ink-note);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-  rotate: -3deg;
 }
 
 .entry__body {

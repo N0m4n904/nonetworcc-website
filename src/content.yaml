@@ -53,6 +53,11 @@
 #     icon       one of: github, gitlab, instagram, as src/lib/content.js
 #                lists them. Omit for a link without an icon.
 #
+# Under a project, the first link that leads to a repository on github.com
+# also gets its latest release: the browser of the visitor asks GitHub for it,
+# and the page stamps it under the title. A project without a release shows
+# nothing. src/lib/release-sources.js lists the hosts the page asks.
+#
 # Below the entries come the two sections that are lists of something else:
 # the garage's permalinks, and the tools at the end.
 #

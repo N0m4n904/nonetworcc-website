@@ -31,4 +31,19 @@
   .cover__links .link {
     min-height: 2.75rem;
   }
+
+  /* The stamp of a release is as small as on a desk, and a finger meets it
+     anywhere in the 44 pixels around its middle. It is there at once, as the
+     drawings are. */
+  .stamp--release {
+    position: relative;
+    animation: none;
+  }
+
+  .stamp--release::after {
+    content: "";
+    position: absolute;
+    inset-block: calc((100% - 2.75rem) / 2);
+    inset-inline: 0;
+  }
 }

@@ -7,6 +7,7 @@ import "./styles/base.css";
 import "./styles/book.css";
 import "./styles/type.css";
 import "./styles/tape.css";
+import "./styles/stamp.css";
 import "./styles/edge.css";
 import "./styles/drawing.css";
 import "./styles/motion.css";

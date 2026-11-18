@@ -35,6 +35,12 @@ en:
     title: Work
   projects:
     title: Projects
+    # The stamp under a project with its latest release. `{tag}` is the place
+    # of the version.
+    release: Release {tag}
+    # The tooltip of that stamp. `{day}` is the place of the day it was
+    # published, written out in the language of the page.
+    published: Published on {day}
 
   garage:
     title: Garage
@@ -103,6 +109,8 @@ de:
     title: Arbeit
   projects:
     title: Projekte
+    release: Release {tag}
+    published: Veröffentlicht am {day}
 
   garage:
     title: Garage

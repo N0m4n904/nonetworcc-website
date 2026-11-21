@@ -168,6 +168,9 @@
   --shadow-low: 0 2px 10px color-mix(in srgb, #000 var(--shade-low), transparent);
   /* The shade a leaf casts on the one it lies on. */
   --shade-edge: color-mix(in srgb, #000 var(--shade-low), transparent);
+  /* The shade a piece of paper casts, following its torn edges, for
+     `filter: drop-shadow()`. */
+  --shadow-paper: 0 2px 4px color-mix(in srgb, #000 calc(var(--shade-low) * 1.6), transparent);
 
   /* The pointer is a tag with tokens of its own; its colours are the site's,
      so they are decided here with everything else rather than written down a

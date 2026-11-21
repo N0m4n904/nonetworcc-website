@@ -7,7 +7,7 @@ import car from "../drawings/car.js";
 import flourish from "../drawings/flourish.js";
 import keyboard from "../drawings/keyboard.js";
 import phone from "../drawings/phone.js";
-import { EdgeShape } from "../lib/edge.js";
+import { EdgeShape, EdgeSide } from "../lib/edge.js";
 import { t } from "../lib/language.js";
 import { SectionId } from "../lib/sections.js";
 
@@ -52,7 +52,7 @@ const carAnchors = {
         <a class="tape tape--paper" :href="`#${SectionId.Projects}`">{{ t.hero.seeProjects }}</a>
       </p>
     </div>
-    <svg v-edge="{ shape: EdgeShape.Torn, seed: 41 }" />
+    <svg v-edge="{ shape: EdgeShape.Torn, side: EdgeSide.Below, seed: 41 }" />
   </section>
 </template>
 

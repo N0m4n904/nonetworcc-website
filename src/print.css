@@ -105,6 +105,19 @@
     rotate: none;
   }
 
+  /* A project is written on the page itself, without a piece of paper, and
+     as far from the next one as an entry of work. */
+  .piece {
+    padding: 0;
+    background: none;
+    rotate: none;
+    filter: none;
+  }
+
+  .piece + .piece {
+    margin-block-start: 6mm;
+  }
+
   .hero {
     --step-name: 24pt;
   }

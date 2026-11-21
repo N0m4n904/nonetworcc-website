@@ -9,7 +9,7 @@ import { createHash } from "node:crypto";
 import { test } from "node:test";
 
 import { closed, course, drawing, loop, plain, rotation, placed, smooth } from "../src/lib/drawing.js";
-import { EdgeShape, layEdge } from "../src/lib/edge.js";
+import { EdgeShape, EdgeSide, layEdge } from "../src/lib/edge.js";
 import { drawByHand } from "../src/lib/hand.js";
 import { toRadians } from "../src/lib/transform.js";
 import { drawings, listWidths } from "./drawings.js";
@@ -40,7 +40,7 @@ for (const { name, drawing: written } of drawings) {
 test("the edges are laid out as recorded", (t) => {
   for (const shape of Object.values(EdgeShape)) {
     for (const width of [1920, 1366, 390]) {
-      const layers = layEdge(shape, { width, seed: SEED });
+      const layers = layEdge(shape, { side: EdgeSide.Below, width, seed: SEED });
       t.assert.snapshot({ shape, width, layers: digest(layers.map(({ layer, d }) => `${layer} ${d}`)) });
     }
   }

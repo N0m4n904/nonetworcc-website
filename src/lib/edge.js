@@ -55,14 +55,37 @@ const LAY_LINE = {
 const fillDownTo = (width, places, drop = 0) =>
   writePolygon([[0, 0], ...places.map(([x, y]) => [x, y + drop]), [width, 0]]);
 
-// The edge of `shape`, `width` pixels wide: its layers from the bottom up,
-// each with the path data that paints it.
-export function layEdge(shape, { width, seed }) {
-  const { line, fibre, drop } = LAY_LINE[shape](width, createRandom(seed));
+// Where an edge lies against its leaf: hanging below it, on top of it turned
+// over, or on top of it as the other side of a tear hanging below another
+// leaf, with the same shape, width and seed, so that the two leaves fit.
+export const EdgeSide = Object.freeze({ Below: "below", Above: "above", Fitting: "fitting" });
+
+// The end of the leaf the edge belongs to, with the line, and below it what
+// it lies on.
+function layEnd(width, { line, fibre, drop }) {
   return [
     { layer: EdgeLayer.Shade, d: fillDownTo(width, fibre ?? line, drop) },
     ...(fibre ? [{ layer: EdgeLayer.Fibre, d: fillDownTo(width, fibre) }] : []),
     { layer: EdgeLayer.Paper, d: fillDownTo(width, line) },
     { layer: EdgeLayer.Line, d: writePolyline(line) },
   ];
+}
+
+// The other side of that end: the paper from the line down to `depth`, where
+// the leaf of this edge begins.
+const layOtherSide = (width, { line }, depth) => [
+  { layer: EdgeLayer.Paper, d: writePolygon([[0, depth], ...line, [width, depth]]) },
+  { layer: EdgeLayer.Line, d: writePolyline(line) },
+];
+
+const LAY_SIDE = {
+  [EdgeSide.Below]: layEnd,
+  [EdgeSide.Above]: layEnd,
+  [EdgeSide.Fitting]: layOtherSide,
+};
+
+// The edge of `shape` on `side`, `width` pixels wide and `depth` pixels deep:
+// its layers from the bottom up, each with the path data that paints it.
+export function layEdge(shape, { side, width, depth, seed }) {
+  return LAY_SIDE[side](width, LAY_LINE[shape](width, createRandom(seed)), depth);
 }

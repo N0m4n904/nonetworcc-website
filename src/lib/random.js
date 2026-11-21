@@ -13,3 +13,7 @@ export function createRandom(seed) {
 
 // The next number from `random`, moved to run from -width / 2 up to width / 2.
 export const pickAroundZero = (random, width) => (random() - 0.5) * width;
+
+// One of `choices`, each as likely as the others, picked with the next number
+// from `random`.
+export const pickOneOf = (random, choices) => choices[Math.floor(random() * choices.length)];

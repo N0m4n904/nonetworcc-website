@@ -20,6 +20,12 @@
   transform: scaleY(-1);
 }
 
+/* The other side of a tear: on top of the leaf, the right way up. */
+.edge--fitting {
+  inset-block-start: auto;
+  inset-block-end: calc(100% - 1px);
+}
+
 .edge__paper {
   fill: var(--paper-here);
 }

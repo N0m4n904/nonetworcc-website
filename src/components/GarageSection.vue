@@ -5,7 +5,7 @@ import InstagramPost from "./InstagramPost.vue";
 import SectionTitle from "./SectionTitle.vue";
 import wheel from "../drawings/wheel.js";
 import { Icon } from "../lib/content.js";
-import { EdgeShape } from "../lib/edge.js";
+import { EdgeShape, EdgeSide } from "../lib/edge.js";
 import { POST_WIDEST, loadEmbedScript } from "../lib/instagram.js";
 import { t } from "../lib/language.js";
 
@@ -54,7 +54,7 @@ async function loadPosts() {
 <template>
   <section class="sheet garage">
     <div class="insert">
-      <svg v-edge="{ shape: EdgeShape.Cut, seed: 138 }" class="edge--above" />
+      <svg v-edge="{ shape: EdgeShape.Cut, side: EdgeSide.Above, seed: 138 }" />
       <span class="strip strip--tl"></span>
       <span class="strip strip--tr"></span>
       <div class="insert__scene"><svg v-drawing="{ drawing: wheel, seed: 10 }" v-live /></div>
@@ -92,7 +92,7 @@ async function loadPosts() {
       </ul>
       <span class="strip strip--bl"></span>
       <span class="strip strip--br"></span>
-      <svg v-edge="{ shape: EdgeShape.Cut, seed: 235 }" />
+      <svg v-edge="{ shape: EdgeShape.Cut, side: EdgeSide.Below, seed: 235 }" />
     </div>
   </section>
 </template>
@@ -120,22 +120,6 @@ async function loadPosts() {
   background-color: var(--paper-here);
   box-shadow: var(--shadow-low);
 }
-
-/* The strips of tape at the corners of the sheet. */
-.strip {
-  position: absolute;
-  z-index: 1;
-  width: clamp(4.5rem, 9vw, 7.5rem);
-  height: 1.9rem;
-  background-color: var(--tape-clear);
-  clip-path: polygon(0 0, 3% 18%, 0 36%, 3% 54%, 0 72%, 3% 90%, 1% 100%, 99% 100%, 97% 82%, 100% 64%, 97% 46%, 100% 28%, 97% 10%, 99% 0);
-  pointer-events: none;
-}
-
-.strip--tl { inset-block-start: -1.1rem; inset-inline-start: -1.6rem; rotate: -38deg; }
-.strip--tr { inset-block-start: -1.1rem; inset-inline-end: -1.6rem; rotate: 36deg; }
-.strip--bl { inset-block-end: -1.1rem; inset-inline-start: -1.6rem; rotate: 40deg; }
-.strip--br { inset-block-end: -1.1rem; inset-inline-end: -1.6rem; rotate: -37deg; }
 
 .insert__scene {
   max-width: 32rem;

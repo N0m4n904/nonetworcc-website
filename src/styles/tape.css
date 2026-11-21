@@ -74,3 +74,24 @@
   background-color: var(--tape-paper);
   box-shadow: var(--shadow-low);
 }
+
+/* ---------------------------------------------------------------------------
+   Clear tape: a strip over a corner of a piece of paper. Its size, and how
+   far it reaches past the corner, are those of the sheet of the garage unless
+   the paper sets them.
+   --------------------------------------------------------------------------- */
+
+.strip {
+  position: absolute;
+  z-index: 1;
+  width: var(--strip-width, clamp(4.5rem, 9vw, 7.5rem));
+  height: var(--strip-height, 1.9rem);
+  background-color: var(--tape-clear);
+  clip-path: polygon(0 0, 3% 18%, 0 36%, 3% 54%, 0 72%, 3% 90%, 1% 100%, 99% 100%, 97% 82%, 100% 64%, 97% 46%, 100% 28%, 97% 10%, 99% 0);
+  pointer-events: none;
+}
+
+.strip--tl { inset-block-start: var(--strip-reach-block, -1.1rem); inset-inline-start: var(--strip-reach-inline, -1.6rem); rotate: -38deg; }
+.strip--tr { inset-block-start: var(--strip-reach-block, -1.1rem); inset-inline-end: var(--strip-reach-inline, -1.6rem); rotate: 36deg; }
+.strip--bl { inset-block-end: var(--strip-reach-block, -1.1rem); inset-inline-start: var(--strip-reach-inline, -1.6rem); rotate: 40deg; }
+.strip--br { inset-block-end: var(--strip-reach-block, -1.1rem); inset-inline-end: var(--strip-reach-inline, -1.6rem); rotate: -37deg; }
